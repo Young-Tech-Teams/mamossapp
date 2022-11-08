@@ -47,8 +47,6 @@ async function initial() {
    await User.create({
       email: "miyuna@gmail.com",
       password: bcrypt.hashSync("Meowmeow", 8),
-      firstname: 'Miyuna', 
-      lastname: 'Aeri',
    })
 }
 
