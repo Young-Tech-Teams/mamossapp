@@ -3,14 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios'
-import Logo from '../assets/sakura.png'
 import { loginRoute } from '../utils/APIRoutes'
 import { 
    LoginSection,
    FormContainer,
    Form,
    Brand,
-   BrandLogo,
    BrandName,
    Input,
    Button,
@@ -86,7 +84,6 @@ const Login = () => {
             <FormContainer className="form container">
                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Brand className="brand">
-                     <BrandLogo src={Logo} alt="" className="logo" />
                      <BrandName>Mamossa</BrandName>
                   </Brand>
                   <Input 

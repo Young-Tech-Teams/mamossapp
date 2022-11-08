@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css"
-import axios from 'axios'
-import Logo from '../assets/sakura.png'
-import { registerRoute } from '../utils/APIRoutes'
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
+import { registerRoute } from '../utils/APIRoutes';
 import { 
    RegisterSection,
    FormContainer,
    Form,
    Brand,
-   BrandLogo,
    BrandName,
    Input,
    Button,
@@ -113,7 +111,6 @@ const Register = () => {
             <FormContainer className="form container">
                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Brand className="brand">
-                     <BrandLogo src={Logo} alt="" className="logo" />
                      <BrandName>MiyuChat</BrandName>
                   </Brand>
                   <Input 
