@@ -1,0 +1,37 @@
+/*======== FAMILY FONTS ========*/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+   /*====== TOASTIFY ======*/
+   --toastify-color-error: #f3b1c7 !important;
+   --toastify-color-progress-light: linear-gradient(
+     to right,
+     #4cd964,
+     #5ac8fa,
+     #007aff,
+     #34aadc,
+     #5856d6,
+     #f3b1c7
+   );
+ }
+
+/********* VARIABLES *********/
+$light: rgb(255, 255, 255);
+$light-bg: rgb(255, 238, 245);
+$light-gray: rgb(148, 148, 148);
+$gray: rgb(94, 94, 94);
+$dark-200: #121113;
+$dark-400: #191819;
+$dark: rgb(0, 0, 0);
+$primary: rgba(160, 43, 101, 0.9);
+$accent: #f572b3;
+$pink: #f89fcc;
+$pink-200: #f8aad1;
+$pastel-pink: #fcb6d1;
+$light-pink: #f78ac0;
+$lighter-pink: #f89fcc;
+$pastel-purple: #CFA4D9;
+$light-purple: #CB5FB3;
+
+$transition: all 400ms ease;
+$transition-slow: all 600ms ease;

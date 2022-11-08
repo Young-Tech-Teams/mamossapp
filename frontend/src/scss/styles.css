@@ -1,0 +1,247 @@
+/*======== FAMILY FONTS ========*/
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+:root {
+  /*====== TOASTIFY ======*/
+  --toastify-color-error: #f3b1c7 !important;
+  --toastify-color-progress-light: linear-gradient(
+    to right,
+    #4cd964,
+    #5ac8fa,
+    #007aff,
+    #34aadc,
+    #5856d6,
+    #f3b1c7
+  );
+}
+
+/********* VARIABLES *********/
+/*=============== BASE ===============*/
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  max-width: 100vw;
+  height: 100%;
+  width: 100%;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::-moz-selection {
+  color: hsl(0deg, 0%, 100%);
+  background-color: #f89fcc;
+  border-radius: 0.2em;
+  padding: 0.125rem 0.5rem;
+}
+
+::selection {
+  color: hsl(0deg, 0%, 100%);
+  background-color: #fcb6d1;
+  border-radius: 0.2em;
+  padding: 0.125rem 0.5rem;
+}
+
+::-moz-selection {
+  color: hsl(0deg, 0%, 100%);
+  background-color: #fcb6d1;
+  border-radius: 0.2em;
+  padding: 0.125rem 0.5rem;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d_flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+  place-items: center;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.col-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.col-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.col-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.col-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.row-2 {
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.mg-auto {
+  margin: 0 auto;
+}
+
+.text-dark {
+  color: rgb(0, 0, 0);
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(160, 43, 101, 0.9);
+}
+
+li {
+  list-style: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+#register-section .form.container,
+#login-section .form.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+#register-section .form.container .brand,
+#login-section .form.container .brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0.2rem;
+}
+#register-section .form.container .brand img,
+#login-section .form.container .brand img {
+  height: 5rem;
+  cursor: default;
+}
+#register-section .form.container .brand h1,
+#login-section .form.container .brand h1 {
+  text-shadow: 1px 0.1rem #fcb6d1;
+  text-transform: uppercase;
+  cursor: default;
+}
+#register-section .form.container form,
+#login-section .form.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 16vw;
+  border-radius: 2rem;
+}
+#register-section .form.container form input,
+#login-section .form.container form input {
+  background: transparent;
+  padding: 1rem;
+  border: 0.13rem solid #fcb6d1;
+  border-radius: 0.5rem;
+  color: rgb(0, 0, 0);
+  text-shadow: 0.07rem 0.04rem 0.02rem #fcb6d1;
+  width: 100%;
+  font-size: 1rem;
+  letter-spacing: 0.03rem;
+}
+#register-section .form.container form input::placeholder,
+#login-section .form.container form input::placeholder {
+  color: rgb(0, 0, 0);
+}
+#register-section .form.container form input:focus,
+#login-section .form.container form input:focus {
+  background-color: rgba(252, 182, 209, 0.85);
+  border: 0.13rem solid rgb(255, 238, 245);
+  outline: none;
+}
+#register-section .form.container form button,
+#login-section .form.container form button {
+  background-color: #fcb6d1;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  text-shadow: 1px 0.1rem #fcb6d1;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+#register-section .form.container form button:hover,
+#login-section .form.container form button:hover {
+  color: #fcb6d1;
+  text-shadow: 1px 0.1rem rgb(0, 0, 0);
+  background-color: rgb(255, 238, 245);
+}
+#register-section .form.container form .account,
+#login-section .form.container form .account {
+  text-align: center;
+  cursor: default;
+}
+#register-section .form.container form .account a,
+#login-section .form.container form .account a {
+  transition: 0.4s ease-in-out;
+  text-decoration: underline 1px solid #fcb6d1;
+}
+#register-section .form.container form .account a:hover,
+#login-section .form.container form .account a:hover {
+  padding-bottom: 2rem;
+  color: rgb(255, 255, 255);
+  text-decoration: underline 1px solid rgb(255, 255, 255);
+  background: rgba(252, 182, 209, 0.9);
+  border-radius: 0.2em;
+  padding: 0.125rem 0.5rem;
+}
+
+/*# sourceMappingURL=styles.css.map */

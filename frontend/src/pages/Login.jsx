@@ -9,7 +9,7 @@ import { loginRoute } from '../utils/APIRoutes';
 const Login = () => {
    const navigate = useNavigate();
    const [values, setValues] = useState({
-      username: "",
+      email: "",
       password: "",
    });
 
@@ -30,9 +30,9 @@ const Login = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       if (handleValidation()) {
-         const { password, username } = values;
+         const { email, password } = values;
          const { data } = await axios.post(loginRoute, {
-            username,
+            email,
             password, 
          });
          if (data.status === false) {
@@ -46,16 +46,16 @@ const Login = () => {
    };
 
    const handleValidation = () => {
-      const { password, username } = values;
+      const { email, password } = values;
       if (password === "") {
          toast.error(
             "The password is required", 
             toastOptions
         ); 
          return false;
-      } else if (username.length === "" ) {
+      } else if (email.length === "" ) {
          toast.error(
-            "The username is required", 
+            "The email is required", 
             toastOptions 
         );
          return false;
@@ -77,12 +77,12 @@ const Login = () => {
                   </Brand>
                   <Input 
                      type="text" 
-                     placeholder="Username" 
-                     name="username" 
+                     placeholder="Email" 
+                     name="email" 
                      autoComplete="off" 
                      onChange={(e) => handleChange(e)}
                      min="3"
-                     />s
+                     />
                   <Input 
                      type="password" 
                      placeholder="Password" 

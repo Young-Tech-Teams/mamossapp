@@ -9,7 +9,6 @@ import { registerRoute } from '../utils/APIRoutes';
 const Register = () => {
    const navigate = useNavigate();
    const [values, setValues] = useState({
-      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -32,9 +31,8 @@ const Register = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       if (handleValidation()) {
-         const { username, email, password } = values;
+         const { email, password } = values;
          const { data } = await axios.post(registerRoute, {
-            username,
             email,
             password, 
          });
@@ -49,24 +47,12 @@ const Register = () => {
    };
 
    const handleValidation = () => {
-      const { password, confirmPassword, username, email } = values;
+      const { password, confirmPassword, email } = values;
       if (password !== confirmPassword) {
          toast.error(
             "The password and confirm password do not match", 
             toastOptions
         ); 
-         return false;
-      } else if (username.length < 3) {
-         toast.error(
-            "Username should be at least 3 characters", 
-            toastOptions 
-        );
-         return false;
-      } else if (username.length > 22) {
-         toast.error(
-            "Username should not exceed 22 characters",
-            toastOptions 
-        );
          return false;
       } else if (password.length < 8) {
          toast.error(
@@ -102,13 +88,6 @@ const Register = () => {
                   <Brand className="brand">
                      <BrandName>Mamossa</BrandName>
                   </Brand>
-                  <Input 
-                     type="text" 
-                     placeholder="Username" 
-                     name="username" 
-                     autoComplete="off" 
-                     onChange={(e) => handleChange(e)}
-                     />
                   <Input 
                      type="email" 
                      placeholder="Email" 
