@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const fileUpload = require("express-fileupload");
 const server = require("http").createServer(app);
 const dotenv = require("dotenv").config();
 const morgan = require("morgan");
@@ -15,10 +14,6 @@ app.use(cors({
    methods: ["GET", "POST", "PUT", "DELETE"],
    credentials: true
 }));
-
-// app.use(fileUpload({
-//    createParentPath: true
-// }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
