@@ -4,18 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { registerRoute } from '../utils/APIRoutes';
-import { 
-   RegisterSection,
-   FormContainer,
-   Form,
-   Brand,
-   BrandName,
-   Input,
-   Button,
-   Account,
-   Span,
-   Space
-} from '../components/StyledElements'
 
 const Register = () => {
    const navigate = useNavigate();
@@ -154,5 +142,16 @@ const Register = () => {
       </>
   )
 }
+
+const RegisterSection = styled.section``
+const FormContainer = styled.div``
+const Form = styled.form``
+const Brand = styled.div``
+const BrandName = styled.h1``
+const Input = styled.input``
+const Button = styled.button``
+const Account = styled.div``
+const Span = styled.span``
+const Space = styled.br``
 
 export default Register
