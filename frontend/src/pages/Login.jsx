@@ -4,18 +4,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios'
 import { loginRoute } from '../utils/APIRoutes'
-import { 
-   LoginSection,
-   FormContainer,
-   Form,
-   Brand,
-   BrandName,
-   Input,
-   Button,
-   Account,
-   Span,
-   Space
-} from '../components/StyledElements'
 
 const Login = () => {
    const navigate = useNavigate();
@@ -115,5 +103,16 @@ const Login = () => {
       </>
   )
 }
+
+const LoginSection = styled.section``
+const FormContainer = styled.div``
+const Form = styled.form``
+const Brand = styled.div``
+const BrandName = styled.h1``
+const Input = styled.input``
+const Button = styled.button``
+const Account = styled.div``
+const Span = styled.span``
+const Space = styled.br``
 
 export default Login
