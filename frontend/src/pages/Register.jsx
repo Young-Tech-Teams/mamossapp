@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
-import axios from 'axios';
-import { registerRoute } from '../utils/APIRoutes';
+import AuthService from "../utils/auth.service";
 
 const Register = () => {
    const navigate = useNavigate();
@@ -23,26 +22,32 @@ const Register = () => {
    };
 
    useEffect(() => {
-      if (localStorage.getItem("mamossa-user")) {
+      if (localStorage.getItem("token")) {
         navigate("/")
       }
    }, []);
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+
+      
       if (handleValidation()) {
          const { email, password } = values;
-         const { data } = await axios.post(registerRoute, {
-            email,
-            password, 
-         });
-         if (data.status === false) {
-            toast.error(data.msg, toastOptions);
-         }
-         if (data.status === true) {
-            localStorage.setItem('mamossa-user', JSON.stringify(data.user));
-            navigate("/");
-         }
+         const { data } = AuthService.register(email, password).then(
+            (response) => {
+               localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+               setTimeout(() => {
+                  navigate("/")
+               }, 500)
+               if (data.status === false) {
+                  toast.error(data.msg, toastOptions);
+               }
+               if (data.status === true) {
+                  localStorage.setItem("token", JSON.stringify(data.user));
+                  navigate("/");
+               }
+            },
+         );
       }
    };
 

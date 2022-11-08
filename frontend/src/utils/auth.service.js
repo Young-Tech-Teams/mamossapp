@@ -1,12 +1,10 @@
-import axios from "axios";
-import { API_AUTH_URL } from "../../config";
+import axios from 'axios';
+import { API_AUTH_URL } from './APIRoutes';
 
 axios.defaults.withCredentials = true
 
-const register = (firstname, lastname, email, password, confirmPassword) => {
+const register = (email, password, confirmPassword) => {
   return axios.post(API_AUTH_URL + "signup", {
-    firstname,
-    lastname,
     email,
     password,
     confirmPassword,
@@ -21,7 +19,6 @@ const login = (email, password) => {
 };
 
 const logout = async () => {
-
   const user = JSON.parse(localStorage.getItem("token"));
 
   var config = {
