@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
-import { ToastContainer, toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css"
-import axios from 'axios'
-import { loginRoute } from '../utils/APIRoutes'
+import axios from 'axios';
+import { loginRoute } from '../utils/APIRoutes';
 
 const Login = () => {
    const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Login = () => {
    };
 
    useEffect(() => {
-      if (localStorage.getItem("miyuchat-user")) {
+      if (localStorage.getItem("mamossa-user")) {
         navigate("/")
       }
    }, []);
@@ -39,7 +39,7 @@ const Login = () => {
             toast.error(data.msg, toastOptions);
          }
          if (data.status === true) {
-            localStorage.setItem('miyuchat-user', JSON.stringify(data.user));
+            localStorage.setItem('mamossa-user', JSON.stringify(data.user));
             navigate("/");
          }
       }

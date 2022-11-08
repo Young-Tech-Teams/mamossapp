@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import styled from 'styled-components';
 import axios from 'axios';
 import { registerRoute } from '../utils/APIRoutes';
 
@@ -24,7 +24,7 @@ const Register = () => {
    };
 
    useEffect(() => {
-      if (localStorage.getItem("miyuchat-user")) {
+      if (localStorage.getItem("mamossa-user")) {
         navigate("/")
       }
    }, []);
@@ -42,7 +42,7 @@ const Register = () => {
             toast.error(data.msg, toastOptions);
          }
          if (data.status === true) {
-            localStorage.setItem('miyuchat-user', JSON.stringify(data.user));
+            localStorage.setItem('mamossa-user', JSON.stringify(data.user));
             navigate("/");
          }
       }
@@ -100,7 +100,7 @@ const Register = () => {
             <FormContainer className="form container">
                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Brand className="brand">
-                     <BrandName>MiyuChat</BrandName>
+                     <BrandName>Mamossa</BrandName>
                   </Brand>
                   <Input 
                      type="text" 
