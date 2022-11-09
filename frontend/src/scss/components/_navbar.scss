@@ -103,6 +103,13 @@
            text-transform: uppercase;
            letter-spacing: 1px;
            
+           .logout {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            gap: 0.5rem;
+           }
+
            &:hover {
               text-decoration: none;
               color: $light;
@@ -123,7 +130,7 @@
            color: $dark;
         }
         @media screen and (max-width: 720px) {
-           .btn {
+           .btn-auth {
               display: none;
            }
            .hide {
@@ -131,10 +138,6 @@
               .link {
                  color: $dark;
               }
-           }
-           .logout {
-              color: $dark;
-              padding: 0 2rem 0 1rem;
            }
         }
         @media screen and (max-width: 500px) {

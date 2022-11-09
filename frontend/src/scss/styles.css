@@ -329,6 +329,12 @@ li {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+#navbar-main #navbar .cta .btn .logout {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+}
 #navbar-main #navbar .cta .btn:hover {
   text-decoration: none;
   color: rgb(255, 255, 255);
@@ -348,7 +354,7 @@ li {
   color: rgb(0, 0, 0);
 }
 @media screen and (max-width: 720px) {
-  #navbar-main #navbar .cta .btn {
+  #navbar-main #navbar .cta .btn-auth {
     display: none;
   }
   #navbar-main #navbar .cta .hide {
@@ -356,10 +362,6 @@ li {
   }
   #navbar-main #navbar .cta .hide .link {
     color: rgb(0, 0, 0);
-  }
-  #navbar-main #navbar .cta .logout {
-    color: rgb(0, 0, 0);
-    padding: 0 2rem 0 1rem;
   }
 }
 @media screen and (max-width: 500px) {

@@ -89,21 +89,18 @@ const Navbar = () => {
                            );
                         })}
                      </MyList>
-                     <Button className="btn">
+                     <Button className="btn btn-auth">
                         <Link to="/connexion" className="signin">Connexion</Link>
                      </Button>
-                     <Button className="btn">
+                     <Button className="btn btn-auth">
                         <Link to="/inscription" className="signup">Inscription</Link>
                      </Button>
                      </>
                   )}
                   {isLoggedIn && (
                      <>
-                     <Button className="hide btn">
-                        <Link to="/create" className="icon"><Feather /></Link>
-                     </Button>
-                     <Button className="btn">
-                        <Link to="/" className="icon logout" onClick={handleLogout} ><LogOut /></Link>
+                     <Button className="btn btn-logout">
+                        <Link to="/" className="icon logout" onClick={handleLogout} ><LogOut />Déconnexion</Link>
                      </Button>
                      </>
                   )}

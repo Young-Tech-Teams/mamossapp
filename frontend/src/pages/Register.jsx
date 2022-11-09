@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
 import AuthService from "../utils/auth.service";
+import validator from "validator";
 
 const Register = () => {
    const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Register = () => {
 
    const toastOptions = {
       position: "bottom-right",
-      autoClose: 8000,
+      autoClose: 4000,
       pauseOnHover: true,
       draggable: true,
       theme: "dark",
@@ -45,29 +46,47 @@ const Register = () => {
 
    const handleValidation = () => {
       const { email, password, confirmPassword } = values;
-      if (password !== confirmPassword) {
+      if (email === "") {
          toast.error(
-            "The password and confirm password do not match", 
-            toastOptions
-        ); 
+            "Veuillez entrer une adresse email",
+            toastOptions 
+        );
+         return false;
+      } else if (!validator.isEmail(email)) {
+         toast.error(
+         "Veuillez entrer une adresse email valide", 
+         toastOptions
+         );
          return false;
       } else if (password.length < 8) {
          toast.error(
-            "Password should be at least 8 characters", 
+            "Le mot de passe doit contenir au moins 8 caractères", 
             toastOptions 
         );
          return false;
       } else if (password.length > 24) {
          toast.error(
-            "Password should not exceed 24 characters", 
+            "Le mot de passe ne doit pas dépasser 24 caractères", 
             toastOptions 
         );
          return false;
-      } else if (email === "") {
+      } else if (confirmPassword.length < 8) {
          toast.error(
-            "The email is required",
+            "Le mot de passe de confirmation doit contenir au moins 8 caractères", 
             toastOptions 
         );
+         return false;
+      } else if (confirmPassword.length > 24) {
+         toast.error(
+            "Le mot de passe de confirmation ne doit pas dépasser 24 caractères", 
+            toastOptions 
+        );
+         return false;
+      } else if (password !== confirmPassword) {
+         toast.error(
+            "Les mots de passe que vous avez entrés ne sont pas identiques", 
+            toastOptions
+        ); 
          return false;
       }
       return true;

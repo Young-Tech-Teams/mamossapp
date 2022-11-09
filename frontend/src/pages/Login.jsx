@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
 import AuthService from "../utils/auth.service";
+import validator from "validator";
 
 const Login = () => {
    const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Login = () => {
 
    const toastOptions = {
       position: "bottom-right",
-      autoClose: 8000,
+      autoClose: 4000,
       pauseOnHover: true,
       draggable: true,
       theme: "dark",
@@ -51,19 +52,38 @@ const Login = () => {
 
    const handleValidation = () => {
       const { email, password } = values;
-      if (password === "") {
+      
+      if (email === "" ) {
          toast.error(
-            "The password is required", 
+         "Veuillez entrer votre adresse email", 
+         toastOptions 
+         );
+         return false;
+      } else if (!validator.isEmail(email)) {
+            toast.error(
+            "Veuillez entrer une adresse email valide", 
             toastOptions
-        ); 
-         return false;
-      } else if (email.length === "" ) {
-         toast.error(
-            "The email is required", 
-            toastOptions 
-        );
-         return false;
-      }
+            );
+            return false
+         } else if (password === "") {
+               toast.error(
+               "Veuillez entrer votre mot de passe", 
+               toastOptions
+               ); 
+               return false;
+            } else if (password.length < 8) {
+                  toast.error(
+                  "Le mot de passe doit contenir au moins 8 caractères", 
+                  toastOptions 
+                  );
+                  return false;
+               } else if (password.length > 24) {
+                  toast.error(
+                  "Le mot de passe ne doit pas dépasser 24 caractères", 
+                  toastOptions 
+                  );
+                  return false;
+               }
       return true;
    };
 
@@ -83,9 +103,8 @@ const Login = () => {
                      type="text" 
                      placeholder="Email" 
                      name="email" 
-                     autoComplete="off" 
+                     autoComplete="on" 
                      onChange={(e) => handleChange(e)}
-                     min="3"
                      />
                   <Input 
                      type="password" 
