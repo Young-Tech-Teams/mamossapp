@@ -11,15 +11,8 @@
       .brand {
          display: flex;
          align-items: center;
-         gap: 1rem;
          justify-content: center;
-         padding: 0.2rem;
-         img {
-            height: 5rem;
-            cursor: default;
-         }
          h1 {
-            text-shadow: 1px 0.1rem $pastel-pink;
             text-transform: uppercase;
             cursor: default;
          }
@@ -27,61 +20,57 @@
       form {
          display: flex;
          flex-direction: column;
-         gap: 2rem;
-         width: 16vw;
-         border-radius: 2rem;
+         gap: 1.6rem;
+         border-radius: 1rem;
 
          input {
             background: transparent;
-            padding: 1rem;
-            border: 0.13rem solid $pastel-pink;
-            border-radius: 0.5rem;
+            padding: 0.8rem 1rem;
+            border: 0.12rem solid $primary;
+            border-radius: 0.2rem;
             color: $dark;
-            text-shadow: 0.07rem 0.04rem 0.02rem $pastel-pink;
             width: 100%;
             font-size: 1rem;
             letter-spacing: 0.03rem;
             &::placeholder {
                color: $dark;
-            }
-            &:focus {   
-               background-color: rgba($pastel-pink, 0.85);
-               border: 0.13rem solid $light-bg;
-               outline: none;
+               font-weight: 500;
             }
          }
          button {
-            background-color: $pastel-pink;
-            color: $dark;
+            background-color: $primary;
+            color: $light;
             font-weight: bold;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 0.5rem;
+            padding: 0.8rem 6rem;
+            border: 0.12rem solid $primary;
+            border-radius: 0.2rem;
             font-size: 1rem;
             letter-spacing: 0.2rem;
             text-transform: uppercase;
-            text-shadow: 1px 0.1rem $pastel-pink;
             transition: 0.5s ease-in-out;
             cursor: pointer;
             &:hover {
-               color: $pastel-pink;
-               text-shadow: 1px 0.1rem $dark;
-               background-color: $light-bg;
+               transform: translateY(-3px);
             }
          }
          .account {
             text-align: center;
             cursor: default;
 
+            span {
+               font-weight: 500;
+            }
+
             a {
+               color: $accent;
                transition: 0.4s ease-in-out;
-               text-decoration: underline 1px solid $pastel-pink;
+               text-decoration: underline 1px solid $accent;
                &:hover {
                   padding-bottom: 2rem;
                   color: $light;
                   text-decoration: underline 1px solid $light;
-                  background: rgba($pastel-pink, 0.9);
-                  border-radius: 0.2em;
+                  background: rgba($primary, 0.9);
+                  border-radius: 0.12em;
                   padding: 0.125rem 0.5rem;
                }
             }

@@ -5,6 +5,7 @@ import AuthService from "../utils/auth.service";
 import { menuItems } from "./navMenu/_menuItems";
 import MenuItems from './navMenu/MenuItems';
 import { Feather, LogOut } from "react-feather";
+import Logo from "../assets/mamossa-logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -67,8 +68,8 @@ const Navbar = () => {
         <Container id="navbar">
           <HeroWrapper id="navbelt" className="wrapper d-flex">
             <Brand className="brand">
-               <Link id="logo" to="/">
-                 Mamossa
+               <Link id="logo" to="https://mamossa.com">
+                 <img src={Logo} alt="logo" onContextMenu={disableRightClick} onDragStart={(e) => e.preventDefault()} />
               </Link>
             </Brand>
 
@@ -89,10 +90,10 @@ const Navbar = () => {
                         })}
                      </MyList>
                      <Button className="btn">
-                        <Link to="/login" className="signin">Login</Link>
+                        <Link to="/connexion" className="signin">Connexion</Link>
                      </Button>
                      <Button className="btn">
-                        <Link to="/register" className="signup">Signup</Link>
+                        <Link to="/inscription" className="signup">Inscription</Link>
                      </Button>
                      </>
                   )}
@@ -100,9 +101,6 @@ const Navbar = () => {
                      <>
                      <Button className="hide btn">
                         <Link to="/create" className="icon"><Feather /></Link>
-                     </Button>
-                     <Button className="btn">
-                        <Link to="/create" className="create">Create Resume</Link> 
                      </Button>
                      <Button className="btn">
                         <Link to="/" className="icon logout" onClick={handleLogout} ><LogOut /></Link>

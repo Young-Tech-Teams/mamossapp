@@ -28,11 +28,10 @@ const Login = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-
       
       if (handleValidation()) {
          const { email, password } = values;
-         const { data } = await AuthService.login(email, password).then(
+         const { data } = AuthService.login(email, password).then(
             (response) => {
                localStorage.setItem("token", JSON.stringify(response.data.accessToken));
                setTimeout(() => {
@@ -78,7 +77,7 @@ const Login = () => {
             <FormContainer className="form container">
                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Brand className="brand">
-                     <BrandName>Mamossa</BrandName>
+                     <BrandName>Se connecter</BrandName>
                   </Brand>
                   <Input 
                      type="text" 
@@ -90,16 +89,16 @@ const Login = () => {
                      />
                   <Input 
                      type="password" 
-                     placeholder="Password" 
+                     placeholder="Mot de passe" 
                      name="password" 
                      onChange={(e) => handleChange(e)}
                      />
-                  <Button type="submit">Log In</Button>
+                  <Button type="submit">Valider</Button>
                   <Account className="account">
                      <Span>
-                        Don't have an account ? 
+                        Pas de compte ? 
                         <Space></Space>
-                        <Link to="/register"> Register</Link>
+                        <Link to="/inscription">Inscrivez-vous</Link>
                      </Span>
                   </Account>
                </Form>

@@ -7,23 +7,13 @@ export const menuItems = [
      cname: 'icon',
      submenu: [
        {
-         title: 'Home',
-         url: '#home',
+         title: 'Connexion',
+         url: '/connexion',
          cname: 'icon one',
        },
        {
-        title: 'Skills',
-        url: '#skills',
-        cname: 'icon',
-       },
-       {
-        title: 'Projects',
-        url: '#projects',
-        cname: 'icon',
-       },
-       {
-        title: `Contact`,
-        url: '#contact',
+        title: 'Inscription',
+        url: '/inscription',
         cname: 'icon',
        },
      ],

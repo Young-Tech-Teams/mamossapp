@@ -30,29 +30,21 @@ const Register = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
 
-      
       if (handleValidation()) {
-         const { email, password } = values;
-         const { data } = AuthService.register(email, password).then(
+         const { email, password, confirmPassword } = values;
+         const { data } = await AuthService.register(email, password, confirmPassword).then(
             (response) => {
-               localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+               console.log(response.data.message);
                setTimeout(() => {
-                  navigate("/")
+                  navigate("/connexion")
                }, 500)
-               if (data.status === false) {
-                  toast.error(data.msg, toastOptions);
-               }
-               if (data.status === true) {
-                  localStorage.setItem("token", JSON.stringify(data.user));
-                  navigate("/");
-               }
             },
          );
       }
    };
 
    const handleValidation = () => {
-      const { password, confirmPassword, email } = values;
+      const { email, password, confirmPassword } = values;
       if (password !== confirmPassword) {
          toast.error(
             "The password and confirm password do not match", 
@@ -91,7 +83,7 @@ const Register = () => {
             <FormContainer className="form container">
                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Brand className="brand">
-                     <BrandName>Mamossa</BrandName>
+                     <BrandName>S'inscrire</BrandName>
                   </Brand>
                   <Input 
                      type="email" 
@@ -102,22 +94,22 @@ const Register = () => {
                      />
                   <Input 
                      type="password" 
-                     placeholder="Password" 
+                     placeholder="Mot de passe" 
                      name="password" 
                      onChange={(e) => handleChange(e)}
                      />
                   <Input 
                      type="password" 
-                     placeholder="Confirm Password" 
+                     placeholder="Confirmer le mot de passe" 
                      name="confirmPassword" 
                      onChange={(e) => handleChange(e)}
                   />
-                  <Button type="submit">Create User</Button>
+                  <Button type="submit">Valider</Button>
                   <Account className="account">
                      <Span>
-                        Already have an account ? 
+                        Déjà inscrit ?
                         <Space></Space>
-                        <Link to="/login"> Log In</Link>
+                        <Link to="/connexion">Connectez-vous</Link>
                      </Span>
                   </Account>
                </Form>

@@ -1,0 +1,151 @@
+ /* ========== NAVBAR ========== */ 
+ #navbar-main {
+   box-sizing: border-box;
+   display: flex;
+   position: fixed;
+   top: 0;
+   z-index: 9999;
+   width: 100%;
+   color: $dark;
+   transition: $transition;
+   
+   &.scrolled {
+     background-color: $primary;
+  }
+
+  #navbar {
+     flex: 1 1 auto;
+     z-index: 198;
+     font-size: 16px;
+     line-height: 1em;
+     display: block;
+     zoom: 1;
+
+     #navbelt {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        transition: $transition-slow;
+        height: 80px;
+
+        .brand {
+           
+           #logo {
+              color: $dark;
+              text-shadow: 1px 1px $primary;
+              font-size: 1.6rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              user-select:none;
+              -webkit-user-drag: none;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              
+              img {
+                 width: 60px;
+                 background-color: transparent;
+                 transition: $transition-slow;
+              }
+     
+              }
+
+              @media screen and (max-width: 900px) {
+                 padding-left: 1rem;
+              }
+           }
+  
+           @media screen and (min-width: 900px) {
+              width: 90%;
+           }
+           @media screen and (min-width: 1600px) {
+              width: 78%;
+           }
+        }
+
+        .cta {
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+           padding: 0 1rem;
+           gap: 1.8rem;
+           transition: $transition-slow;
+
+           .menu {
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              transition: $transition-slow;
+           }
+           
+           .hide {
+              display: none;
+              transition: $transition-slow;
+
+              button svg {
+                 width: 45px;
+                 height: 35px;
+              }
+              
+              .btn {
+                 &:hover {
+                    color: $primary;
+                 }
+              }
+           }
+
+        .btn {
+           color: $dark;
+           padding: 8px 14px;
+           font-size: 1.2rem;
+           font-weight: bold;
+           transition: $transition-slow;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+           
+           &:hover {
+              text-decoration: none;
+              color: $light;
+              background-color: $primary;
+              border-radius: 2px;
+              transition: $transition-slow;
+              a {
+                 color: $light;
+              font-weight: 500;
+                 transition: $transition-slow;
+         }
+           }
+           &:active {
+              opacity: 1;
+           }
+        }
+        .icon {
+           color: $dark;
+        }
+        @media screen and (max-width: 720px) {
+           .btn {
+              display: none;
+           }
+           .hide {
+              display: block;
+              .link {
+                 color: $dark;
+              }
+           }
+           .logout {
+              color: $dark;
+              padding: 0 2rem 0 1rem;
+           }
+        }
+        @media screen and (max-width: 500px) {
+           gap: 0.7rem;
+           padding: 0;
+        }
+     }
+     @media screen and (max-width: 900px) {
+        .cta {
+           gap: 1.1rem;
+        }
+     }
+  }
+}

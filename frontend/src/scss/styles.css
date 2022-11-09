@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 :root {
   /*====== TOASTIFY ======*/
-  --toastify-color-error: #f3b1c7 !important;
+  --toastify-color-error: #81b168 !important;
   --toastify-color-progress-light: linear-gradient(
     to right,
     #4cd964,
@@ -14,7 +14,10 @@
   );
 }
 
-/********* VARIABLES *********/
+/*======= VARIABLES =======*/
+/*===== NEUTRALS =====*/
+/*===== COLORS =====*/
+/*===== TRANSITIONS =====*/
 /*=============== BASE ===============*/
 html {
   scroll-behavior: smooth;
@@ -45,21 +48,21 @@ body {
 
 ::-moz-selection {
   color: hsl(0deg, 0%, 100%);
-  background-color: #f89fcc;
+  background-color: #0D1E04;
   border-radius: 0.2em;
   padding: 0.125rem 0.5rem;
 }
 
 ::selection {
   color: hsl(0deg, 0%, 100%);
-  background-color: #fcb6d1;
+  background-color: #0D1E04;
   border-radius: 0.2em;
   padding: 0.125rem 0.5rem;
 }
 
 ::-moz-selection {
   color: hsl(0deg, 0%, 100%);
-  background-color: #fcb6d1;
+  background-color: #0D1E04;
   border-radius: 0.2em;
   padding: 0.125rem 0.5rem;
 }
@@ -129,7 +132,7 @@ body {
 
 a {
   text-decoration: none;
-  color: rgba(160, 43, 101, 0.9);
+  color: #0D1E04;
 }
 
 li {
@@ -158,18 +161,10 @@ li {
 #login-section .form.container .brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
   justify-content: center;
-  padding: 0.2rem;
-}
-#register-section .form.container .brand img,
-#login-section .form.container .brand img {
-  height: 5rem;
-  cursor: default;
 }
 #register-section .form.container .brand h1,
 #login-section .form.container .brand h1 {
-  text-shadow: 1px 0.1rem #fcb6d1;
   text-transform: uppercase;
   cursor: default;
 }
@@ -177,18 +172,16 @@ li {
 #login-section .form.container form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  width: 16vw;
-  border-radius: 2rem;
+  gap: 1.6rem;
+  border-radius: 1rem;
 }
 #register-section .form.container form input,
 #login-section .form.container form input {
   background: transparent;
-  padding: 1rem;
-  border: 0.13rem solid #fcb6d1;
-  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  border: 0.12rem solid #0D1E04;
+  border-radius: 0.2rem;
   color: rgb(0, 0, 0);
-  text-shadow: 0.07rem 0.04rem 0.02rem #fcb6d1;
   width: 100%;
   font-size: 1rem;
   letter-spacing: 0.03rem;
@@ -196,52 +189,254 @@ li {
 #register-section .form.container form input::placeholder,
 #login-section .form.container form input::placeholder {
   color: rgb(0, 0, 0);
-}
-#register-section .form.container form input:focus,
-#login-section .form.container form input:focus {
-  background-color: rgba(252, 182, 209, 0.85);
-  border: 0.13rem solid rgb(255, 238, 245);
-  outline: none;
+  font-weight: 500;
 }
 #register-section .form.container form button,
 #login-section .form.container form button {
-  background-color: #fcb6d1;
-  color: rgb(0, 0, 0);
+  background-color: #0D1E04;
+  color: rgb(255, 255, 255);
   font-weight: bold;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 0.5rem;
+  padding: 0.8rem 6rem;
+  border: 0.12rem solid #0D1E04;
+  border-radius: 0.2rem;
   font-size: 1rem;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
-  text-shadow: 1px 0.1rem #fcb6d1;
   transition: 0.5s ease-in-out;
   cursor: pointer;
 }
 #register-section .form.container form button:hover,
 #login-section .form.container form button:hover {
-  color: #fcb6d1;
-  text-shadow: 1px 0.1rem rgb(0, 0, 0);
-  background-color: rgb(255, 238, 245);
+  transform: translateY(-3px);
 }
 #register-section .form.container form .account,
 #login-section .form.container form .account {
   text-align: center;
   cursor: default;
 }
+#register-section .form.container form .account span,
+#login-section .form.container form .account span {
+  font-weight: 500;
+}
 #register-section .form.container form .account a,
 #login-section .form.container form .account a {
+  color: #61CE70;
   transition: 0.4s ease-in-out;
-  text-decoration: underline 1px solid #fcb6d1;
+  text-decoration: underline 1px solid #61CE70;
 }
 #register-section .form.container form .account a:hover,
 #login-section .form.container form .account a:hover {
   padding-bottom: 2rem;
   color: rgb(255, 255, 255);
   text-decoration: underline 1px solid rgb(255, 255, 255);
-  background: rgba(252, 182, 209, 0.9);
-  border-radius: 0.2em;
+  background: rgba(13, 30, 4, 0.9);
+  border-radius: 0.12em;
   padding: 0.125rem 0.5rem;
+}
+
+/* ========== NAVBAR ========== */
+#navbar-main {
+  box-sizing: border-box;
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  transition: all 400ms ease;
+}
+#navbar-main.scrolled {
+  background-color: #0D1E04;
+}
+#navbar-main #navbar {
+  flex: 1 1 auto;
+  z-index: 198;
+  font-size: 16px;
+  line-height: 1em;
+  display: block;
+  zoom: 1;
+}
+#navbar-main #navbar #navbelt {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  transition: all 600ms ease;
+  height: 80px;
+}
+#navbar-main #navbar #navbelt .brand #logo {
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px #0D1E04;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+#navbar-main #navbar #navbelt .brand #logo img {
+  width: 60px;
+  background-color: transparent;
+  transition: all 600ms ease;
+}
+@media screen and (max-width: 900px) {
+  #navbar-main #navbar #navbelt .brand {
+    padding-left: 1rem;
+  }
+}
+@media screen and (min-width: 900px) {
+  #navbar-main #navbar #navbelt {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  #navbar-main #navbar #navbelt {
+    width: 78%;
+  }
+}
+#navbar-main #navbar .cta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1.8rem;
+  transition: all 600ms ease;
+}
+#navbar-main #navbar .cta .menu {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  transition: all 600ms ease;
+}
+#navbar-main #navbar .cta .hide {
+  display: none;
+  transition: all 600ms ease;
+}
+#navbar-main #navbar .cta .hide button svg {
+  width: 45px;
+  height: 35px;
+}
+#navbar-main #navbar .cta .hide .btn:hover {
+  color: #0D1E04;
+}
+#navbar-main #navbar .cta .btn {
+  color: rgb(0, 0, 0);
+  padding: 8px 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 600ms ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#navbar-main #navbar .cta .btn:hover {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  background-color: #0D1E04;
+  border-radius: 2px;
+  transition: all 600ms ease;
+}
+#navbar-main #navbar .cta .btn:hover a {
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  transition: all 600ms ease;
+}
+#navbar-main #navbar .cta .btn:active {
+  opacity: 1;
+}
+#navbar-main #navbar .cta .icon {
+  color: rgb(0, 0, 0);
+}
+@media screen and (max-width: 720px) {
+  #navbar-main #navbar .cta .btn {
+    display: none;
+  }
+  #navbar-main #navbar .cta .hide {
+    display: block;
+  }
+  #navbar-main #navbar .cta .hide .link {
+    color: rgb(0, 0, 0);
+  }
+  #navbar-main #navbar .cta .logout {
+    color: rgb(0, 0, 0);
+    padding: 0 2rem 0 1rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  #navbar-main #navbar .cta {
+    gap: 0.7rem;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 900px) {
+  #navbar-main #navbar .cta {
+    gap: 1.1rem;
+  }
+}
+
+.menus {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.menus .menu-items {
+  position: relative;
+  font-size: 14px;
+}
+.menus .menu-items a {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  padding: 0.7rem 0.7rem;
+  text-align: left;
+  text-decoration: none;
+}
+.menus .menu-items a:hover {
+  background-color: rgba(13, 30, 4, 0.1);
+}
+.menus .menu-items button {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  font-size: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.7rem 1.8rem;
+}
+.menus .menu-items .arrow::after {
+  content: "";
+  display: inline-block;
+  margin-left: 0.28em;
+  vertical-align: 0.09em;
+  border-top: 0.42em solid;
+  border-right: 0.32em solid transparent;
+  border-left: 0.32em solid transparent;
+}
+.menus .menu-items .dropdown {
+  position: absolute;
+  right: 0;
+  left: auto;
+  border: 1px solid rgba(13, 30, 4, 0.8);
+  box-shadow: 0 10px 15px -3px rgba(46, 41, 51, 0.08), 0 4px 6px -2px rgba(71, 63, 79, 0.16);
+  font-size: 1.1rem;
+  z-index: 99999;
+  min-width: 7rem;
+  text-align: center;
+  list-style: none;
+  border-radius: 0.2rem;
+  display: none;
+}
+.menus .menu-items .dropdown.show {
+  display: block;
+}
+.menus .menu-items .dropdown .dropdown-submenu {
+  position: absolute;
+  left: 100%;
+  top: -7px;
 }
 
 /*# sourceMappingURL=styles.css.map */

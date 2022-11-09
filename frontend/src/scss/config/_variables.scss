@@ -3,7 +3,7 @@
 
 :root {
    /*====== TOASTIFY ======*/
-   --toastify-color-error: #f3b1c7 !important;
+   --toastify-color-error: #81b168 !important;
    --toastify-color-progress-light: linear-gradient(
      to right,
      #4cd964,
@@ -15,7 +15,9 @@
    );
  }
 
-/********* VARIABLES *********/
+/*======= VARIABLES =======*/
+
+/*===== NEUTRALS =====*/
 $light: rgb(255, 255, 255);
 $light-bg: rgb(255, 238, 245);
 $light-gray: rgb(148, 148, 148);
@@ -23,15 +25,13 @@ $gray: rgb(94, 94, 94);
 $dark-200: #121113;
 $dark-400: #191819;
 $dark: rgb(0, 0, 0);
-$primary: rgba(160, 43, 101, 0.9);
-$accent: #f572b3;
-$pink: #f89fcc;
-$pink-200: #f8aad1;
-$pastel-pink: #fcb6d1;
-$light-pink: #f78ac0;
-$lighter-pink: #f89fcc;
-$pastel-purple: #CFA4D9;
-$light-purple: #CB5FB3;
 
+/*===== COLORS =====*/
+$primary: #0D1E04;
+$primary-light: #81b168;
+$primary-pastel: #CAFFBF;
+$accent: #61CE70;
+
+/*===== TRANSITIONS =====*/
 $transition: all 400ms ease;
 $transition-slow: all 600ms ease;
