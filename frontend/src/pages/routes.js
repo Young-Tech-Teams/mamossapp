@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "../components/Navbar";
+import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import Accueil from './Accueil';
+import Profile from './Profile';
 
-const Home = () => {
+const Pages = () => {
    const navigate = useNavigate();
 
    const token = JSON.parse(localStorage.getItem("token"));
@@ -19,19 +20,20 @@ const Home = () => {
         setIsLoggedIn(false)
         navigate("/connexion");
       }
-    }, [token]);
+    }, [navigate, token]);
   
 
    return (
       <>
          <NavBar />
          <Routes>
-            <Route path="/inscription" element={<Register />}/>
+            <Route path="/" element={<Home />} />
             <Route path="/connexion" element={<Login />} />
-            <Route path="/" element={<Accueil />} />
+            <Route path="/inscription" element={<Register />}/>
+            <Route path="/mon-compte" element={<Profile />} />
          </Routes>
       </>
    )
 }
 
-export default Home
+export default Pages

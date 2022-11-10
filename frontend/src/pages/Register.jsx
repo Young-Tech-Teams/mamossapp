@@ -26,7 +26,7 @@ const Register = () => {
       if (localStorage.getItem("token")) {
         navigate("/")
       }
-   }, []);
+   });
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -39,6 +39,9 @@ const Register = () => {
                setTimeout(() => {
                   navigate("/connexion")
                }, 500)
+               if (data.status === false) {
+                  toast.error(data.msg, toastOptions);
+               }
             },
          );
       }

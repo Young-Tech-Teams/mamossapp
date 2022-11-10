@@ -4,7 +4,7 @@ import styled from "styled-components";
 import AuthService from "../utils/auth.service";
 import { menuItems } from "./navMenu/_menuItems";
 import MenuItems from './navMenu/MenuItems';
-import { Feather, LogOut } from "react-feather";
+import { LogOut } from "react-feather";
 import Logo from "../assets/mamossa-logo.png";
 
 const Navbar = () => {
@@ -14,7 +14,6 @@ const Navbar = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeLink, setActiveLink] = useState("/");
   const [scrolled, setScrolled] = useState(false);
 
   const handleLogout = (event) => {
@@ -54,10 +53,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onUpdateActiveLink = (value) => {
-    setActiveLink(value);
-  };
-
   const disableRightClick = (e) => {
     e.preventDefault();
   }
@@ -68,7 +63,7 @@ const Navbar = () => {
         <Container id="navbar">
           <HeroWrapper id="navbelt" className="wrapper d-flex">
             <Brand className="brand">
-               <Link id="logo" to="https://mamossa.com">
+               <Link id="logo" to="/">
                  <img src={Logo} alt="logo" onContextMenu={disableRightClick} onDragStart={(e) => e.preventDefault()} />
               </Link>
             </Brand>

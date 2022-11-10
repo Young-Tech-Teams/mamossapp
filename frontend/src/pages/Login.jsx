@@ -25,7 +25,7 @@ const Login = () => {
       if (localStorage.getItem("token")) {
         navigate("/")
       }
-   }, []);
+   });
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -36,14 +36,10 @@ const Login = () => {
             (response) => {
                localStorage.setItem("token", JSON.stringify(response.data.accessToken));
                setTimeout(() => {
-                  navigate("/")
+                  navigate("/mon-compte")
                }, 500)
                if (data.status === false) {
                   toast.error(data.msg, toastOptions);
-               }
-               if (data.status === true) {
-                  localStorage.setItem("token", JSON.stringify(data.user));
-                  navigate("/");
                }
             },
          );
