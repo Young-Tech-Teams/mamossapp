@@ -20,7 +20,7 @@ const Pages = () => {
         setIsLoggedIn(false)
         navigate("/connexion");
       }
-    }, [navigate, token]);
+    }, [token]);
   
 
    return (
