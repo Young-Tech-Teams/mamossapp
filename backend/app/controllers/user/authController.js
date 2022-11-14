@@ -1,21 +1,19 @@
-const config = require("../config/auth.config.js");
-const db = require("../models");
+const config = require("../../config/auth.config.js");
+const db = require("../../models");
 const Op = db.Sequelize.Op;
 const { user: User, refreshToken: RefreshToken } = db;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
 
-/**
-* @description Test user private content with JWT auth
-* @param req
-* @param res
-*/
-exports.userBoard = (req, res) => {
-   res.status(200).send("User Content.");
-};
 
 /** REGISTER **/
+/**
+ * @description Register a new user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 module.exports.signup = async (req, res, next) => {
    User.create({
       email: req.body.email,
@@ -32,6 +30,12 @@ module.exports.signup = async (req, res, next) => {
 };
 
 /** LOGIN **/
+/**
+ * @ description Log in a user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 module.exports.login = async (req, res, next) => {
    User.findOne({
       where: {
@@ -70,6 +74,12 @@ module.exports.login = async (req, res, next) => {
 };
 
 /** LOGOUT **/
+/**
+ * @description Log out the user
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 module.exports.logout = (req, res) => {
    try {
        RefreshToken.destroy({ where: { userId: req.userId } });
@@ -84,6 +94,12 @@ module.exports.logout = (req, res) => {
 };
 
 /** TOKEN REFRESH **/
+/**
+ * @description Refresh access-token
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 module.exports.refreshToken = async (req, res) => {
    const { refreshToken: requestToken } = req.body;
    if (requestToken == null) {
@@ -100,7 +116,7 @@ module.exports.refreshToken = async (req, res) => {
            RefreshToken.destroy({ where: { id: refreshToken.id } });
 
            res.status(403).json({
-               message: "Refresh token was expired. Please make a new signin request",
+               message: "Refresh token has expired. Please make a new signin request",
            });
            return;
        }
@@ -116,29 +132,3 @@ module.exports.refreshToken = async (req, res) => {
        return res.status(500).send({ message: err });
    }
 };
-
-/** GET INFOS **/
-module.exports.getUserInfos = (req, res) => {
-   let token = req.headers["x-access-token"];
-   var userId;
-   if (!token) {
-       return res.status(403).send({
-           message: "No token provided!"
-       });
-   }
-   jwt.verify(token, config.secret, (err, decoded) => {
-       if (err) {
-           return catchError(err, res);
-       }
-       req.userId = decoded.id;
-       userId = decoded.id;
-   });
-   User.findOne({
-      where: {
-         id: userId
-      }
-   })
-   .then(data => {
-    res.send(data);
-})
-}
