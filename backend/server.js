@@ -24,10 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 const db = require("./app/models");
+const Role = db.role;
 const User = db.user;
 const Op = db.Sequelize.Op;
 
 /** SYNC DB SEQUELIZE **/
+// db.sequelize.sync()
 db.sequelize.sync({force : true})
    .then(() => {
       initial();
@@ -38,12 +40,34 @@ db.sequelize.sync({force : true})
    });
 
 async function initial() {
+   await Role.create({
+      id: 1,
+      name: "client"
+   });
+   
+   await Role.create({
+      id: 2,
+      name: "admin"
+   });
 
    await User.create({
       email: "miyuna@gmail.com",
       password: bcrypt.hashSync("Meowmeow", 8),
+      status: "admin"
    })
-}
+   .then(user => {
+      Role.findAll({
+         where: {
+            name: {
+               [Op.or]: ["admin"]
+            }
+         }
+      })
+      .then(roles => {
+         user.setRoles(roles).then(() => {});
+      });
+   })
+};
 
 require("./app/routes/routes")(app);
 

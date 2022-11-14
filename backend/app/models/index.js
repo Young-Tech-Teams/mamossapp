@@ -18,18 +18,33 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.user = require("./user/user.model.js")(sequelize, Sequelize);
+db.refreshToken = require("./user/refreshToken.model.js")(sequelize, Sequelize);
+db.role = require("./user/role.model.js")(sequelize, Sequelize);
 
-db.user = require("./user.model.js")(sequelize, Sequelize);
-db.refreshToken = require("./refreshToken.js")(sequelize, Sequelize);
+/** ROLES */
+db.role.belongsToMany(db.user, {
+  through: "user_roles",
+  foreignKey: "roleId",
+  otherKey: "userId"
+});
+db.user.belongsToMany(db.role, {
+  through: "user_roles",
+  foreignKey: "userId",
+  otherKey: "roleId"
+});
 
+db.ROLES = ["client", "admin"];
+
+/** TOKEN */
+db.refreshToken.belongsTo(db.user, {
+  foreignKey: "userId",
+  targetKey: "id"
+});
 db.user.hasOne(db.refreshToken, {
   foreignKey: "userId",
   targetKey: "id"
 });
 
-db.refreshToken.belongsTo(db.user, {
-  foreignKey: "userId",
-  targetKey: "id"
-});
 
 module.exports = db;
