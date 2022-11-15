@@ -12,7 +12,7 @@ const { TokenExpiredError } = jwt;
 * @param {*} req
 * @param {*} res
 */
-module.exports.userBoard = (req, res) => {
+exports.userBoard = (req, res) => {
    res.status(200).send("User's private content working!.");
 };
 
@@ -21,7 +21,7 @@ module.exports.userBoard = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-module.exports.adminBoard = (req, res) => {
+exports.adminBoard = (req, res) => {
     res.status(200).send("Admin's private content working!")
 }
 
@@ -38,7 +38,7 @@ const catchError = (err, res) => {
     }
     return res.sendStatus(401).send({ message: "Unauthorized access! "})
 }
-module.exports.getUserInfos = (req, res) => {
+exports.getUserInfos = (req, res) => {
    let token = req.headers["x-access-token"];
    var userId;
    if (!token) {
@@ -76,7 +76,7 @@ module.exports.getUserInfos = (req, res) => {
  * @param {*} res 
  * @returns 
  */
- module.exports.findAllUsers  = async (req, res) => {
+ exports.findAllUsers  = async (req, res) => {
     let token = req.headers["x-access-token"];
     if (!token) {
         return res.status(403).send({
