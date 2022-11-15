@@ -40,6 +40,7 @@ db.sequelize.sync({force : true})
    });
 
 async function initial() {
+   // creating roles
    await Role.create({
       id: 1,
       name: "client"
@@ -50,6 +51,7 @@ async function initial() {
       name: "admin"
    });
 
+   // creating user
    await User.create({
       email: "miyuna@gmail.com",
       password: bcrypt.hashSync("Meowmeow", 8),
@@ -69,6 +71,7 @@ async function initial() {
    })
 };
 
+require("./app/routes/authRoutes")(app);
 require("./app/routes/userRoutes")(app);
 
 /** CONNEXION TO LOCALHOST **/
