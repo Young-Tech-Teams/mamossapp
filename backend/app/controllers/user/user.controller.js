@@ -6,6 +6,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
 
+const catchError = (err, res) => {
+    if (err instanceof TokenExpiredError) {
+        return res.sendStatus(401).send({ message: "Unauthorized access, JWT Token has expired." });
+    }
+    return res.sendStatus(401).send({ message: "Unauthorized access! "})
+}
+
 /******* PRIVATE CONTENT *******/
 /**
 * @description Test USER private content with JWT auth
@@ -32,12 +39,6 @@ exports.adminBoard = (req, res) => {
  * @param {*} res 
  * @returns 
  */
-const catchError = (err, res) => {
-    if (err instanceof TokenExpiredError) {
-        return res.sendStatus(401).send({ message: "Unauthorized access, JWT Token has expired." });
-    }
-    return res.sendStatus(401).send({ message: "Unauthorized access! "})
-}
 exports.getUserInfos = (req, res) => {
    let token = req.headers["x-access-token"];
    var userId;
@@ -69,7 +70,7 @@ exports.getUserInfos = (req, res) => {
     })
 }
 
-/** GET ALL USERS INFOS **/
+/** TEST GET ALL USERS INFOS **/
 /**
  * @description Returns all users informations FOR ADMIN ONLY
  * @param {*} req 
