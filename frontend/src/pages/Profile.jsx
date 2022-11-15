@@ -1,7 +1,24 @@
-import React from 'react'
-import { API_BASE_URL } from '../utils/APIRoutes'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
+import { API_BASE_URL, API_AUTH_URL } from '../utils/APIRoutes'
 
 const Profile = () => {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const url = location.pathname.split("/");
+
+  const [values, setValues] = useState({
+    email: "",
+
+  })
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  }
+
 
   const fname = "John";
   const lname = "Doe";
@@ -72,12 +89,10 @@ const Profile = () => {
           <div className="consign">
             <h2>Mes consignes en cours</h2>
           </div>
-
           
-          <div className="consign">
-            <h2>Mes consignes en cours</h2>
-          </div>
         </div>
+
+        <a href="/mes-commandes">Mes commandes</a>
 
       </div>
 
