@@ -1,7 +1,7 @@
 const config = require("../../config/auth.config.js");
 const db = require("../../models");
 const Op = db.Sequelize.Op;
-const { user: User, refreshToken: RefreshToken } = db;
+const User = db.user;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
