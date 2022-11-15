@@ -90,6 +90,7 @@ exports.login = async (req, res, next) => {
             res.status(200).send({
                 id: user.id,
                 email: user.email,
+                status: user.status,
                 accessToken: token,
                 refreshToken: refreshToken,
                 message: 'Successfully logged in!'
