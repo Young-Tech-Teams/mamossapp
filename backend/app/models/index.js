@@ -34,7 +34,7 @@ db.user.belongsToMany(db.role, {
   otherKey: "roleId"
 });
 
-db.ROLES = ["client", "admin"];
+db.ROLES = ["client", "livreur", "admin"];
 
 /** TOKEN */
 db.refreshToken.belongsTo(db.user, {
