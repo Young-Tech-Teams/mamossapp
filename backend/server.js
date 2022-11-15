@@ -69,7 +69,7 @@ async function initial() {
    })
 };
 
-require("./app/routes/routes")(app);
+require("./app/routes/userRoutes")(app);
 
 /** CONNEXION TO LOCALHOST **/
 const colors = require("./utils/colors");

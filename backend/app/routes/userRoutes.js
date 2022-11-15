@@ -1,4 +1,4 @@
-const { verifySignUp, authJwt } = require("../middleware");
+const { authJwt } = require("../middleware");
 const userController = require("../controllers/user/user.controller");
 const router = require("express").Router();
 
@@ -11,14 +11,41 @@ module.exports = function (app) {
       next();
    });
    
-   router.post("/signup", verifySignUp.checkDuplicateEmail, authController.signup);
-   router.post("/login", authController.login);
-   router.post("/logout", authJwt.verifyToken, authController.logout);
-   router.post("/refresh", authController.refreshToken);
-
+   // Test user private content with JWT
    router.get("/user", authJwt.verifyToken, userController.userBoard);
-   router.get("/user-infos", authJwt.verifyToken, userController.getUserInfos);
-   router.get("/all-users", authJwt.verifyToken, userController.findAllUsers);
 
-   app.use("/api/auth", router);
+   // Test admin private content with JWT auth
+   router.get(
+      "/admin",
+      [
+         authJwt.verifyToken,
+         authJwt.isAdmin
+      ],
+      userController.adminBoard
+   );
+
+   // Test admin role
+   router.get(
+      "/testrole",
+      [
+         authJwt.verifyToken,
+         authJwt.isAdmin
+      ],
+      userController.adminBoard
+   );
+
+   // Get user information
+   router.get("/user-infos", authJwt.verifyToken, userController.getUserInfos);
+
+   // Get all users informations
+   router.get(
+      "/all-users", 
+      [
+         authJwt.verifyToken, 
+         authJwt.isAdmin
+      ],
+      userController.findAllUsers
+   );
+
+   app.use("/api/", router);
 };
