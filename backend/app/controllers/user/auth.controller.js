@@ -15,7 +15,7 @@ const { TokenExpiredError } = jwt;
  * @param {*} res 
  * @param {*} next 
  */
-module.exports.signup = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
     User.create({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
@@ -58,7 +58,7 @@ module.exports.signup = async (req, res, next) => {
  * @param {*} res 
  * @param {*} next 
  */
-module.exports.login = async (req, res, next) => {
+exports.login = async (req, res, next) => {
    User.findOne({
       where: {
           email: req.body.email
@@ -108,7 +108,7 @@ module.exports.login = async (req, res, next) => {
  * @param {*} res 
  * @returns 
  */
-module.exports.logout = (req, res) => {
+exports.logout = (req, res) => {
    try {
        RefreshToken.destroy({ where: { userId: req.userId } });
 
@@ -128,7 +128,7 @@ module.exports.logout = (req, res) => {
  * @param {*} res 
  * @returns 
  */
-module.exports.refreshToken = async (req, res) => {
+exports.refreshToken = async (req, res) => {
    const { refreshToken: requestToken } = req.body;
    if (requestToken == null) {
        return res.status(403).json({ message: "Refresh Token is required!" });
