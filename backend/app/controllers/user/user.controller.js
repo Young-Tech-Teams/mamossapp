@@ -32,6 +32,35 @@ exports.adminBoard = (req, res) => {
     res.status(200).send("Admin's private content working!")
 }
 
+/** MODIFY USER INFOS */
+/**
+ * @description Updating user informations
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.update = (req, res) => {
+    const id = req.params.id;
+    Product.update(req.body, {
+        whdere: { id: id }
+    })
+    .then(nb => {
+        if (nb == 1) {
+            res.send({
+                message: "User has been successfully updated",
+            });
+        } else {
+            res.send({
+                message: `Could not update user with id ${id}. Please try again`
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: `There was an error updating user with id ${id}.`
+        });
+    });
+};
+
 /** GET INFOS **/
 /**
  * @description Get user information with JWT
