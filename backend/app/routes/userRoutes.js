@@ -21,7 +21,7 @@ module.exports = function (app) {
          authJwt.verifyToken,
          authJwt.isClient
       ],
-      userController.userBoard
+      userController.update
    );
 
    // Test admin private content with JWT auth
