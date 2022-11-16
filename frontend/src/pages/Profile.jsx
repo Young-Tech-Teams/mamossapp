@@ -7,19 +7,45 @@ import { API_BASE_URL, API_AUTH_URL } from '../utils/APIRoutes'
 const Profile = () => {
 
   const location = useLocation();
-  const navigate = useNavigate();
-  const url = location.pathname.split("/");
+  // const url = location.pathname.split("/");
 
+  const token = JSON.parse(localStorage.getItem("token"));
+  
   const [values, setValues] = useState({
     email: "",
-
+    password: "",
+    status: "",
   })
 
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+  const fetchCurrentUser = () => {
+    var config = {
+      method: 'get',
+      url: `${API_BASE_URL}/user-infos`,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      }
+    }
+
+    axios.defaults.withCredentials = true;
+
+    axios(config)
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+    
+    useEffect(() => {
+      fetchCurrentUser();
+    }, []);
+    
+    const handleChange = (e) => {
+      setValues({ ...values, [e.target.name]: e.target.value });
   }
 
-
+  
+  // Tests
   const fname = "John";
   const lname = "Doe";
   const email = "john@doe.fr";
