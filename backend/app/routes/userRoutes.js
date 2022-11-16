@@ -13,6 +13,16 @@ module.exports = function (app) {
    
    // Test user private content with JWT
    router.get("/user", authJwt.verifyToken, userController.userBoard);
+   
+   // Only clients
+   router.get(
+      "/add-info",
+      [
+         authJwt.verifyToken,
+         authJwt.isClient
+      ],
+      userController.userBoard
+   );
 
    // Test admin private content with JWT auth
    router.get(
