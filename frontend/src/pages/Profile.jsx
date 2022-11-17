@@ -15,7 +15,7 @@ const Profile = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
 
-  const fetchCurrentUser = () => {
+  const fetchCurrentUserInfo = () => {
     var config = {
       method: 'get',
       url: `${API_BASE_URL}/user-infos`,
@@ -45,7 +45,7 @@ const Profile = () => {
     }
     
     useEffect(() => {
-      fetchCurrentUser();
+      fetchCurrentUserInfo();
     }, []);
     
   
