@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { API_BASE_URL, API_AUTH_URL } from '../utils/APIRoutes'
+import axios from 'axios';
+import { API_BASE_URL, API_PUBLIC_URL } from '../utils/APIRoutes';
+import Modal from '../components/profile/InfoModal';
 
 const Profile = () => {
 
-  const location = useLocation();
-  // const url = location.pathname.split("/");
-
   const token = JSON.parse(localStorage.getItem("token"));
   
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    status: "",
-  })
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
   const fetchCurrentUser = () => {
     var config = {
       method: 'get',
       url: `${API_BASE_URL}/user-infos`,
-      headers: {
+      headers: localStorage.getItem("token") ? {
+        "Access-Control-Allow-Origin": "*",
+        "x-access-token": token,
+      } : {
         "Access-Control-Allow-Origin": "*",
       }
     }
@@ -30,9 +31,16 @@ const Profile = () => {
 
     axios(config)
       .then((response) => {
+        console.log(response);
+        console.log("It worked!");
+        setFirstname(response.data.firstname);
+        setLastname(response.data.lastname);
+        setEmail(response.data.email);
+        setAge(response.data.age);
+        setGender(response.data.gender);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       })
     }
     
@@ -40,24 +48,16 @@ const Profile = () => {
       fetchCurrentUser();
     }, []);
     
-    const handleChange = (e) => {
-      setValues({ ...values, [e.target.name]: e.target.value });
-  }
-
   
-  // Tests
-  const fname = "John";
-  const lname = "Doe";
-  const email = "john@doe.fr";
-  const age = 29;
-  const gender = "Male";
-  const created = "Mamossien depuis 25/05/22";
+    const openModal = () => {
+      <Modal />
+    }
 
   return (
     <section id="profile">
       <div className="container">
         <h2>Mon compte</h2>
-        <p>Bonjour {fname} </p>
+        <p>Bonjour {firstname}</p>
 
         <div className="tabs">
           <div className="delivery">
@@ -68,30 +68,38 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="user-info">
+        <div className="user-info d-flex">
           <div className="avatar">
             <img src="" alt="Avatar" />
           </div>
           <div className="info">
             <div className="name">
-              <span>{fname}</span>
-              <span>{lname}</span>
+              <span>Prénom: {firstname}</span>
+              <hr />
+              <span>Nom: {lastname}</span>
             </div>
             <div className="mail">
-              <span>{email}</span>
+              <span>Email: {email}</span>
             </div>
             <div className="age gender">
-              <span>{age}</span>
-              <span>{gender}</span>
+              <span>Age: {age}</span>
+              <hr />
+              <span>Genre: {gender}</span>
             </div>
             <div className="created">
-              <span>{created}</span>
+              <span>Mamossien depuis</span>
             </div>
           </div>
 
           <div className="allergies">
             <span>Allergies</span>
           </div>
+
+          <button
+            onClick={openModal}
+          >
+            Modifier mes informations
+          </button>
         </div>
 
         <div className="body">
