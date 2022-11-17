@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
 
+/** ERROR HANDLING **/
 const catchError = (err, res) => {
     if (err instanceof TokenExpiredError) {
         return res.sendStatus(401).send({ message: "Unauthorized access, JWT Token has expired." });
