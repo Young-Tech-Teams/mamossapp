@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_BASE_URL, API_PUBLIC_URL } from '../utils/APIRoutes';
+import { API_BASE_URL } from '../utils/APIRoutes';
 import Modal from '../components/profile/InfoModal';
 
 const Profile = () => {
