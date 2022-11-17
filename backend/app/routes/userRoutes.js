@@ -15,11 +15,11 @@ module.exports = function (app) {
    router.get("/user", authJwt.verifyToken, userController.userBoard);
    
    // Only clients
-   router.get(
-      "/add-info",
+   router.put(
+      "/update",
       [
          authJwt.verifyToken,
-         authJwt.isClient
+         // authJwt.isClient
       ],
       userController.update
    );

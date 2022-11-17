@@ -39,24 +39,54 @@ exports.adminBoard = (req, res) => {
  * @param {*} res 
  */
 exports.update = (req, res) => {
-    const id = req.params.id;
-    Product.update(req.body, {
-        whdere: { id: id }
+   let token = req.headers["x-access-token"];
+   var userId;
+    if (!token) {
+        return res.status(403).send({
+            message: "No token provided!"
+        });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return catchError(err, res);
+        }
+        req.userId = decoded.id;
+        userId = decoded.id;
+    });
+    User.findOne({ 
+        where: { 
+            id: userId 
+        } 
     })
-    .then(nb => {
-        if (nb == 1) {
-            res.send({
-                message: "User has been successfully updated",
-            });
+    .then(userRecord => {
+        if (!userRecord) {
+            throw new Error('No record found')
         } else {
-            res.send({
-                message: `Could not update user with id ${id}. Please try again`
+            console.log(`Retrieved record ${JSON.stringify(userRecord, null, 2)}`) 
+            
+            let values = {
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                age: req.body.age,
+                gender: req.body.gender
+            }
+            
+            userRecord.update(req.body, { values })
+            
+            .then(updatedRecord => {
+                console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
+                res.status(200).send({ message: updatedRecord })
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "There was an error getting the updated record."
+                });
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: `There was an error updating user with id ${id}.`
+            message: "There was an error updating user."
         });
     });
 };
