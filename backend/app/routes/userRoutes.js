@@ -16,7 +16,7 @@ module.exports = function (app) {
    
    // Only clients
    router.put(
-      "/update",
+      "/user-update",
       [
          authJwt.verifyToken,
          // authJwt.isClient
