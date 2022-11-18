@@ -14,6 +14,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   // MODAL
@@ -51,17 +52,17 @@ const Profile = () => {
         setEmail(response.data.email);
         setAge(response.data.age);
         setGender(response.data.gender);
+        setCreatedAt(response.data.createdAt);
       })
       .catch((err) => {
         console.log(err);
       })
     }
-    
+
     useEffect(() => {
       fetchCurrentUserInfo();
     }, []);
     
-  
 
   return (
     <section id="profile">
@@ -85,22 +86,22 @@ const Profile = () => {
           <div className="avatar">
             <img src="" alt="Avatar" />
           </div>
-          <div className="info">
+          <div className="bio">
             <div className="name">
-              <span>Prénom: {firstname}</span>
+              <span>{firstname ? firstname : "Prénom"}</span>
               <hr />
-              <span>Nom: {lastname}</span>
+              <span>{lastname ? lastname : "Nom"}</span>
             </div>
             <div className="mail">
-              <span>Email: {email}</span>
+              <span>{email}</span>
             </div>
             <div className="age gender">
-              <span>Age: {age}</span>
+              <span>{age ? age : "Age"}</span>
               <hr />
-              <span>Genre: {gender}</span>
+              <span>{gender ? gender : "Sexe"}</span>
             </div>
             <div className="created">
-              <span>Mamossien depuis</span>
+              <span>Mamossien depuis {format({createdAt}, 'yyyy/mm/dd')}</span>
             </div>
           </div>
 
