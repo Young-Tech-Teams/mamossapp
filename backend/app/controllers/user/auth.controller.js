@@ -6,8 +6,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
 
-/**====== USER CRUD ======*/
-
 /** REGISTER **/
 /**
  * @description Register a new user
