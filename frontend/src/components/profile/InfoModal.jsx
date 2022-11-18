@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
+import FormData from "form-data";
 
 const InfoModal = ({ setShowModal }) => {
 
@@ -63,27 +64,35 @@ const InfoModal = ({ setShowModal }) => {
       setGender(e.target.value);
     }
 
-   // var config = {
-   //    method: 'put',
-   //    url: `${API_BASE_URL}/update`,
-   //    headers: localStorage.getItem("token") ? {
-   //       "Access-Control-Allow-Origin": "*",
-   //       "x-access-token": token,
-   //    } : {
-   //       "Access-Control-Allow-Origin": "*"
-   //    }
-   // }
+    const onSubmit = (e) => {
+      e.preventDefault();
+      const data = new FormData();
+      data.append("firstname", firstname);
+      data.append("lastname", lastname);
+      data.append("email", email);
+      data.append("age", age);
+      data.append("gender", gender);
 
-   // axios.defaults.withCredetials = true;
-
-   // axios(config)
-   // .then((response) => {
-   //    setValues
-   // })
+      var config = {
+        method: 'put',
+        url: `${API_USER_URL}update`,
+        headers: {
+          'x-access-token': token,
+        },
+        data: data,
+      };
+      axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
 
    const form = 
    <>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <label htmlFor="firstname">Prénom</label>
           <hr />
           <Input 
@@ -138,12 +147,21 @@ const InfoModal = ({ setShowModal }) => {
             value={gender}
             onChange={onChangeGender}
           />
+          <hr />
+          <button
+            className="btn btn-save"
+          >Sauvegarder</button>
         </Form>
    </>
 
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
+        <button
+          className="btn btn-close"
+          onClick={() => setShowModal(false)}
+        >Close
+        </button>
         {form}
       </FormContainer>
     </Modal>

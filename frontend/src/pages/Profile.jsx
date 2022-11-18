@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../utils/APIRoutes';
+import { format } from 'fecha';
 import Modal from '../components/profile/InfoModal';
 
 const Profile = () => {
@@ -30,7 +31,7 @@ const Profile = () => {
   });
 
   const fetchCurrentUserInfo = () => {
-    var config = {
+    const config = {
       method: 'get',
       url: `${API_USER_URL}infos`,
       headers: localStorage.getItem("token") ? {
@@ -58,6 +59,8 @@ const Profile = () => {
         console.log(err);
       })
     }
+
+    // console.log(createdAt,'YY/MM/DD');
 
     useEffect(() => {
       fetchCurrentUserInfo();
@@ -101,7 +104,7 @@ const Profile = () => {
               <span>{gender ? gender : "Sexe"}</span>
             </div>
             <div className="created">
-              <span>Mamossien depuis {format({createdAt}, 'yyyy/mm/dd')}</span>
+              <span>Mamossien depuis {createdAt}</span>
             </div>
           </div>
 
