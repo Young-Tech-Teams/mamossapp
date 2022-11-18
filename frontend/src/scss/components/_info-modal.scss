@@ -1,0 +1,17 @@
+#modal {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rgba(209, 209, 209, 0.8);
+   transition: $transition-slow;
+   z-index: 333;
+   backdrop-filter: blur(4px);
+   -webkit-backdrop-filter: blur(4px);
+   animation: fadeIn .9s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+   padding-top: 5%;
+}
