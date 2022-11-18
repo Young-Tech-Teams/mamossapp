@@ -11,18 +11,8 @@ module.exports = function (app) {
       next();
    });
    
-   // Test user private content with JWT
-   router.get("/user", authJwt.verifyToken, userController.userBoard);
-   
-   // Only clients
-   router.put(
-      "/user-update",
-      [
-         authJwt.verifyToken,
-         // authJwt.isClient
-      ],
-      userController.update
-   );
+   // Test client private content with JWT
+   router.get("/client", authJwt.verifyToken, userController.userBoard);
 
    // Test admin private content with JWT auth
    router.get(
@@ -34,22 +24,22 @@ module.exports = function (app) {
       userController.adminBoard
    );
 
-   // Test admin role
-   router.get(
-      "/testrole",
+   // Updating user informations
+   router.put(
+      "/update",
       [
          authJwt.verifyToken,
-         authJwt.isAdmin
+         // authJwt.isClient
       ],
-      userController.adminBoard
+      userController.update
    );
 
    // Get user information
-   router.get("/user-infos", authJwt.verifyToken, userController.getUserInfos);
+   router.get("/infos", authJwt.verifyToken, userController.getUserInfos);
 
    // Get all users informations
    router.get(
-      "/all-users", 
+      "/get-all", 
       [
          authJwt.verifyToken, 
          authJwt.isAdmin
@@ -57,5 +47,8 @@ module.exports = function (app) {
       userController.findAllUsers
    );
 
-   app.use("/api/", router);
+   // Deleting user from database
+   router.delete("/delete")
+
+   app.use("/api/user", router);
 };
