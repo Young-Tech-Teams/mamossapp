@@ -17,7 +17,7 @@ const InfoModal = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       var config = {
         method: 'get',
-        url: `${API_USER_URL}/infos`,
+        url: `${API_USER_URL}infos`,
         headers: localStorage.getItem("token") ? {
           "Access-Control-Allow-Origin": "*",
           "x-access-token": token,
@@ -81,47 +81,70 @@ const InfoModal = ({ setShowModal }) => {
    //    setValues
    // })
 
-  return (
-    <Modal id="info-modal" className="info-modal">
-      <FormContainer>
+   const form = 
+   <>
         <Form>
+          <label htmlFor="firstname">Prénom</label>
+          <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="firstname"
+            placeholder="Prénom"
             name="firstname"
             value={firstname}
             onChange={onChangeFirstname}
           />
+          <hr />
+          <label htmlFor="lastname">Nom</label>
+          <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="Lastname"
+            placeholder="Nom"
             name="lastname"
+            value={lastname}
             onChange={onChangeLastname}
           />
+          <hr />
+          <label htmlFor="email">Email</label>
+          <hr />
           <Input 
             type="email"
             className="form-control"
             placeholder="Email"
             name="email"
+            value={`${email ? email : "Email"}`}
             onChange={onChangeEmail}
           />
-          <Input 
-            type="date"
+          <hr />
+          <label htmlFor="age">Age</label>
+          <hr />
+          <Input  
+            type="text"
             className="form-control"
             placeholder="Age"
             name="age"
+            value={age}
             onChange={onChangeAge}
           />
+          <hr />
+          <label htmlFor="gender">Genre</label>
+          <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="Gender"
+            placeholder="Genre"
             name="gender"
+            value={gender}
             onChange={onChangeGender}
           />
         </Form>
+   </>
+
+  return (
+    <Modal id="info-modal" className="info-modal">
+      <FormContainer>
+        {form}
       </FormContainer>
     </Modal>
   )

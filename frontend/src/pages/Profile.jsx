@@ -31,7 +31,7 @@ const Profile = () => {
   const fetchCurrentUserInfo = () => {
     var config = {
       method: 'get',
-      url: `${API_USER_URL}/infos`,
+      url: `${API_USER_URL}infos`,
       headers: localStorage.getItem("token") ? {
         "Access-Control-Allow-Origin": "*",
         "x-access-token": token,
