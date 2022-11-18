@@ -61,7 +61,7 @@ exports.update = (req, res) => {
     })
     .then(userRecord => {
         if (!userRecord) {
-            throw new Error('No record found')
+            throw new Error("User records not found")
         } else {
             console.log(`Retrieved record ${JSON.stringify(userRecord, null, 2)}`) 
             
@@ -173,19 +173,42 @@ exports.delete = async (req, res) => {
         req.userId = decoded.id;
         userId = decoded.id;
     });
-    User.destroy({
-        where: { id: userId }
-    })
-    .then((success) => {
-        if (!success) {
-            res.status(200).send({
-                message: "User had been deleted successfully."
+    // User.findOne({
+    //     where: { 
+    //         id: userId
+    //     }
+    // })
+    // .then((user) => {
+    //     if (!user) {
+    //         throw new Error("User not found");
+    //     } else {
+    //         console.log(`User ${JSON.stringify(user, null, 2)}`);
+    //     }
+        
+        User.destroy({
+            where: { id: userId }
+        })
+        .then((success) => {
+            if (!success) {
+                res.status(403).send({
+                    message: "Couldn't delete the account."
+                });
+            } else {
+                res.status(200).send({
+                    message: "User had been deleted successfully."
+                });
+            };
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "There was an error deleting the account."
             });
-        } else {
-            res.status(403).send({
-                message: "Couldn't delete the account."
-            });
-        };
-    })
+        });
+    // })
+    // .catch(err => {
+    //     res.status(500).send({
+    //         message: "There was an error deleting the account."
+    //     });
+    // });
 }
  

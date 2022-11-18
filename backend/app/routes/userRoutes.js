@@ -48,7 +48,13 @@ module.exports = function (app) {
    );
 
    // Deleting user from database
-   router.delete("/delete")
+   router.delete(
+      "/delete",
+      [
+         authJwt.verifyToken,
+      ],
+      userController.delete
+   )
 
    app.use("/api/user", router);
 };
