@@ -33,7 +33,7 @@ exports.adminBoard = (req, res) => {
     res.status(200).send("Admin's private content working!")
 }
 
-/** MODIFY USER INFOS */
+/******* USER MODIFY *******/
 /**
  * @description Updating user informations
  * @param {*} req 
@@ -158,3 +158,9 @@ exports.getUserInfos = (req, res) => {
     });
  }
 
+/** DELETE USER */
+exports.delete = async (req, res) => {
+    let token = req.headers["x-access-token"];
+    var userId;
+}
+ 
