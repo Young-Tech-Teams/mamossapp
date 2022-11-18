@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
@@ -16,7 +16,7 @@ const InfoModal = ({ setShowModal }) => {
   const [gender, setGender] = useState("");
 
    const fetchCurrentUserInfo = () => {
-      var config = {
+      const config = {
         method: 'get',
         url: `${API_USER_URL}infos`,
         headers: localStorage.getItem("token") ? {
@@ -66,103 +66,102 @@ const InfoModal = ({ setShowModal }) => {
 
     const onSubmit = (e) => {
       e.preventDefault();
-      const data = new FormData();
+      let data = new FormData(e.target.value);
       data.append("firstname", firstname);
       data.append("lastname", lastname);
       data.append("email", email);
       data.append("age", age);
       data.append("gender", gender);
 
-      var config = {
+      const config = {
         method: 'put',
         url: `${API_USER_URL}update`,
-        headers: {
-          'x-access-token': token,
+        headers: localStorage.getItem("token") ? {
+          "Access-Control-Allow-Origin": "*",
+          "x-access-token": token,
+        } : {
+          "Access-Control-Allow-Origin": "*",
         },
         data: data,
       };
       axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
+         console.log(response.data.message);
+         console.log("did it work?");
+        // window.location.href = "/mon-compte"
       })
       .catch(err => {
         console.log(err);
       })
     }
 
-   const form = 
-   <>
-        <Form onSubmit={onSubmit}>
+  return (
+    <Modal id="info-modal" className="info-modal">
+      <FormContainer>
+      <Form onSubmit={onSubmit}>
+          <div>
           <label htmlFor="firstname">Prénom</label>
           <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="Prénom"
+            placeholder="Entrez votre prénom"
             name="firstname"
-            value={firstname}
+            value={firstname ? firstname : ""}
             onChange={onChangeFirstname}
-          />
-          <hr />
+            />
+          </div>
+          <div>
           <label htmlFor="lastname">Nom</label>
           <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="Nom"
+            placeholder="Entrez votre nom"
             name="lastname"
-            value={lastname}
+            value={lastname ? lastname : ""}
             onChange={onChangeLastname}
-          />
-          <hr />
+            />
+          </div>
+          <div>
           <label htmlFor="email">Email</label>
           <hr />
           <Input 
             type="email"
             className="form-control"
-            placeholder="Email"
+            placeholder="Entrez votre adresse mail"
             name="email"
-            value={`${email ? email : "Email"}`}
+            value={email ? email : ""}
             onChange={onChangeEmail}
           />
-          <hr />
+          </div>
+          <div>
           <label htmlFor="age">Age</label>
           <hr />
           <Input  
             type="text"
             className="form-control"
-            placeholder="Age"
+            placeholder="Entrez votre age"
             name="age"
-            value={age}
+            value={age ? age : ""}
             onChange={onChangeAge}
-          />
-          <hr />
+            />
+          </div>
+          <div>
           <label htmlFor="gender">Genre</label>
           <hr />
           <Input 
             type="text"
             className="form-control"
-            placeholder="Genre"
+            placeholder="Entrez votre genre"
             name="gender"
-            value={gender}
+            value={gender ? gender : ""}
             onChange={onChangeGender}
           />
-          <hr />
-          <button
-            className="btn btn-save"
-          >Sauvegarder</button>
+          </div>
+          <button>Sauvegarder</button>
         </Form>
-   </>
-
-  return (
-    <Modal id="info-modal" className="info-modal">
-      <FormContainer>
-        <button
-          className="btn btn-close"
-          onClick={() => setShowModal(false)}
-        >Close
-        </button>
-        {form}
       </FormContainer>
     </Modal>
   )
