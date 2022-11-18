@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_BASE_URL } from '../utils/APIRoutes';
+import { API_USER_URL } from '../utils/APIRoutes';
 import Modal from '../components/profile/InfoModal';
 
 const Profile = () => {
@@ -14,11 +14,23 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  // MODAL
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setShowModal(false);
+    }
+  });
 
   const fetchCurrentUserInfo = () => {
     var config = {
       method: 'get',
-      url: `${API_BASE_URL}/user-infos`,
+      url: `${API_USER_URL}/infos`,
       headers: localStorage.getItem("token") ? {
         "Access-Control-Allow-Origin": "*",
         "x-access-token": token,
@@ -49,9 +61,6 @@ const Profile = () => {
     }, []);
     
   
-    const openModal = () => {
-      <Modal />
-    }
 
   return (
     <section id="profile">
@@ -61,10 +70,7 @@ const Profile = () => {
 
         <div className="tabs">
           <div className="delivery">
-            <span>Livraison</span>
-          </div>
-          <div className="takeout">
-            <span>À emporter</span>
+            <a href="/mes-commandes">Commander un repas</a>
           </div>
         </div>
 
@@ -96,7 +102,8 @@ const Profile = () => {
           </div>
 
           <button
-            onClick={openModal}
+            className="btn btn-modal"
+            onClick={toggleModal}
           >
             Modifier mes informations
           </button>
@@ -125,8 +132,6 @@ const Profile = () => {
           </div>
           
         </div>
-
-        <a href="/mes-commandes">Mes commandes</a>
 
       </div>
 

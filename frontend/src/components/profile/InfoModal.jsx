@@ -20,7 +20,7 @@ const InfoModal = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       var config = {
         method: 'get',
-        url: `${API_BASE_URL}/user-infos`,
+        url: `${API_USER_URL}/infos`,
         headers: localStorage.getItem("token") ? {
           "Access-Control-Allow-Origin": "*",
           "x-access-token": token,
@@ -53,7 +53,7 @@ const InfoModal = ({ setShowModal }) => {
 
    // var config = {
    //    method: 'put',
-   //    url: `${API_BASE_URL}/user-update`,
+   //    url: `${API_BASE_URL}/update`,
    //    headers: localStorage.getItem("token") ? {
    //       "Access-Control-Allow-Origin": "*",
    //       "x-access-token": token,
@@ -74,10 +74,54 @@ const InfoModal = ({ setShowModal }) => {
    }
 
   return (
-    <div>
-      
-    </div>
+    <Modal>
+      <FormContainer>
+        <Form>
+          <Input 
+            type="text"
+            className="form-control"
+            placeholder="Firstname"
+            name="firstname"
+            value={this.state.firstname}
+            onChange={(e) => handleChange(e)}
+          />
+          <Input 
+            type="text"
+            className="form-control"
+            placeholder="Lastname"
+            name="lastname"
+            onChange={(e) => handleChange(e)}
+          />
+          <Input 
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            name="email"
+            onChange={(e) => handleChange(e)}
+          />
+          <Input 
+            type="date"
+            className="form-control"
+            placeholder="Age"
+            name="age"
+            onChange={(e) => handleChange(e)}
+          />
+          <Input 
+            type="text"
+            className="form-control"
+            placeholder="Gender"
+            name="gender"
+            onChange={(e) => handleChange(e)}
+          />
+        </Form>
+      </FormContainer>
+    </Modal>
   )
 }
+
+const Modal = styled.div``
+const FormContainer = styled.div``
+const Form = styled.form``
+const Input = styled.input``
 
 export default InfoModal
