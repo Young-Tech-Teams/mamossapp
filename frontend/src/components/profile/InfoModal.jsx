@@ -74,7 +74,7 @@ const InfoModal = ({ setShowModal }) => {
    }
 
   return (
-    <Modal>
+    <Modal id="info-modal" className="info-modal">
       <FormContainer>
         <Form>
           <Input 
