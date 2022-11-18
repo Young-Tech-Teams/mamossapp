@@ -459,9 +459,10 @@ li {
   justify-content: center;
   gap: 1rem;
   align-items: center;
+  z-index: 222;
 }
 
-#modal {
+#info-modal {
   position: fixed;
   top: 0;
   right: 0;

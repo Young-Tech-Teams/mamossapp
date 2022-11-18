@@ -8,14 +8,11 @@ const InfoModal = ({ setShowModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
   
-   const [values, setValues] = useState({
-      firstname: "",
-      lastname: "",
-      email: "",
-      // password: "",
-      age: "",
-      gender: ""
-   })
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
    const fetchCurrentUserInfo = () => {
       var config = {
@@ -35,21 +32,36 @@ const InfoModal = ({ setShowModal }) => {
       .then((response) => {
          console.log(response);
          console.log("It worked!");
-         setValues.firstname(response.data.firstname);
-         setValues.lastname(response.data.lastname);
-         setValues.email(response.data.email);
-         setValues.age(response.data.age);
-         setValues.gender(response.data.gender);
+         setFirstname(response.data.firstname);
+         setLastname(response.data.lastname);
+         setEmail(response.data.email);
+         setAge(response.data.age);
+         setGender(response.data.gender);
       })
       .catch((err) => {
          console.log(err);
       })
    }
       
-      useEffect(() => {
-        fetchCurrentUserInfo();
-      }, []);
+    useEffect(() => {
+      fetchCurrentUserInfo();
+    }, []);
 
+    const onChangeFirstname = (e) => {
+      setFirstname(e.target.value);
+    };
+    const onChangeLastname = (e) => {
+      setLastname(e.target.value);
+    };
+    const onChangeEmail = (e) => {
+      setEmail(e.target.value);
+    };
+    const onChangeAge = (e) => {
+      setAge(e.target.value);
+    };
+    const onChangeGender = (e) => {
+      setGender(e.target.value);
+    }
 
    // var config = {
    //    method: 'put',
@@ -69,10 +81,6 @@ const InfoModal = ({ setShowModal }) => {
    //    setValues
    // })
 
-   const handleChange = (e) => {
-      setValues({ ...values, [e.target.name]: e.target.value });
-   }
-
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
@@ -80,38 +88,38 @@ const InfoModal = ({ setShowModal }) => {
           <Input 
             type="text"
             className="form-control"
-            placeholder="Firstname"
+            placeholder="firstname"
             name="firstname"
-            value={this.state.firstname}
-            onChange={(e) => handleChange(e)}
+            value={firstname}
+            onChange={onChangeFirstname}
           />
           <Input 
             type="text"
             className="form-control"
             placeholder="Lastname"
             name="lastname"
-            onChange={(e) => handleChange(e)}
+            onChange={onChangeLastname}
           />
           <Input 
             type="email"
             className="form-control"
             placeholder="Email"
             name="email"
-            onChange={(e) => handleChange(e)}
+            onChange={onChangeEmail}
           />
           <Input 
             type="date"
             className="form-control"
             placeholder="Age"
             name="age"
-            onChange={(e) => handleChange(e)}
+            onChange={onChangeAge}
           />
           <Input 
             type="text"
             className="form-control"
             placeholder="Gender"
             name="gender"
-            onChange={(e) => handleChange(e)}
+            onChange={onChangeGender}
           />
         </Form>
       </FormContainer>

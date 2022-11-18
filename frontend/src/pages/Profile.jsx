@@ -19,6 +19,7 @@ const Profile = () => {
   // MODAL
   const toggleModal = () => {
     setShowModal(!showModal);
+    console.log("modal is working");
   }
 
   document.addEventListener("keydown", (e) => {
@@ -65,6 +66,12 @@ const Profile = () => {
   return (
     <section id="profile">
       <div className="container">
+        {showModal ? (
+          <>
+            <Modal setShowModal={setShowModal} />
+          </>
+          ) : <></>
+        }
         <h2>Mon compte</h2>
         <p>Bonjour {firstname}</p>
 
