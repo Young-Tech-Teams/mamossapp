@@ -7,13 +7,18 @@ import { API_USER_URL } from '../../utils/APIRoutes';
 const InfoModal = ({ setShowModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
-  var FormData = require("form-data");
   
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [data, setData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    age: "",
+    gender: ""
+ });
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+ }
 
    const fetchCurrentUserInfo = () => {
       const config = {
@@ -33,11 +38,11 @@ const InfoModal = ({ setShowModal }) => {
       .then((response) => {
          console.log(response);
          console.log("It worked!");
-         setFirstname(response.data.firstname);
-         setLastname(response.data.lastname);
-         setEmail(response.data.email);
-         setAge(response.data.age);
-         setGender(response.data.gender);
+         setData({ ...data, ["firstname"]: response.data.firstname });
+         setData({ ...data, ["lastname"]: response.data.lastname });
+         setData({ ...data, ["email"]: response.data.email });
+         setData({ ...data, ["age"]: response.data.age });
+         setData({ ...data, ["gender"]: response.data.gender });
       })
       .catch((err) => {
          console.log(err);
@@ -48,40 +53,8 @@ const InfoModal = ({ setShowModal }) => {
       fetchCurrentUserInfo();
     }, []);
 
-    const onChangeFirstname = (e) => {
-      const firstname = e.target.value;
-      setFirstname(firstname);
-    };
-    const onChangeLastname = (e) => {
-      const  lastname = e.target.value;
-      setLastname(lastname);
-    };
-    const onChangeEmail = (e) => {
-      const  email = e.target.value;
-      setEmail(email);
-    };
-    const onChangeAge = (e) => {
-      const  age = e.target.value;
-      setAge(age);
-    };
-    const onChangeGender = (e) => {
-      const gender = e.target.value;
-      setGender(gender);
-    }
-
     const onSubmit = (e) => {
       e.preventDefault();
-      let data = new FormData();
-      data.append('firstname', firstname);
-      data.append('lastname', lastname);
-      data.append('email', email);
-      data.append('age', age);
-      data.append('gender', gender);
-
-      for (var pair of data.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
-    }
-
       const config = {
         method: 'put',
         url: `${API_USER_URL}update`,
@@ -112,11 +85,11 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={firstname ? firstname : ""}
+            value={data.firstname}
             className="form-control"
             placeholder="Entrez votre prénom"
             name="firstname"
-            onChange={onChangeFirstname}
+            onChange={handleChange}
             />
           </div>
           <div>
@@ -124,11 +97,11 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={lastname ? lastname : ""}
+            value={data.lastname}
             className="form-control"
             placeholder="Entrez votre nom"
             name="lastname"
-            onChange={onChangeLastname}
+            onChange={handleChange}
             />
           </div>
           <div>
@@ -136,11 +109,11 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="email"
-            value={email ? email : ""}
+            value={data.email}
             className="form-control"
             placeholder="Entrez votre adresse mail"
             name="email"
-            onChange={onChangeEmail}
+            onChange={handleChange}
           />
           </div>
           <div>
@@ -148,11 +121,11 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input  
             type="number"
-            value={age ? age : ""}
+            value={data.age}
             className="form-control"
             placeholder="Entrez votre age"
             name="age"
-            onChange={onChangeAge}
+            onChange={handleChange}
             />
           </div>
           <div>
@@ -160,11 +133,11 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={gender ? gender : ""}
+            value={data.gender}
             className="form-control"
             placeholder="Entrez votre genre"
             name="gender"
-            onChange={onChangeGender}
+            onChange={handleChange}
           />
           </div>
           <button>Sauvegarder</button>
