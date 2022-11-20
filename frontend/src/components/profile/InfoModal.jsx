@@ -71,12 +71,12 @@ const InfoModal = ({ setShowModal }) => {
 
     const onSubmit = (e) => {
       e.preventDefault();
-      let data = new FormData();
-      data.append("firstname", firstname);
-      data.append("lastname", lastname);
-      data.append("email", email);
-      data.append("age", age);
-      data.append("gender", gender);
+      let formData = new FormData();
+      formData.append('firstname', firstname);
+      formData.append('lastname', lastname);
+      formData.append('email', email);
+      formData.append('age', age);
+      formData.append('gender', gender);
 
       const config = {
         method: 'put',
@@ -91,7 +91,7 @@ const InfoModal = ({ setShowModal }) => {
       };
       axios(config)
       .then((response) => {
-        // console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data));
          console.log(response.data.message);
          console.log("did it work?");
         // window.location.href = "/mon-compte"
@@ -104,7 +104,7 @@ const InfoModal = ({ setShowModal }) => {
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} id="form">
           <div>
           <label htmlFor="firstname">Prénom</label>
           <hr />
@@ -145,7 +145,7 @@ const InfoModal = ({ setShowModal }) => {
           <label htmlFor="age">Age</label>
           <hr />
           <Input  
-            type="text"
+            type="number"
             className="form-control"
             placeholder="Entrez votre age"
             name="age"
