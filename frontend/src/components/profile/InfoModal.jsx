@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
-import FormData from "form-data";
 
 const InfoModal = ({ setShowModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
+  var FormData = require("form-data");
   
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -71,21 +71,22 @@ const InfoModal = ({ setShowModal }) => {
 
     const onSubmit = (e) => {
       e.preventDefault();
-      let formData = new FormData();
-      formData.append('firstname', firstname);
-      formData.append('lastname', lastname);
-      formData.append('email', email);
-      formData.append('age', age);
-      formData.append('gender', gender);
+      let data = new FormData();
+      data.append('firstname', firstname);
+      data.append('lastname', lastname);
+      data.append('email', email);
+      data.append('age', age);
+      data.append('gender', gender);
+
+      for (var pair of data.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
 
       const config = {
         method: 'put',
         url: `${API_USER_URL}update`,
-        headers: localStorage.getItem("token") ? {
-          "Access-Control-Allow-Origin": "*",
-          "x-access-token": token,
-        } : {
-          "Access-Control-Allow-Origin": "*",
+        headers: {
+          'x-access-token': token,          
         },
         data: data,
       };
@@ -104,16 +105,17 @@ const InfoModal = ({ setShowModal }) => {
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
+      <button className="btn btn-close" onClick={() => setShowModal(false)}>Fermer</button>
       <Form onSubmit={onSubmit} id="form">
           <div>
           <label htmlFor="firstname">Prénom</label>
           <hr />
           <Input 
             type="text"
+            value={firstname ? firstname : ""}
             className="form-control"
             placeholder="Entrez votre prénom"
             name="firstname"
-            value={firstname ? firstname : ""}
             onChange={onChangeFirstname}
             />
           </div>
@@ -122,34 +124,22 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
+            value={lastname ? lastname : ""}
             className="form-control"
             placeholder="Entrez votre nom"
             name="lastname"
-            value={lastname ? lastname : ""}
             onChange={onChangeLastname}
             />
-          </div>
-          <div>
-          <label htmlFor="email">Email</label>
-          <hr />
-          <Input 
-            type="email"
-            className="form-control"
-            placeholder="Entrez votre adresse mail"
-            name="email"
-            value={email ? email : ""}
-            onChange={onChangeEmail}
-          />
           </div>
           <div>
           <label htmlFor="age">Age</label>
           <hr />
           <Input  
             type="number"
+            value={age ? age : ""}
             className="form-control"
             placeholder="Entrez votre age"
             name="age"
-            value={age ? age : ""}
             onChange={onChangeAge}
             />
           </div>
@@ -158,10 +148,10 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
+            value={gender ? gender : ""}
             className="form-control"
             placeholder="Entrez votre genre"
             name="gender"
-            value={gender ? gender : ""}
             onChange={onChangeGender}
           />
           </div>
