@@ -68,7 +68,6 @@ exports.update = (req, res) => {
             let values = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                email: req.body.email,
                 age: req.body.age,
                 gender: req.body.gender
             }
