@@ -37,7 +37,6 @@ const InfoModal = ({ setShowModal }) => {
       axios(config)
       .then((response) => {
          console.log(response);
-         console.log("It worked!");
          setData({ 
             ["firstname"]: response.data.firstname,
             ["lastname"]: response.data.lastname,
