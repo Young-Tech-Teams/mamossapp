@@ -132,6 +132,18 @@ const InfoModal = ({ setShowModal }) => {
             />
           </div>
           <div>
+          <label htmlFor="email">Email</label>
+          <hr />
+          <Input 
+            type="email"
+            value={email ? email : ""}
+            className="form-control"
+            placeholder="Entrez votre adresse mail"
+            name="email"
+            onChange={onChangeEmail}
+          />
+          </div>
+          <div>
           <label htmlFor="age">Age</label>
           <hr />
           <Input  
