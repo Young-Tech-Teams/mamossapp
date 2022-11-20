@@ -49,24 +49,29 @@ const InfoModal = ({ setShowModal }) => {
     }, []);
 
     const onChangeFirstname = (e) => {
-      setFirstname(e.target.value);
+      const firstname = e.target.value;
+      setFirstname(firstname);
     };
     const onChangeLastname = (e) => {
-      setLastname(e.target.value);
+      const  lastname = e.target.value;
+      setLastname(lastname);
     };
     const onChangeEmail = (e) => {
-      setEmail(e.target.value);
+      const  email = e.target.value;
+      setEmail(email);
     };
     const onChangeAge = (e) => {
-      setAge(e.target.value);
+      const  age = e.target.value;
+      setAge(age);
     };
     const onChangeGender = (e) => {
-      setGender(e.target.value);
+      const gender = e.target.value;
+      setGender(gender);
     }
 
     const onSubmit = (e) => {
       e.preventDefault();
-      let data = new FormData(e.target.value);
+      let data = new FormData();
       data.append("firstname", firstname);
       data.append("lastname", lastname);
       data.append("email", email);
