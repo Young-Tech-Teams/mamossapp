@@ -38,11 +38,13 @@ const InfoModal = ({ setShowModal }) => {
       .then((response) => {
          console.log(response);
          console.log("It worked!");
-         setData({ ...data, ["firstname"]: response.data.firstname });
-         setData({ ...data, ["lastname"]: response.data.lastname });
-         setData({ ...data, ["email"]: response.data.email });
-         setData({ ...data, ["age"]: response.data.age });
-         setData({ ...data, ["gender"]: response.data.gender });
+         setData({ 
+            ["firstname"]: response.data.firstname,
+            ["lastname"]: response.data.lastname,
+            ["email"]: response.data.email,
+            ["gender"]: response.data.gender,
+            ["age"]: response.data.age
+          });
       })
       .catch((err) => {
          console.log(err);
@@ -85,7 +87,7 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={data.firstname}
+            value={data.firstname ? data.firstname : ""}
             className="form-control"
             placeholder="Entrez votre prénom"
             name="firstname"
@@ -97,7 +99,7 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={data.lastname}
+            value={data.lastname ? data.lastname : ""}
             className="form-control"
             placeholder="Entrez votre nom"
             name="lastname"
@@ -109,7 +111,7 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="email"
-            value={data.email}
+            value={data.email ? data.email : ""}
             className="form-control"
             placeholder="Entrez votre adresse mail"
             name="email"
@@ -121,7 +123,7 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input  
             type="number"
-            value={data.age}
+            value={data.age ? data.age : ""}
             className="form-control"
             placeholder="Entrez votre age"
             name="age"
@@ -133,7 +135,7 @@ const InfoModal = ({ setShowModal }) => {
           <hr />
           <Input 
             type="text"
-            value={data.gender}
+            value={data.gender ? data.gender : ""}
             className="form-control"
             placeholder="Entrez votre genre"
             name="gender"
