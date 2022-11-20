@@ -65,18 +65,19 @@ exports.update = (req, res) => {
         } else {
             console.log(`Retrieved record ${JSON.stringify(userRecord, null, 2)}`) 
             
-            let values = {
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                age: req.body.age,
-                gender: req.body.gender
-            }
+            // let values = {
+            //     firstname: req.body.firstname,
+            //     lastname: req.body.lastname,
+            //     email: req.body.email,
+            //     age: req.body.age,
+            //     gender: req.body.gender
+            // }
             
             userRecord.update(req.body, { 
                 where: { 
                     id: userId 
-                }, 
-                values
+                }
+                // values
             })
             .then(updatedRecord => {
                 console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
