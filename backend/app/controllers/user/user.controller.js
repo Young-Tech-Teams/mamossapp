@@ -2,6 +2,7 @@ const config = require("../../config/auth.config.js");
 const db = require("../../models");
 const Op = db.Sequelize.Op;
 const User = db.user;
+const Role = db.role;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
@@ -41,6 +42,7 @@ exports.adminBoard = (req, res) => {
  */
 exports.update = (req, res) => {
    let token = req.headers["x-access-token"];
+   console.log("body\n\n" + req.body);
    var userId;
     if (!token) {
         return res.status(403).send({
@@ -54,30 +56,17 @@ exports.update = (req, res) => {
         req.userId = decoded.id;
         userId = decoded.id;
     });
-    User.findOne({ 
-        where: { 
-            id: userId 
-        } 
-    })
+    User.findByPk(userId, { include: Role }) // { include: [ { model : Role },{ model: Order, include : [{model: Product}] }]}
     .then(userRecord => {
         if (!userRecord) {
             throw new Error("User records not found")
         } else {
             console.log(`Retrieved record ${JSON.stringify(userRecord, null, 2)}`) 
             
-            // let values = {
-            //     firstname: req.body.firstname,
-            //     lastname: req.body.lastname,
-            //     email: req.body.email,
-            //     age: req.body.age,
-            //     gender: req.body.gender
-            // }
-            
             userRecord.update(req.body, { 
                 where: { 
                     id: userId 
                 }
-                // values
             })
             .then(updatedRecord => {
                 console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
@@ -119,11 +108,7 @@ exports.getUserInfos = (req, res) => {
        req.userId = decoded.id;
        userId = decoded.id;
    });
-   User.findOne({
-      where: {
-         id: userId
-      }
-   })
+   User.findByPk(userId, { include: Role})
    .then(data => {
     res.send(data);
     })

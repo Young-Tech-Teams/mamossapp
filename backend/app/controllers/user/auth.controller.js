@@ -57,11 +57,14 @@ exports.signup = async (req, res, next) => {
  * @param {*} next 
  */
 exports.login = async (req, res, next) => {
-   User.findOne({
-      where: {
-          email: req.body.email
-      }
-  })
+   User.findOne(
+       { include: Role },
+       {
+          where: {
+              email: req.body.email
+          },
+       }
+    )
    .then(async (user) => {
         if (!user) {
            return res.status(404).send({ message: "We didn't find you, sorry." });
@@ -80,21 +83,15 @@ exports.login = async (req, res, next) => {
             expiresIn: config.jwtExpiration
         });
         let refreshToken = await RefreshToken.createToken(user);
-        var authorities = [];
-        user.getRoles().then(roles => {
-            for (let i = 0; i < roles.length; i++) {
-                authorities.push("ROLE_" + roles[i].name.toUpperCase());
-            }
+
             res.status(200).send({
                 id: user.id,
                 email: user.email,
-                status: user.status,
                 accessToken: token,
                 refreshToken: refreshToken,
                 message: 'Successfully logged in!'
             });
-        });
-    })
+        })
     .catch(err => {
         res.status(500).send({ message: err.message });
     });

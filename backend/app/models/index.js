@@ -23,16 +23,20 @@ db.refreshToken = require("./user/refreshToken.model.js")(sequelize, Sequelize);
 db.role = require("./user/role.model.js")(sequelize, Sequelize);
 
 /** ROLES */
-db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId"
-});
-db.user.belongsToMany(db.role, {
-  through: "user_roles",
-  foreignKey: "userId",
-  otherKey: "roleId"
-});
+// db.role.belongsToMany(db.user, {
+//   through: "user_roles",
+//   foreignKey: "roleId",
+//   otherKey: "userId"
+// });
+// db.user.belongsToMany(db.role, {
+//   through: "user_roles",
+//   foreignKey: "userId",
+//   otherKey: "roleId"
+// });
+
+db.role.hasMany(db.user);
+db.user.belongsTo(db.role);
+// db.user.hasMany(db.comments, {onDelete: "cascade"}) // Si dans la table user, un utilisateur est supprimé, tous ses commentaires seront supprimés.
 
 db.ROLES = ["client", "livreur", "admin"];
 

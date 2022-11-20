@@ -18,11 +18,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
        },
        gender: {
-            type: Sequelize.STRING
+            type: Sequelize.ENUM("Femme", "Homme", "Autre")
        },
-       status: {
-        type: Sequelize.STRING
-       },
+     //   status: {
+     //    type: Sequelize.STRING
+     //   },
    });
    return User;
 };

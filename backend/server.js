@@ -43,32 +43,37 @@ async function initial() {
    // creating roles
    await Role.create({
       id: 1,
-      name: "client"
+      name: "admin"
    });
    
    await Role.create({
       id: 2,
-      name: "admin"
+      name: "client"
+   });
+
+   await Role.create({
+      id: 3,
+      name: "livreur"
    });
 
    // creating user
    await User.create({
       email: "miyuna@gmail.com",
       password: bcrypt.hashSync("Meowmeow", 8),
-      status: "admin"
+      roleId: 1
    })
-   .then(user => {
-      Role.findAll({
-         where: {
-            name: {
-               [Op.or]: ["admin"]
-            }
-         }
-      })
-      .then(roles => {
-         user.setRoles(roles).then(() => {});
-      });
-   })
+   // .then(user => {
+   //    Role.findAll({
+   //       where: {
+   //          name: {
+   //             [Op.or]: ["admin"]
+   //          }
+   //       }
+   //    })
+   //    .then(roles => {
+   //       user.setRoles(roles).then(() => {});
+   //    });
+   // })
 };
 
 require("./app/routes/authRoutes")(app);
