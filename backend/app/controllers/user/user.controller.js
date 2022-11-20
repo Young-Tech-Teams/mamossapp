@@ -33,7 +33,7 @@ exports.adminBoard = (req, res) => {
     res.status(200).send("Admin's private content working!")
 }
 
-/******* USER MODIFY *******/
+/******* USER UPDATE *******/
 /**
  * @description Updating user informations
  * @param {*} req 
