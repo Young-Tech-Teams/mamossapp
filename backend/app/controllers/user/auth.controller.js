@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
     .then(user => {
         if (req.body.roles) {
             user.update({
-                status: "admin"
+                roleId: 1
             });
             Role.findAll({
                 where: {
@@ -30,18 +30,11 @@ exports.signup = async (req, res, next) => {
                     }
                 }
             })
-            .then(roles => {
-                user.setRoles(roles).then(() => {
-                    res.send({ message: "User was registered successfully!" });
-                });
-            });
         } else {
             user.update({
-                status: "client"
+                roleId: 2
             });
-            user.setRoles([1]).then(() => {
-                res.send({ message: "User was registered successfully!" });
-            });
+            res.send({ message: "User was registered successfully!" });
         }
     })
     .catch(err => {

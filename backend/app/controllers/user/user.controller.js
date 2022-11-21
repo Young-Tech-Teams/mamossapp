@@ -63,11 +63,7 @@ exports.update = (req, res) => {
         } else {
             console.log(`Retrieved record ${JSON.stringify(userRecord, null, 2)}`) 
             
-            userRecord.update(req.body, { 
-                where: { 
-                    id: userId 
-                }
-            })
+            userRecord.update(req.body, { where: { id: userId } })
             .then(updatedRecord => {
                 console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
                 res.status(200).send({ message: updatedRecord })
