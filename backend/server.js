@@ -29,8 +29,8 @@ const User = db.user;
 const Op = db.Sequelize.Op;
 
 /** SYNC DB SEQUELIZE **/
-// db.sequelize.sync()
-db.sequelize.sync({force : true})
+// db.sequelize.sync({force : true})
+db.sequelize.sync()
    .then(() => {
       initial();
       console.log("Database synced");
