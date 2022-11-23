@@ -28,22 +28,28 @@ const Register = () => {
       }
    });
 
+   // const fetchZeltyApi = () => {
+   //    const config = {
+   //       method: 'post',
+   //       url: 'https://api.zelty.fr/2.7/customers'
+   //    }
+   // }
+
    const handleSubmit = async (e) => {
       e.preventDefault();
 
       if (handleValidation()) {
          const { email, password, confirmPassword } = values;
-         const { data } = await AuthService.register(email, password, confirmPassword).then(
-            (response) => {
-               console.log(response.data.message);
-               setTimeout(() => {
-                  navigate("/connexion")
-               }, 500)
-               if (data.status === false) {
-                  toast.error(data.msg, toastOptions);
-               }
-            },
-         );
+         const { data } = await AuthService.register(email, password, confirmPassword)
+         .then((response) => {
+            console.log(response.data.message);
+            setTimeout(() => {
+               navigate("/connexion")
+            }, 500)
+            if (data.status === false) {
+               toast.error(data.msg, toastOptions);
+            }
+         });
       }
    };
 
