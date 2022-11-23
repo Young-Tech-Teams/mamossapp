@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
 
-const InfoModal = ({ setShowModal }) => {
+const MyInfos = ({ setShowModal }) => {
    
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState({
@@ -53,48 +53,41 @@ const InfoModal = ({ setShowModal }) => {
    }, []);
 
   return (
-    <Modal id="info-modal" className="info-modal">
-      <FormContainer>
-      <Form onSubmit={onSubmit} id="form">
+    <InfoContainer id="infos" className="infos-container">
          <p>Bonjour {data.firstname}</p>
-         <div>
          <div className="tabs">
-         <div className="delivery">
-            <a href="/mes-commandes">Commander un repas</a>
-         </div>
+            <div className="delivery">
+               <a href="/mes-commandes">Commander un repas</a>
+            </div>
          </div>
 
          <div className="user-info d-flex">
-         <div className="avatar">
-            <img src="" alt="Avatar" />
+            <div className="avatar">
+               <img src="" alt="Avatar" />
+            </div>
+            <div className="bio">
+               <div className="name">
+                  <span>{data.firstname ? data.firstname : "Prénom"}</span>
+                  <hr />
+                  <span>{data.lastname ? data.lastname : "Nom"}</span>
+               </div>
+               <div className="mail">
+                  <span>{data.email ? data.email : "Votre email"}</span>
+               </div>
+               <div className="age gender">
+                  <span>{data.age ? data.age : "Age"}</span>
+                  <hr />
+                  <span>{data.gender ? data.gender : "Sexe"}</span>
+               </div>
+               <div className="created">
+                  <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
+               </div>
+            </div>
          </div>
-         <div className="bio">
-            <div className="name">
-               <span>{data.firstname ? data.firstname : "Prénom"}</span>
-               <hr />
-               <span>{data.lastname ? data.lastname : "Nom"}</span>
-            </div>
-            <div className="mail">
-               <span>{data.email ? data.email : "Votre email"}</span>
-            </div>
-            <div className="age gender">
-               <span>{data.age ? data.age : "Age"}</span>
-               <hr />
-               <span>{data.gender ? data.gender : "Sexe"}</span>
-            </div>
-            <div className="created">
-               <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
-            </div>
-         </div>
-        </Form>
-      </FormContainer>
-    </Modal>
+    </InfoContainer>
   )
 }
 
-const Modal = styled.div``
-const FormContainer = styled.div``
-const Form = styled.form``
-const Input = styled.input``
+const InfoContainer = styled.div``
 
-export default InfoModal
+export default MyInfos

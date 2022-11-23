@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_USER_URL } from '../utils/APIRoutes';
 import { format } from 'fecha';
 import Modal from '../components/profile/InfoModal';
+import MyInfos from '../components/profile/Infos';
 
 const Profile = () => {
 
@@ -32,45 +33,34 @@ const Profile = () => {
           ) : <></>
         }
         <h2>Mon compte</h2>
-        
+        <MyInfos />
 
           <div className="allergies">
             <span>Allergies</span>
           </div>
 
-          <button
-            className="btn btn-modal"
-            onClick={toggleModal}
-          >
+          <button className="btn btn-modal" onClick={toggleModal}>
             Modifier mes informations
           </button>
+
+          <div className="body">
+            <div className="plats">
+              <h2>Plats favoris</h2>
+            </div>
+            <div className="addresses">
+              <h2>Mes addresses</h2>
+            </div>
+            <div className="history">
+              <h2>Mon historique de commandes</h2>
+            </div>
+            <div className="payment">
+              <h2>Mes moyens de paiements</h2>
+            </div>
+            <div className="consign">
+              <h2>Mes consignes en cours</h2>
+            </div>
+          </div>
         </div>
-
-        <div className="body">
-
-          <div className="plats">
-            <h2>Plats favoris</h2>
-          </div>
-
-          <div className="addresses">
-            <h2>Mes addresses</h2>
-          </div>
-
-          <div className="history">
-            <h2>Mon historique de commandes</h2>
-          </div>
-
-          <div className="payment">
-            <h2>Mes moyens de paiements</h2>
-          </div>
-
-          <div className="consign">
-            <h2>Mes consignes en cours</h2>
-          </div>
-          
-        </div>
-
-      </div>
 
     </section>
   )
