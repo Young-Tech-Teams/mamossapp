@@ -20,18 +20,6 @@ const Profile = () => {
   })
   const [showModal, setShowModal] = useState(false);
 
-  // MODAL
-  const toggleModal = () => {
-    setShowModal(!showModal);
-    console.log("modal is working");
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setShowModal(false);
-    }
-  });
-
   const fetchCurrentUserInfo = () => {
     const config = {
       method: 'get',
@@ -67,8 +55,20 @@ const Profile = () => {
     useEffect(() => {
       fetchCurrentUserInfo();
     }, []);
-    
 
+    
+    // MODAL
+    const toggleModal = () => {
+      setShowModal(!showModal);
+      console.log("modal is working");
+    }
+    // Close modal with Echap Key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setShowModal(false);
+      }
+    });
+    
   return (
     <section id="profile">
       <div className="container">
