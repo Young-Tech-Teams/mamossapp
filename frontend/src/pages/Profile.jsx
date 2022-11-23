@@ -10,12 +10,14 @@ const Profile = () => {
 
   const token = JSON.parse(localStorage.getItem("token"));
   
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
+  const [data, setData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    age: "",
+    gender: "",
+    createdAt: ""
+  })
   const [showModal, setShowModal] = useState(false);
 
   // MODAL
@@ -48,19 +50,19 @@ const Profile = () => {
       .then((response) => {
         console.log(response);
         console.log("It worked!");
-        setFirstname(response.data.firstname);
-        setLastname(response.data.lastname);
-        setEmail(response.data.email);
-        setAge(response.data.age);
-        setGender(response.data.gender);
-        setCreatedAt(response.data.createdAt);
+        setData({
+          ["firstname"]: response.data.firstname,
+          ["lastname"]: response.data.lastname,
+          ["email"]: response.data.email,
+          ["age"]: response.data.age,
+          ["gender"]: response.data.gender,
+          ["createdAt"]: response.data.createdAt
+        })
       })
       .catch((err) => {
         console.log(err);
       })
     }
-
-    // console.log(createdAt,'YY/MM/DD');
 
     useEffect(() => {
       fetchCurrentUserInfo();
@@ -77,7 +79,7 @@ const Profile = () => {
           ) : <></>
         }
         <h2>Mon compte</h2>
-        <p>Bonjour {firstname}</p>
+        <p>Bonjour {data.firstname}</p>
 
         <div className="tabs">
           <div className="delivery">
@@ -91,20 +93,20 @@ const Profile = () => {
           </div>
           <div className="bio">
             <div className="name">
-              <span>{firstname ? firstname : "Prénom"}</span>
+              <span>{data.firstname ? data.firstname : "Prénom"}</span>
               <hr />
-              <span>{lastname ? lastname : "Nom"}</span>
+              <span>{data.lastname ? data.lastname : "Nom"}</span>
             </div>
             <div className="mail">
-              <span>{email}</span>
+              <span>{data.email ? data.email : "Votre email"}</span>
             </div>
             <div className="age gender">
-              <span>{age ? age : "Age"}</span>
+              <span>{data.age ? data.age : "Age"}</span>
               <hr />
-              <span>{gender ? gender : "Sexe"}</span>
+              <span>{data.gender ? data.gender : "Sexe"}</span>
             </div>
             <div className="created">
-              <span>Mamossien depuis {createdAt}</span>
+              <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
             </div>
           </div>
 
