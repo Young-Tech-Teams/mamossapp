@@ -9,10 +9,8 @@ const morgan = require("morgan");
 var path = require("path");
 var bcrypt = require("bcryptjs");
 
-const origins = ["https://localhost:3000", "https://api.zelty.fr/2.7/", "https://api.zelty.fr/2.7/customers"]
-
 app.use(cors({
-   origin: "https://localhost:3000",
+   origin: "http://localhost:3000",
    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
    credentials: true
 }));
