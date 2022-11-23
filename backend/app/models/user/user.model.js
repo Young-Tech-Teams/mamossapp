@@ -20,9 +20,6 @@ module.exports = (sequelize, Sequelize) => {
        gender: {
             type: Sequelize.ENUM("Femme", "Homme", "Autre")
        },
-     //   status: {
-     //    type: Sequelize.STRING
-     //   },
    });
    return User;
 };

@@ -75,5 +75,5 @@ const hostname = "localhost";
 
 server.listen(port, () => console.log(
    `\u2794 Server up and running on port ${port}`.custom,
-   `\nat: https://${hostname}:${port}/`.brightMagenta
+   `\nat: http://${hostname}:${port}/`.brightMagenta
 ));
