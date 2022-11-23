@@ -9,8 +9,10 @@ const morgan = require("morgan");
 var path = require("path");
 var bcrypt = require("bcryptjs");
 
+const origins = ["https://localhost:3000", "https://api.zelty.fr/2.7/", "https://api.zelty.fr/2.7/customers"]
+
 app.use(cors({
-   origin: "http://localhost:3000",
+   origin: "https://localhost:3000",
    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
    credentials: true
 }));
@@ -29,8 +31,8 @@ const User = db.user;
 const Op = db.Sequelize.Op;
 
 /** SYNC DB SEQUELIZE **/
-// db.sequelize.sync({force : true})
-db.sequelize.sync()
+// db.sequelize.sync()
+db.sequelize.sync({force : true})
    .then(() => {
       initial();
       console.log("Database synced");
@@ -62,18 +64,6 @@ async function initial() {
       password: bcrypt.hashSync("Meowmeow", 8),
       roleId: 1
    })
-   // .then(user => {
-   //    Role.findAll({
-   //       where: {
-   //          name: {
-   //             [Op.or]: ["admin"]
-   //          }
-   //       }
-   //    })
-   //    .then(roles => {
-   //       user.setRoles(roles).then(() => {});
-   //    });
-   // })
 };
 
 require("./app/routes/authRoutes")(app);
@@ -87,5 +77,5 @@ const hostname = "localhost";
 
 server.listen(port, () => console.log(
    `\u2794 Server up and running on port ${port}`.custom,
-   `\nat: http://${hostname}:${port}/`.brightMagenta
+   `\nat: https://${hostname}:${port}/`.brightMagenta
 ));
