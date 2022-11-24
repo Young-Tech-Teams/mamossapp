@@ -12,25 +12,25 @@ const Home = () => {
     phone: "",
   })
 
-  var options = {
-    method: 'GET',
-    url: 'https://api.zelty.fr/2.7/customers/',
-    headers: {authorization: 'Bearer {NzQ4Mzo1+O+N9JTGVjOiA3H1sA3iPJY7ow==}', 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*'},
-  };
+//   var options = {
+//     method: 'GET',
+//     url: 'https://api.zelty.fr/2.7/customers/',
+//     headers: {authorization: 'Bearer {NzQ4Mzo1+O+N9JTGVjOiA3H1sA3iPJY7ow==}', 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*'},
+//   };
 
-  axios.request(options).then(function (response) {
-    console.log(response.data);
-  }).catch(function (error) {
-    console.error(error);
-  });
+//   axios.request(options).then(function (response) {
+//     console.log(response.data);
+//   }).catch(function (error) {
+//     console.error(error);
+//   });
 
-  (function() {
-    fetch('https://api.zelty.fr/2.7/customers/', {
-      method: "GET", 
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));
-})();   
+//   (function() {
+//     fetch('https://api.zelty.fr/2.7/customers/', {
+//       method: "GET", 
+//     })
+//     .then(response => response.json())
+//     .then(data => console.log(data));
+// })();   
 
 //   const fetchZeltyApi = () => {
 //     const config = {
