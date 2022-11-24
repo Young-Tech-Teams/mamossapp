@@ -32,7 +32,7 @@ const Op = db.Sequelize.Op;
 // db.sequelize.sync({force : true})
 db.sequelize.sync()
    .then(() => {
-      initial();
+      // initial();
       console.log("Database synced");
    })
    .catch((err) => {
@@ -41,20 +41,20 @@ db.sequelize.sync()
 
 async function initial() {
    // creating roles
-   // await Role.create({
-   //    id: 1,
-   //    name: "admin"
-   // });
+   await Role.create({
+      id: 1,
+      name: "admin"
+   });
    
-   // await Role.create({
-   //    id: 2,
-   //    name: "client"
-   // });
+   await Role.create({
+      id: 2,
+      name: "client"
+   });
 
-   // await Role.create({
-   //    id: 3,
-   //    name: "livreur"
-   // });
+   await Role.create({
+      id: 3,
+      name: "livreur"
+   });
 
    // creating user
    await User.create({
