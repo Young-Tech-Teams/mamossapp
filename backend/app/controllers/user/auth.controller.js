@@ -19,22 +19,15 @@ exports.signup = async (req, res, next) => {
         password: bcrypt.hashSync(req.body.password, 8)
     })
     .then(user => {
-        if (req.body.roles) {
-            user.update({
-                roleId: 1
-            });
-            Role.findAll({
-                where: {
-                    name: {
-                        [Op.or]: req.body.roles
-                    }
-                }
-            })
-        } else {
-            user.update({
-                roleId: 2
-            });
-            res.send({ message: "User was registered successfully!" });
+        if (req.body.roles === 1) {
+            user.update({ roleId: 1 });
+            res.send({ message: "User was registered successfully as admin!" });
+        } else if (req.body.roles === 2) {
+            user.update({ roleId: 2 });
+            res.send({ message: "User was registered successfully as client!" });
+        } else if (req.body.roles === 3) {
+            user.update({ roleId: 3 });
+            res.send({ message: "User was registered successfully as livreur!" });
         }
     })
     .catch(err => {
