@@ -1,28 +1,52 @@
-import React from 'react'
-const SECRET_KEY = process.env.SECRET_ZELTY_API_KEY;
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
 
 const Home = () => {
 
+  const token = JSON.parse(localStorage.getItem("token"));
+  const [data, setData] = useState({
+    fname: "",
+    name: "",
+    mail: "",
+    phone: "",
+  })
+
   const fetchZeltyApi = () => {
-    fetch('https://api.zelty.fr/2.7/customers', {             
-      method: 'GET',  
-      withCredentials: true,  
-      crossorigin: true,  
-      headers: {                
+    const config = {
+      method: 'get',
+      url: 'https://api.zelty.fr/2.7/',
+      headers: {
         "Access-Control-Allow-Origin": "*",
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${SECRET_KEY}`
+        'Authorization': 'Bearer NzQ4Mzo1+O+N9JTGVjOiA3H1sA3iPJY7ow=='
       }
-    })
+    }
+    axios.defaults.withCredentials = true;
+
+    axios(config)
     .then((response) => {
-      console.log(response.data);
+       console.log(response);
+       console.log("It worked!");
+      //  setData({
+      //     ["fname"]: response.data.fname,
+      //     ["name"]: response.data.name,
+      //     ["mail"]: response.data.mail,
+      //     ["phone"]: response.data.phone,
+      //  })
     })
-  }
+    .catch((err) => {
+       console.log(err);
+    })
+ }
+
+ useEffect(() => {
+  fetchZeltyApi();
+ }, []);
 
   return (
     <section id="home">
       <div className="container">
-        <button onClick={fetchZeltyApi}>Accueil</button>
+        <button>Accueil</button>
         <a href="/mon-compte">Mon compte</a>
       </div>
     </section>
