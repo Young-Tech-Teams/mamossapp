@@ -28,6 +28,9 @@ exports.signup = async (req, res, next) => {
         } else if (req.body.roles === 3) {
             user.update({ roleId: 3 });
             res.send({ message: "User was registered successfully as livreur!" });
+        } else {
+            user.update({ roleId: 2 })
+            res.send({ message: "User was registered successfully!" });
         }
     })
     .catch(err => {
@@ -43,14 +46,7 @@ exports.signup = async (req, res, next) => {
  * @param {*} next 
  */
 exports.login = async (req, res, next) => {
-   User.findOne(
-       { include: Role },
-       {
-          where: {
-              email: req.body.email
-          },
-       }
-    )
+   User.findOne({ where: { email: req.body.email } })
    .then(async (user) => {
         if (!user) {
            return res.status(404).send({ message: "We didn't find you, sorry." });

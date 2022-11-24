@@ -10,7 +10,7 @@ var path = require("path");
 var bcrypt = require("bcryptjs");
 
 app.use(cors({
-   origin: "http://localhost:3000",
+   origin: ["http://localhost:3000", "https://api.zelty.fr/2.7/"],
    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
    credentials: true
 }));
@@ -29,8 +29,8 @@ const User = db.user;
 const Op = db.Sequelize.Op;
 
 /** SYNC DB SEQUELIZE **/
-// db.sequelize.sync()
-db.sequelize.sync({force : true})
+// db.sequelize.sync({force : true})
+db.sequelize.sync()
    .then(() => {
       initial();
       console.log("Database synced");
@@ -41,24 +41,24 @@ db.sequelize.sync({force : true})
 
 async function initial() {
    // creating roles
-   await Role.create({
-      id: 1,
-      name: "admin"
-   });
+   // await Role.create({
+   //    id: 1,
+   //    name: "admin"
+   // });
    
-   await Role.create({
-      id: 2,
-      name: "client"
-   });
+   // await Role.create({
+   //    id: 2,
+   //    name: "client"
+   // });
 
-   await Role.create({
-      id: 3,
-      name: "livreur"
-   });
+   // await Role.create({
+   //    id: 3,
+   //    name: "livreur"
+   // });
 
    // creating user
    await User.create({
-      email: "miyuna@gmail.com",
+      email: "lunayu@gmail.com",
       password: bcrypt.hashSync("Meowmeow", 8),
       roleId: 1
    })
@@ -75,5 +75,5 @@ const hostname = "localhost";
 
 server.listen(port, () => console.log(
    `\u2794 Server up and running on port ${port}`.custom,
-   `\nat: https://${hostname}:${port}/`.brightMagenta
+   `\nat: http://${hostname}:${port}/`.brightMagenta
 ));
