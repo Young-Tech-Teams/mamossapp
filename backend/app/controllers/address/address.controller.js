@@ -139,20 +139,21 @@ exports.update = (req, res) => {
 * @param res
 */
 exports.delete = (req, res) => {
-   let token = req.headers["x-access-token"];
-   var userId;
-   if (!token) {
-       return res.status(403).send({
-           message: "Access token is required for this operation to work.",
-       });
-   }
-   jwt.verify(token, config.secret, (err, decoded) => {
-       if (err) {
-           return catchError(err, res);
-       }
-       req.userId = decoded.id;
-       userId = decoded.id;
-   });
+    let token = req.headers["x-access-token"];
+    var userId;
+    if (!token) {
+        return res.status(403).send({
+            message: "Access token is required for this operation to work.",
+        });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return catchError(err, res);
+        }
+        req.userId = decoded.id;
+        userId = decoded.id;
+    });
+    const id = req.params.id;
     Address.destroy({ where: { id: id } }, [{ include: User }, { where: { id: userId }} ])
     .then((success) => {
       if (!success) {
