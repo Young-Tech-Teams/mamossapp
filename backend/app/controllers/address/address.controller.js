@@ -71,12 +71,13 @@ exports.findOne = (req, res) => {
       req.userId = decoded.id;
       userId = decoded.id;
    });
-   Address.findByPk(userId, { where: id })
+   const id = req.params.id;
+   Address.findByPk({ where: id })
    .then(data => {
        if (data) {
-           res.send(data);
+           res.status(200).send(data);
        } else {
-           res.status(404).send({
+           res.status(403).send({
                message: `There has been an error retrieving address with id=${id}.`
            });
            return;
