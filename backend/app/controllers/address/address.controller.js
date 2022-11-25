@@ -42,15 +42,15 @@ exports.create = (req, res) => {
     };
     // Save adress in the database
     Address.create(dataList)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: 
-                err.message || "Some error occurred while creating the address"
-            });
-        });
+   .then(data => {
+       res.send(data);
+   })
+   .catch(err => {
+       res.status(500).send({
+           message: 
+           err.message || "Some error occurred while creating the address"
+       });
+   });
 };
 
 /**

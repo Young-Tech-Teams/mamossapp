@@ -1,4 +1,4 @@
-const { authJwt } = require("../middleware");
+const { authJwt } = require("../../middleware");
 const addressController = require("../../controllers/address/address.controller");
 const router = require("express").Router();
 
@@ -15,10 +15,10 @@ module.exports = function (app) {
    router.post("/create", authJwt.verifyToken, addressController.create);
 
    // Retrieve all adresss
-   router.get("/list", authJwt.verifyToken, addressController.findAll);
+   // router.get("/list", authJwt.verifyToken, addressController.findAll);
 
     // Retrieve a single adress with id
-    router.get("/list/:id", addressController.findOne);
+   //  router.get("/list/:id", addressController.findOne);
 
     // Update a adress with id
     router.put("/update/:id", authJwt.verifyToken, addressController.update);

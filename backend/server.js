@@ -73,6 +73,7 @@ async function initial() {
 
 require("./app/routes/authRoutes")(app);
 require("./app/routes/userRoutes")(app);
+require("./app/routes/address/addressRoutes")(app);
 
 /** CONNEXION TO LOCALHOST **/
 const colors = require("./utils/colors");
