@@ -17,6 +17,9 @@ module.exports = function (app) {
     // Retrieve a single adress with id
     router.get("/list/:id", authJwt.verifyToken, addressController.findOne);
 
+    // Retrieve a single adress with id
+    router.get("/list-all", authJwt.verifyToken, addressController.findAll);
+
     // Update a adress with id
     router.put("/update/:id", authJwt.verifyToken, addressController.update);
 
