@@ -27,7 +27,7 @@ exports.create = (req, res) => {
         userId = decoded.id;
     });
     // Create an adress
-    const infos = {
+    const dataList = {
         name: req.body.name,
         street: req.body.street,
         street_num: req.body.street_num,
@@ -41,14 +41,14 @@ exports.create = (req, res) => {
         userId: userId
     };
     // Save adress in the database
-    Adress.create(infos)
+    Address.create(dataList)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message: 
-                err.message || "Some error occurred while creating the adress"
+                err.message || "Some error occurred while creating the address"
             });
         });
 };
@@ -57,98 +57,124 @@ exports.create = (req, res) => {
 * @param req
 * @param res
 */
-exports.findAll = (req, res) => {
-    const {userId} = req.query;
-    var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
-    Adress.findAll({
-        where: condition
-    })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving adresss."
-            });
-        });
-};
+// exports.findAll = (req, res) => {
+//     Adress.findAll({ where: condition })
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Some error occurred while retrieving adresss."
+//             });
+//         });
+// };
 /**
 * @description Find a single adress with an id
 * @param req
 * @param res
 */
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-    Adress.findByPk(id)
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find adress with id=${id}.`
-                });
-                return;
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving adress with id=" + id
-            });
-        });
-};
+// exports.findOne = (req, res) => {
+//     const id = req.params.id;
+//     Adress.findByPk(id)
+//         .then(data => {
+//             if (data) {
+//                 res.send(data);
+//             } else {
+//                 res.status(404).send({
+//                     message: `Cannot find adress with id=${id}.`
+//                 });
+//                 return;
+//             }
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message: "Error retrieving adress with id=" + id
+//             });
+//         });
+// };
 /**
 * @description Update an adress by the id in the request
 * @param req
 * @param res
 */
 exports.update = (req, res) => {
-    const id = req.params.id;
-    Adress.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Adress was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update adress with id=${id}. Maybe adress was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
+   let token = req.headers["x-access-token"];
+   var userId;
+   if (!token) {
+      return res.status(403).send({
+          message: "Access token is required for this operation to work."
+      });
+  }
+  jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+          return catchError(err, res);
+      }
+      req.userId = decoded.id;
+      userId = decoded.id;
+  });
+  User.findByPk(userId, { include: Address })
+  .then(addressRecord => {
+      if (!addressRecord) {
+         throw new Error("Address records could not be found");
+      } else {
+         console.log(`Retrieved address records ${JSON.stringify(addressRecord, null, 2)}`);
+
+         Address.update(req.body, { where: { id: userId } })
+         .then(updatedRecord => {
+            console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
+            res.status(200).send({ message: updatedRecord })
+         })
+         .catch(err => {
             res.status(500).send({
-                message: "Error updating adress with id=" + id
+               message: "There was an error getting the updated address."
             });
-        });
+         });
+      }
+   })
+   .catch(err => {
+      res.status(500).send({
+         message: "There was an error updating the address."
+      });
+   });
 };
+
 /**
 * @description Delete an adress with the specified id in the request
 * @param req
 * @param res
 */
 exports.delete = (req, res) => {
-    const id = req.params.id;
-    Adress.destroy({
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Adress was deleted successfully!"
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete adress with id=${id}. Maybe adress was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: 
-                err.message || "Could not delete adress with id=" + id
-            });
-        });
+   let token = req.headers["x-access-token"];
+   var userId;
+   if (!token) {
+       return res.status(403).send({
+           message: "Access token is required for this operation to work.",
+       });
+   }
+   jwt.verify(token, config.secret, (err, decoded) => {
+       if (err) {
+           return catchError(err, res);
+       }
+       req.userId = decoded.id;
+       userId = decoded.id;
+   });
+    Adress.destroy({ where: { id: id } }, [{ include: User }, { where: { id: userId }} ])
+    .then((success) => {
+      if (!success) {
+           res.send({
+               message: "Your address was deleted successfully!"
+           });
+       } else {
+           res.send({
+               message: `Cannot delete address with id=${id}. Maybe adress was not found!`
+           });
+       }
+   })
+   .catch(err => {
+       res.status(500).send({
+           message: 
+           err.message || "Could not delete adress with id=" + id
+       });
+   });
 };
