@@ -52,23 +52,7 @@ exports.create = (req, res) => {
             });
         });
 };
-/**
-* @description Retrieve all adresses from the database
-* @param req
-* @param res
-*/
-// exports.findAll = (req, res) => {
-//     Adress.findAll({ where: condition })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while retrieving adresss."
-//             });
-//         });
-// };
+
 /**
 * @description Find a single adress with an id
 * @param req
