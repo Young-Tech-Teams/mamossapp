@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
            type: Sequelize.STRING
        },
        number: {
-           type: Sequelize.BIG_INT
+           type: Sequelize.BIGINT
        },
        expiration_date: {
            type: Sequelize.STRING
