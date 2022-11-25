@@ -30,9 +30,9 @@ exports.create = (req, res) => {
     const dataList = {
         lastname: req.body.lastname,
         firstname: req.body.firstname,
-        number: req.body.number,
-        expiration_date: req.body.expiration_date,
-        crypto: req.body.crypto,
+        card_number: req.body.number,
+        card_exp_date: req.body.expiration_date,
+        card_scrypto: req.body.crypto,
         userId: userId
     };
     Payment.create(dataList)
