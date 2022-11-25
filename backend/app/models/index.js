@@ -22,6 +22,7 @@ db.user = require("./user/user.model.js")(sequelize, Sequelize);
 db.refreshToken = require("./user/refreshToken.model.js")(sequelize, Sequelize);
 db.role = require("./user/role.model.js")(sequelize, Sequelize);
 db.address = require("./address/address.model.js")(sequelize, Sequelize);
+db.payment = require("./payment/credit_card.model.js")(sequelize, Sequelize);
 
 /** TOKEN */
 db.refreshToken.belongsTo(db.user, {
@@ -49,9 +50,14 @@ db.ROLES = ["client", "livreur", "admin"];
 //   foreignKey: "userId",
 //   otherKey: "roleId"
 // });
+ee
 
-/** Address */
+/** ADDRESS */
 db.user.hasMany(db.address, { as: "addresses" });
 db.address.belongsTo(db.user, { as: "user" });
+
+/** PAYMENT */
+db.user.hasMany(db.payment, { as: "credit_cards" });
+db.payment.belongsTo(db.user, { as: "user" });
 
 module.exports = db;
