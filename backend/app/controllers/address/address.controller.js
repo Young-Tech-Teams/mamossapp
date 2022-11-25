@@ -7,7 +7,7 @@ const { TokenExpiredError } = jwt;
 const config = require("../../config/auth.config.js");
 
 /**
-* @description Create and save a new address
+* @description Create and save a new address for current user
 * @param req
 * @param res
 */
@@ -52,7 +52,7 @@ exports.create = (req, res) => {
 };
 
 /**
-* @description Find current user address
+* @description Find current user address by the specified id in the request
 * @param req
 * @param res
 */
@@ -89,8 +89,49 @@ exports.findOne = (req, res) => {
        });
    });
 };
+
 /**
-* @description Update current user address
+* @description Find all addresses of current user
+* @param req
+* @param res
+*/
+exports.findAll = (req, res) => {
+    let token = req.headers["x-access-token"];
+    var userId;
+       if (!token) {
+          return res.status(403).send({
+          message: "Access token is required for this operation to work."
+       });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+       if (err) {
+          return catchError(err, res);
+       }
+       req.userId = decoded.id;
+       userId = decoded.id;
+    });
+    const id = req.params.id;
+    Address.findAll(userId)
+    .then(data => {
+        if (data) {
+            res.status(200).send(data);
+        } else {
+            res.status(403).send({
+                message: `There has been an error retrieving address with id=${id}.`
+            });
+            return;
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error retrieving address with id=" + id
+        });
+    });
+ };
+
+
+/**
+* @description Update current user address by the specified id in the request
 * @param req
 * @param res
 */
@@ -136,7 +177,7 @@ exports.update = (req, res) => {
 };
 
 /**
-* @description Delete an address with the specified id in the request
+* @description Delete an address by the specified id in the request
 * @param req
 * @param res
 */
