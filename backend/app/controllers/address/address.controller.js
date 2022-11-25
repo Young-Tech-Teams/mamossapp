@@ -111,20 +111,20 @@ exports.findAll = (req, res) => {
        userId = decoded.id;
     });
     const id = req.params.id;
-    Address.findAll(userId)
+    Address.findAll({ where: { userId : userId } })
     .then(data => {
         if (data) {
             res.status(200).send(data);
         } else {
             res.status(403).send({
-                message: `There has been an error retrieving address with id=${id}.`
+                message: "There has been an error retrieving all the addresses"
             });
             return;
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error retrieving address with id=" + id
+            message: "Error retrieving all the addresses"
         });
     });
  };
