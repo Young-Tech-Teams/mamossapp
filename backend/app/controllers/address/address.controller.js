@@ -37,6 +37,7 @@ exports.create = (req, res) => {
         code: req.body.code,
         zip_code: req.body.zip_code,
         city: req.body.city,
+        country: req.body.country,
         userId: userId
     };
     // Save adress in the database
