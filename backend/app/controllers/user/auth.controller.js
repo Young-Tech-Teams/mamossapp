@@ -11,9 +11,8 @@ const { TokenExpiredError } = jwt;
  * @description Register a new user
  * @param {*} req 
  * @param {*} res 
- * @param {*} next 
  */
-exports.signup = async (req, res, next) => {
+exports.signup = async (req, res) => {
     User.create({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
