@@ -26,21 +26,17 @@ exports.create = (req, res) => {
         req.userId = decoded.id;
         userId = decoded.id;
     });
-    // Validate request
-    if (!req.body.adress || !req.body.city || !req.body.state_province || !req.body.postal_code || !req.body.country_code) {
-        res.status(400).send({
-            message: "All fields must be fulfilled !"
-        });
-        return;
-    }
     // Create an adress
     const infos = {
-        adress: req.body.adress,
+        name: req.body.name,
+        street: req.body.street,
+        street_num: req.body.street_num,
+        floor: req.body.floor,
+        door: req.body.door,
+        building: req.body.building,
+        code: req.body.code,
+        zip_code: req.body.zip_code,
         city: req.body.city,
-        state_province: req.body.state_province,
-        postal_code: req.body.postal_code,
-        country_code: req.body.postal_code,
-        title: req.body.title,
         userId: userId
     };
     // Save adress in the database
