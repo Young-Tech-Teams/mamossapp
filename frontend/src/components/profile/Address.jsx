@@ -2,24 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_USER_URL } from '../../utils/APIRoutes';
+import { API_ADDRESS_URL } from '../../utils/APIRoutes';
 
 const MyAddress = ({ setShowModal }) => {
    
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState({
-      firstname: "",
-      lastname: "",
-      email: "",
-      age: "",
-      gender: "",
-      createdAt: ""
+      name: "",
+      street: "",
+      street_num: "",
+      floor: "",
+      door: "",
+      building: "",
+      code: "",
+      zip_code: "",
+      city: "",
+      country: ""
    })
 
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_USER_URL}infos`,
+      url: `${API_ADDRESS_URL}list-all`,
       headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": "*",
          "x-access-token": token,
@@ -35,12 +39,16 @@ const MyAddress = ({ setShowModal }) => {
          console.log(response);
          console.log("It worked!");
          setData({
-            ["firstname"]: response.data.firstname,
-            ["lastname"]: response.data.lastname,
-            ["email"]: response.data.email,
-            ["age"]: response.data.age,
-            ["gender"]: response.data.gender,
-            ["createdAt"]: response.data.createdAt
+            ["name"]: response.data.name,
+            ["street"]: response.data.street,
+            ["street_num"]: response.data.street_num,
+            ["floor"]: response.data.floor,
+            ["door"]: response.data.door,
+            ["building"]: response.data.building,
+            ["code"]: response.data.code,
+            ["zip_code"]: response.data.zip_code,
+            ["city"]: response.data.city,
+            ["country"]: response.data.country
          })
       })
       .catch((err) => {
@@ -54,33 +62,25 @@ const MyAddress = ({ setShowModal }) => {
 
   return (
     <AddressContainer id="address" className="address-container">
-         <p>Bonjour {data.firstname}</p>
-         <div className="tabs">
-            <div className="delivery">
-               <a href="/mes-commandes">Commander un repas</a>
-            </div>
-         </div>
-
          <div className="user-info d-flex">
-            <div className="avatar">
-               <img src="" alt="Avatar" />
-            </div>
             <div className="bio">
                <div className="name">
-                  <span>{data.firstname ? data.firstname : "Prénom"}</span>
+                  <span>{data.name ? data.name : "Nom d'adresse"}</span>
                   <hr />
-                  <span>{data.lastname ? data.lastname : "Nom"}</span>
+                  <span>{data.street_num ? data.street_num : "Numéro de rue"}, {data.street ? data.street : "Rue"}</span>
                </div>
                <div className="mail">
-                  <span>{data.email ? data.email : "Votre email"}</span>
+                  <span>{data.floor ? data.floor : "Étage"}</span>
                </div>
                <div className="age gender">
-                  <span>{data.age ? data.age : "Age"}</span>
+                  <span>{data.building ? data.building : "Bâtiment"}, {data.door ? data.door : "Numéro de porte"}</span>
                   <hr />
-                  <span>{data.gender ? data.gender : "Sexe"}</span>
                </div>
                <div className="created">
-                  <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
+                  <span>{data.code ? data.code : "??"}</span>
+                  <span>{data.zip_code ? data.zip_code : "??"}</span>
+                  <span>{data.city ? data.city : "Ville"}</span>
+                  <span>{data.country ? data.country : "Pays"}</span>
                </div>
             </div>
          </div>
