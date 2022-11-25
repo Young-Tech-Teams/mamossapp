@@ -12,11 +12,11 @@ const config = require("../../config/auth.config.js");
 * @param res
 */
 exports.create = (req, res) => {
-    let token = req.headers["x-access-token"];
-    var userId;
+   let token = req.headers["x-access-token"];
+   var userId;
     if (!token) {
         return res.status(403).send({
-            message: "No token provided!"
+            message: "Access token is required for this operation to work."
         });
     }
     jwt.verify(token, config.secret, (err, decoded) => {
