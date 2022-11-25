@@ -14,12 +14,22 @@ module.exports = function (app) {
    // Create a new adress
    router.post("/create", authJwt.verifyToken, addressController.create);
 
-    // Retrieve a single adress with id
+    // Retrieve current user adress with id
     router.get("/list/:id", authJwt.verifyToken, addressController.findOne);
 
-    // Retrieve a single adress with id
+    // Retrieve all adresses of current user
     router.get("/list-all", authJwt.verifyToken, addressController.findAll);
 
+    // Retrieve all adresses in database if admin
+    router.get(
+        "/get-all", 
+        [
+            authJwt.verifyToken, 
+            authJwt.isAdmin
+        ],
+        addressController.findAll
+    );
+    
     // Update a adress with id
     router.put("/update/:id", authJwt.verifyToken, addressController.update);
 
