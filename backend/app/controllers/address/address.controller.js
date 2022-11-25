@@ -56,7 +56,7 @@ exports.create = (req, res) => {
 * @param req
 * @param res
 */
-exports.findAddress = (req, res) => {
+exports.findOne = (req, res) => {
    let token = req.headers["x-access-token"];
    var userId;
       if (!token) {
@@ -77,7 +77,7 @@ exports.findAddress = (req, res) => {
            res.send(data);
        } else {
            res.status(404).send({
-               message: `There has been an error while trying to find address with id=${id}.`
+               message: `There has been an error retrieving address with id=${id}.`
            });
            return;
        }

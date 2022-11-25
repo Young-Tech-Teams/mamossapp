@@ -15,7 +15,7 @@ module.exports = function (app) {
    router.post("/create", authJwt.verifyToken, addressController.create);
 
     // Retrieve a single adress with id
-    router.get("/list/:id", addressController.findAddress);
+    router.get("/list/:id", addressController.findOne);
 
     // Update a adress with id
     router.put("/update/:id", authJwt.verifyToken, addressController.update);
