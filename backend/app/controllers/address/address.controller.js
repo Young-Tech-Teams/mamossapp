@@ -7,7 +7,7 @@ const { TokenExpiredError } = jwt;
 const config = require("../../config/auth.config.js");
 
 /**
-* @description Create and save a new adress
+* @description Create and save a new address
 * @param req
 * @param res
 */
@@ -26,7 +26,7 @@ exports.create = (req, res) => {
         req.userId = decoded.id;
         userId = decoded.id;
     });
-    // Create an adress
+    // Create an address
     const dataList = {
         name: req.body.name,
         street: req.body.street,
@@ -54,31 +54,44 @@ exports.create = (req, res) => {
 };
 
 /**
-* @description Find a single adress with an id
+* @description Find current user address
 * @param req
 * @param res
 */
-// exports.findOne = (req, res) => {
-//     const id = req.params.id;
-//     Adress.findByPk(id)
-//         .then(data => {
-//             if (data) {
-//                 res.send(data);
-//             } else {
-//                 res.status(404).send({
-//                     message: `Cannot find adress with id=${id}.`
-//                 });
-//                 return;
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving adress with id=" + id
-//             });
-//         });
-// };
+exports.findOne = (req, res) => {
+   let token = req.headers["x-access-token"];
+   var userId;
+      if (!token) {
+         return res.status(403).send({
+         message: "Access token is required for this operation to work."
+      });
+   }
+   jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+         return catchError(err, res);
+      }
+      req.userId = decoded.id;
+      userId = decoded.id;
+   });
+   Adress.findByPk(userId, { where: id })
+   .then(data => {
+       if (data) {
+           res.send(data);
+       } else {
+           res.status(404).send({
+               message: `Cannot find adress with id=${id}.`
+           });
+           return;
+       }
+   })
+   .catch(err => {
+       res.status(500).send({
+           message: "Error retrieving adress with id=" + id
+       });
+   });
+};
 /**
-* @description Update an adress by the id in the request
+* @description Update current user address
 * @param req
 * @param res
 */
