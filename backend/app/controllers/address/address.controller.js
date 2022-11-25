@@ -110,8 +110,45 @@ exports.findAll = (req, res) => {
        req.userId = decoded.id;
        userId = decoded.id;
     });
-    const id = req.params.id;
     Address.findAll({ where: { userId : userId } })
+    .then(data => {
+        if (data) {
+            res.status(200).send(data);
+        } else {
+            res.status(403).send({
+                message: "There has been an error retrieving all the addresses"
+            });
+            return;
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error retrieving all the addresses"
+        });
+    });
+ };
+
+/**
+* @description Get all addresses in database if admin
+* @param req
+* @param res
+*/
+exports.findAll = (req, res) => {
+    let token = req.headers["x-access-token"];
+    var userId;
+       if (!token) {
+          return res.status(403).send({
+          message: "Access token is required for this operation to work."
+       });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+       if (err) {
+          return catchError(err, res);
+       }
+       req.userId = decoded.id;
+       userId = decoded.id;
+    });
+    Address.findAll()
     .then(data => {
         if (data) {
             res.status(200).send(data);
