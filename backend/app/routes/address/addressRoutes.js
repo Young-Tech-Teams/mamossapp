@@ -18,7 +18,7 @@ module.exports = function (app) {
     router.get("/list/:id", addressController.findAddress);
 
     // Update a adress with id
-    router.put("/update", authJwt.verifyToken, addressController.update);
+    router.put("/update/:id", authJwt.verifyToken, addressController.update);
 
     // Delete a adress with id
     router.delete("/delete/:id", authJwt.verifyToken, addressController.delete);
