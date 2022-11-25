@@ -67,20 +67,16 @@ const MyAddress = ({ setShowModal }) => {
                <div className="name">
                   <span>{data.name ? data.name : "Nom d'adresse"}</span>
                   <hr />
-                  <span>{data.street_num ? data.street_num : "Numéro de rue"}, {data.street ? data.street : "Rue"}</span>
-               </div>
-               <div className="mail">
-                  <span>{data.floor ? data.floor : "Étage"}</span>
+                  <span>{data.street_num ? data.street_num : "Numéro de rue"}, {data.street ? data.street : "Rue"},</span>
                </div>
                <div className="age gender">
-                  <span>{data.building ? data.building : "Bâtiment"}, {data.door ? data.door : "Numéro de porte"}</span>
+                  <span>
+                     {data.building ? data.building : "Bâtiment"}, {data.door ? data.door : "Numéro de porte"}, {data.floor ? data.floor : "Étage"}
+                  </span>
                   <hr />
                </div>
                <div className="created">
-                  <span>{data.code ? data.code : "??"}</span>
-                  <span>{data.zip_code ? data.zip_code : "??"}</span>
-                  <span>{data.city ? data.city : "Ville"}</span>
-                  <span>{data.country ? data.country : "Pays"}</span>
+                  <span>{data.zip_code ? data.zip_code : "??"}, {data.city ? data.city : "Ville"}, {data.country ? data.country : "Pays"}</span>
                </div>
             </div>
          </div>

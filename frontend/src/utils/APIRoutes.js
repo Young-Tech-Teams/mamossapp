@@ -12,4 +12,6 @@ export {
     API_BASE_URL,
     API_AUTH_URL,
     API_USER_URL,
+    API_ADDRESS_URL,
+    API_PAYMENT_URL
 }
