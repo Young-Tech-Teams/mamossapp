@@ -133,7 +133,7 @@ exports.findAll = (req, res) => {
 * @param req
 * @param res
 */
-exports.findAll = (req, res) => {
+exports.getAll = (req, res) => {
     let token = req.headers["x-access-token"];
     var userId;
        if (!token) {
