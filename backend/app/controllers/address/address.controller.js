@@ -154,17 +154,17 @@ exports.delete = (req, res) => {
         userId = decoded.id;
     });
     const id = req.params.id;
-    Address.destroy({ where: { id: id } }, [{ include: User }, { where: { id: userId }} ])
+    Address.destroy({ where: { id: id } })
     .then((success) => {
       if (!success) {
-           res.status(200).send({
-               message: "Your address was successfully deleted!"
-           });
-       } else {
-           res.status(500).send({
-               message: `There has been an error deleting the address with id=${id}.`
-           });
-       }
+        res.status(403).send({
+           message: `There has been an error deleting the address with id=${id}.`
+        });
+        } else {
+            res.status(200).send({
+                message: `Address with id=${id} has been successfully deleted!`
+            });
+        }
    })
    .catch(err => {
        res.status(500).send({
