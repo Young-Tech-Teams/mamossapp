@@ -58,7 +58,7 @@ exports.create = (req, res) => {
 * @param req
 * @param res
 */
-exports.findOne = (req, res) => {
+exports.findAddress = (req, res) => {
    let token = req.headers["x-access-token"];
    var userId;
       if (!token) {
@@ -96,44 +96,33 @@ exports.findOne = (req, res) => {
 * @param res
 */
 exports.update = (req, res) => {
-   let token = req.headers["x-access-token"];
-   var userId;
-   if (!token) {
-      return res.status(403).send({
-          message: "Access token is required for this operation to work."
-      });
-  }
-  jwt.verify(token, config.secret, (err, decoded) => {
-      if (err) {
-          return catchError(err, res);
-      }
-      req.userId = decoded.id;
-      userId = decoded.id;
-  });
-  User.findByPk(userId, { include: Address })
-  .then(addressRecord => {
-      if (!addressRecord) {
-         throw new Error("Address records could not be found");
-      } else {
-         console.log(`Retrieved address records ${JSON.stringify(addressRecord, null, 2)}`);
-
-         Address.update(req.body, { where: { id: userId } })
-         .then(updatedRecord => {
-            console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
-            res.status(200).send({ message: updatedRecord })
-         })
-         .catch(err => {
-            res.status(500).send({
-               message: "There was an error getting the updated address."
-            });
-         });
-      }
-   })
-   .catch(err => {
-      res.status(500).send({
-         message: "There was an error updating the address."
-      });
-   });
+    let token = req.headers["x-access-token"];
+    var userId;
+    if (!token) {
+        return res.status(403).send({
+            message: "Access token is required for this operation to work."
+        });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return catchError(err, res);
+        }
+        req.userId = decoded.id;
+        userId = decoded.id;
+    });
+    const id = req.params.id;
+    Address.update(req.body, { where: { id: id } })
+    .then(data => {
+            res.send(data);
+            res.send({
+                message: "Adress was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "There was an error updating the address."
+        });
+    });
 };
 
 /**

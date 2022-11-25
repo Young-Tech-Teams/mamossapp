@@ -14,14 +14,11 @@ module.exports = function (app) {
    // Create a new adress
    router.post("/create", authJwt.verifyToken, addressController.create);
 
-   // Retrieve all adresss
-   // router.get("/list", authJwt.verifyToken, addressController.findAll);
-
     // Retrieve a single adress with id
-   //  router.get("/list/:id", addressController.findOne);
+    router.get("/list", addressController.findAddress);
 
     // Update a adress with id
-    router.put("/update/:id", authJwt.verifyToken, addressController.update);
+    router.put("/update", authJwt.verifyToken, addressController.update);
 
     // Delete a adress with id
     router.delete("/delete/:id", authJwt.verifyToken, addressController.delete);
