@@ -40,15 +40,13 @@ exports.create = (req, res) => {
         country: req.body.country,
         userId: userId
     };
-    // Save adress in the database
     Address.create(dataList)
-   .then(data => {
+    .then(data => {
        res.send(data);
-   })
-   .catch(err => {
-       res.status(500).send({
-           message: 
-           err.message || "Some error occurred while creating the address"
+    })
+    .catch(err => {
+        res.status(500).send({
+           message: err.message || "Some error occurred while creating the address"
        });
    });
 };
@@ -73,20 +71,20 @@ exports.findAddress = (req, res) => {
       req.userId = decoded.id;
       userId = decoded.id;
    });
-   Adress.findByPk(userId, { where: id })
+   Address.findByPk(userId, { where: id })
    .then(data => {
        if (data) {
            res.send(data);
        } else {
            res.status(404).send({
-               message: `Cannot find adress with id=${id}.`
+               message: `There has been an error while trying to find address with id=${id}.`
            });
            return;
        }
    })
    .catch(err => {
        res.status(500).send({
-           message: "Error retrieving adress with id=" + id
+           message: "Error retrieving address with id=" + id
        });
    });
 };
@@ -111,12 +109,22 @@ exports.update = (req, res) => {
         userId = decoded.id;
     });
     const id = req.params.id;
-    Address.update(req.body, { where: { id: id } })
+    const dataList = {
+        name: req.body.name,
+        street: req.body.street,
+        street_num: req.body.street_num,
+        floor: req.body.floor,
+        door: req.body.door,
+        building: req.body.building,
+        code: req.body.code,
+        zip_code: req.body.zip_code,
+        city: req.body.city,
+        country: req.body.country,
+        userId: userId
+    };
+    Address.update(dataList, { where: { id: id } })
     .then(data => {
-            res.send(data);
-            res.send({
-                message: "Adress was updated successfully."
-        });
+        res.status(200).send({ message: "The address has been updated successfully" })
     })
     .catch(err => {
         res.status(500).send({
@@ -126,7 +134,7 @@ exports.update = (req, res) => {
 };
 
 /**
-* @description Delete an adress with the specified id in the request
+* @description Delete an address with the specified id in the request
 * @param req
 * @param res
 */
@@ -145,22 +153,22 @@ exports.delete = (req, res) => {
        req.userId = decoded.id;
        userId = decoded.id;
    });
-    Adress.destroy({ where: { id: id } }, [{ include: User }, { where: { id: userId }} ])
+    Address.destroy({ where: { id: id } }, [{ include: User }, { where: { id: userId }} ])
     .then((success) => {
       if (!success) {
-           res.send({
-               message: "Your address was deleted successfully!"
+           res.status(200).send({
+               message: "Your address was successfully deleted!"
            });
        } else {
-           res.send({
-               message: `Cannot delete address with id=${id}. Maybe adress was not found!`
+           res.status(500).send({
+               message: `There has been an error deleting the address with id=${id}.`
            });
        }
    })
    .catch(err => {
        res.status(500).send({
            message: 
-           err.message || "Could not delete adress with id=" + id
+           err.message || `There has been an error deleting the address with id=${id}.`
        });
    });
 };
