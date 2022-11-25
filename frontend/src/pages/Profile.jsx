@@ -6,6 +6,7 @@ import { API_USER_URL } from '../utils/APIRoutes';
 import { format } from 'fecha';
 import Modal from '../components/profile/InfoModal';
 import MyInfos from '../components/profile/Infos';
+import MyAddress from '../components/profile/Address';
 
 const Profile = () => {
 
@@ -49,6 +50,7 @@ const Profile = () => {
             </div>
             <div className="addresses">
               <h2>Mes addresses</h2>
+              <MyAddress />
             </div>
             <div className="history">
               <h2>Mon historique de commandes</h2>
