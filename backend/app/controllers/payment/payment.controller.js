@@ -183,23 +183,9 @@ exports.update = (req, res) => {
         userId = decoded.id;
     });
     const id = req.params.id;
-    const dataList = {
-        name: req.body.name,
-        street: req.body.street,
-        street_num: req.body.street_num,
-        floor: req.body.floor,
-        door: req.body.door,
-        building: req.body.building,
-        code: req.body.code,
-        zip_code: req.body.zip_code,
-        city: req.body.city,
-        country: req.body.country,
-        userId: userId
-    };
-    Payment.update(dataList, { where: { id: id } })
+    Payment.update(req.body, { where: { id: id } })
     .then(data => {
         res.status(200).send({ message: "The payment has been updated successfully" });
-        res.send(data);
     })
     .catch(err => {
         res.status(500).send({
