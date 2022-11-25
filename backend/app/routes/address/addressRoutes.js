@@ -27,7 +27,7 @@ module.exports = function (app) {
             authJwt.verifyToken, 
             authJwt.isAdmin
         ],
-        addressController.findAll
+        addressController.getAll
     );
     
     // Update a adress with id
