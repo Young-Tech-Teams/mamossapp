@@ -45,7 +45,7 @@ db.user.hasMany(db.address, { as: "addresses" });
 db.address.belongsTo(db.user, { as: "user" });
 
 /** PAYMENT */
-db.user.hasMany(db.payment, { as: "credit_cards" });
+db.user.hasMany(db.payment, { as: "payments" });
 db.payment.belongsTo(db.user, { as: "user" });
 
 module.exports = db;
