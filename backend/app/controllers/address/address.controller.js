@@ -72,7 +72,7 @@ exports.findOne = (req, res) => {
       userId = decoded.id;
    });
    const id = req.params.id;
-   Address.findByPk({ where: id })
+   Address.findByPk(id)
    .then(data => {
        if (data) {
            res.status(200).send(data);
@@ -125,7 +125,8 @@ exports.update = (req, res) => {
     };
     Address.update(dataList, { where: { id: id } })
     .then(data => {
-        res.status(200).send({ message: "The address has been updated successfully" })
+        res.status(200).send({ message: "The address has been updated successfully" });
+        res.send(data);
     })
     .catch(err => {
         res.status(500).send({
