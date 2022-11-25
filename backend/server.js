@@ -10,7 +10,7 @@ var path = require("path");
 var bcrypt = require("bcryptjs");
 
 app.use(cors({
-   origin: "*",
+   origin: "http://localhost:3000",
    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
    credentials: true,
 }));
@@ -22,13 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
-
-app.use((req, res, next) => {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-   next();
-   }
-)
 
 const db = require("./app/models");
 const Role = db.role;
