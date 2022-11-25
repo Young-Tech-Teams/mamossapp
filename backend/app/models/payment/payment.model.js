@@ -1,18 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-   const Payment = sequelize.define("credit_cards", {
+   const Payment = sequelize.define("payment", {
       lastname: {
           type: Sequelize.STRING
       },
        firstname: {
            type: Sequelize.STRING
        },
-       number: {
+       card_number: {
            type: Sequelize.BIGINT
        },
-       expiration_date: {
+       card_exp_date: {
            type: Sequelize.STRING
        },
-       crypto: {
+       card_crypto: {
            type: Sequelize.INTEGER
        }
    });
