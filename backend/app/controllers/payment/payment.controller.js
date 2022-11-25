@@ -28,16 +28,11 @@ exports.create = (req, res) => {
     });
 
     const dataList = {
-        name: req.body.name,
-        street: req.body.street,
-        street_num: req.body.street_num,
-        floor: req.body.floor,
-        door: req.body.door,
-        building: req.body.building,
-        code: req.body.code,
-        zip_code: req.body.zip_code,
-        city: req.body.city,
-        country: req.body.country,
+        lastname: req.body.lastname,
+        firstname: req.body.firstname,
+        number: req.body.number,
+        expiration_date: req.body.expiration_date,
+        crypto: req.body.crypto,
         userId: userId
     };
     Payment.create(dataList)
