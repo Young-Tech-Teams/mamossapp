@@ -6,9 +6,6 @@ const jwt = require("jsonwebtoken");
 const { TokenExpiredError } = jwt;
 const config = require("../../config/auth.config.js");
 
-// If token
-
-
 /**
 * @description Create and save a new address for current user
 * @param req
