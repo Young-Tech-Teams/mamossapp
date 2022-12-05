@@ -17,7 +17,7 @@ const MyPayments = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_PAYMENT_URL}list/1`,
+      url: `${API_PAYMENT_URL}list/6`,
       headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": "*",
          "x-access-token": token,
@@ -54,8 +54,7 @@ const MyPayments = ({ setShowModal }) => {
          <div className="user-info d-flex">
             <div className="bio">
                <div className="name">
-                  <span>{data.lastname ? data.lastname : "Nom"}</span>
-                  <span>{data.firstname ? data.firstname :"Prénom"}</span>
+                  <span>{data.lastname ? data.lastname : "Nom"} {data.firstname ? data.firstname :"Prénom"}</span>
                </div>
                <div className="age gender">
                   <span>{data.card_number ? data.card_number : "Numéro de carte"}</span>
