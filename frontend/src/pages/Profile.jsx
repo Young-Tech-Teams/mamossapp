@@ -7,6 +7,7 @@ import { format } from 'fecha';
 import Modal from '../components/profile/InfoModal';
 import MyInfos from '../components/profile/Infos';
 import MyAddress from '../components/profile/Address';
+import MyPayments from '../components/profile/Payment';
 
 const Profile = () => {
 
@@ -52,14 +53,9 @@ const Profile = () => {
               <h2>Mes addresses</h2>
               <MyAddress />
             </div>
-            <div className="history">
-              <h2>Mon historique de commandes</h2>
-            </div>
             <div className="payment">
               <h2>Mes moyens de paiements</h2>
-            </div>
-            <div className="consign">
-              <h2>Mes consignes en cours</h2>
+              <MyPayments />
             </div>
           </div>
         </div>
