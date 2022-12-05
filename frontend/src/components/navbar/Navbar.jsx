@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AuthService from "../utils/auth.service";
-import { menuItems } from "./navMenu/_menuItems";
-import MenuItems from './navMenu/MenuItems';
+import AuthService from "../../utils/auth.service";
+import { menuItems } from "./_menuItems";
+import MenuItems from './MenuItems';
 import { LogOut } from "react-feather";
-import Logo from "../assets/mamossa-logo.png";
+import Logo from "../../assets/mamossa-logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
