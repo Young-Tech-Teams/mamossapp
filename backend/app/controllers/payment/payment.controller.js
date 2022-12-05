@@ -32,7 +32,7 @@ exports.create = (req, res) => {
         firstname: req.body.firstname,
         card_number: req.body.card_number,
         card_exp_date: req.body.card_exp_date,
-        card_scrypto: req.body.card_crypto,
+        card_crypto: req.body.card_crypto,
         userId: userId
     };
     Payment.create(dataList)
