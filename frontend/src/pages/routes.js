@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
+// eslint-disable-next-line
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "../components/navbar/Navbar";
 import Home from './Home';
@@ -20,7 +21,8 @@ const Pages = () => {
         setIsLoggedIn(false)
         navigate("/connexion");
       }
-    }, [token]);
+      // eslint-disable-next-line
+    }, [token]); 
   
 
    return (
@@ -30,7 +32,9 @@ const Pages = () => {
             <Route path="/" element={<Home />} />
             <Route path="/connexion" element={<Login />} />
             <Route path="/inscription" element={<Register />}/>
-            <Route path="/mon-compte" element={<Profile />} />
+            {isLoggedIn ? (
+               <Route path="/mon-compte" element={<Profile />} />
+            ) : <></> }
          </Routes>
       </>
    )
