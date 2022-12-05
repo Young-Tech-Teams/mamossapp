@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_ADDRESS_URL } from '../../utils/APIRoutes';
+import { API_PAYMENT_URL } from '../../utils/APIRoutes';
 
 const MyPayments = ({ setShowModal }) => {
    
@@ -17,7 +17,7 @@ const MyPayments = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_ADDRESS_URL}list-all`,
+      url: `${API_PAYMENT_URL}list/1`,
       headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": "*",
          "x-access-token": token,
