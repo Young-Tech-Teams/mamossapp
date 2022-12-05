@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
            type: Sequelize.BIGINT
        },
        card_exp_date: {
-           type: Sequelize.STRING
+           type: Sequelize.DATE
        },
        card_crypto: {
            type: Sequelize.INTEGER
