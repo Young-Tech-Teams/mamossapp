@@ -1,4 +1,4 @@
-const { checkDuplicateEmail, checkRolesExisting, verifyToken } = require("../middleware/authJwt");
+const { verifyEmail, checkRolesExisting, verifyToken } = require("../middleware/authJwt");
 const authController = require("../controllers/user/auth.controller")
 const router = require("express").Router();
 
@@ -15,7 +15,7 @@ module.exports = function (app) {
    router.post(
       "/signup", 
       [
-         checkDuplicateEmail, 
+         verifyEmail, 
          checkRolesExisting
       ],
       authController.signup
