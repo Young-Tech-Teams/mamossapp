@@ -1,4 +1,4 @@
-const { verifyToken, isAdmin } = require("../../middleware");
+const { verifyToken, isAdmin } = require("../../middleware/authJwt");
 const paymentController = require("../../controllers/payment/payment.controller.js");
 const router = require("express").Router();
 
