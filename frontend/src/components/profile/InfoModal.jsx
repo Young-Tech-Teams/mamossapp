@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
@@ -38,11 +37,11 @@ const InfoModal = ({ setShowModal }) => {
       .then((response) => {
          console.log(response);
          setData({ 
-            ["firstname"]: response.data.firstname,
-            ["lastname"]: response.data.lastname,
-            ["email"]: response.data.email,
-            ["gender"]: response.data.gender,
-            ["age"]: response.data.age
+            "firstname": response.data.firstname,
+            "lastname": response.data.lastname,
+            "email": response.data.email,
+            "gender": response.data.gender,
+            "age": response.data.age
           });
       })
       .catch((err) => {
@@ -52,7 +51,7 @@ const InfoModal = ({ setShowModal }) => {
       
     useEffect(() => {
       fetchCurrentUserInfo();
-    }, []);
+    });
 
     const onSubmit = (e) => {
       e.preventDefault();
