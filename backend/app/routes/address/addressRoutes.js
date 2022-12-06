@@ -1,4 +1,4 @@
-const { verifyToken, isAdmin } = require("../../middleware");
+const { verifyToken, isAdmin } = require("../../middleware/authJwt");
 const addressController = require("../../controllers/address/address.controller");
 const router = require("express").Router();
 
