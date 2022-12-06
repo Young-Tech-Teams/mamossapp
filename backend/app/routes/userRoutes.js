@@ -1,4 +1,4 @@
-const { authJwt } = require("../middleware");
+const { verifyToken, isClient, isAdmin } = require("../middleware");
 const userController = require("../controllers/user/user.controller");
 const router = require("express").Router();
 
@@ -14,8 +14,8 @@ module.exports = function (app) {
    // Test client private content with JWT
    router.get("/client", 
       [
-         authJwt.verifyToken,
-         authJwt.isClient  
+         verifyToken,
+         isClient  
       ],
       userController.userBoard
    );
@@ -24,8 +24,8 @@ module.exports = function (app) {
    router.get(
       "/admin",
       [
-         authJwt.verifyToken,
-         authJwt.isAdmin
+         verifyToken,
+         isAdmin
       ],
       userController.adminBoard
    );
@@ -34,21 +34,21 @@ module.exports = function (app) {
    router.put(
       "/update",
       [
-         authJwt.verifyToken,
-         // authJwt.isClient
+         verifyToken,
+         // isClient
       ],
       userController.update
    );
 
    // Get user information
-   router.get("/infos", authJwt.verifyToken, userController.getUserInfos);
+   router.get("/infos", verifyToken, userController.getUserInfos);
 
    // Get all users informations
    router.get(
       "/get-all", 
       [
-         authJwt.verifyToken, 
-         authJwt.isAdmin
+         verifyToken, 
+         isAdmin
       ],
       userController.findAllUsers
    );
@@ -57,7 +57,7 @@ module.exports = function (app) {
    router.delete(
       "/delete",
       [
-         authJwt.verifyToken,
+         verifyToken,
       ],
       userController.delete
    )
