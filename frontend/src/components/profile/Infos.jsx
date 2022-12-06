@@ -20,10 +20,10 @@ const MyInfos = ({ setShowModal }) => {
       method: 'get',
       url: `${API_USER_URL}infos`,
       headers: localStorage.getItem("token") ? {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
          "x-access-token": token,
       } : {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
       }
       }
 

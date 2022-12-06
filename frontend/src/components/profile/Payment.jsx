@@ -19,10 +19,10 @@ const MyPayments = ({ setShowModal }) => {
       method: 'get',
       url: `${API_PAYMENT_URL}list/6`,
       headers: localStorage.getItem("token") ? {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
          "x-access-token": token,
       } : {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
       }
       }
 
