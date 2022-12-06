@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
@@ -35,12 +34,12 @@ const MyInfos = ({ setShowModal }) => {
          console.log(response);
          console.log("It worked!");
          setData({
-            ["firstname"]: response.data.firstname,
-            ["lastname"]: response.data.lastname,
-            ["email"]: response.data.email,
-            ["age"]: response.data.age,
-            ["gender"]: response.data.gender,
-            ["createdAt"]: response.data.createdAt
+            "firstname": response.data.firstname,
+            "lastname": response.data.lastname,
+            "email": response.data.email,
+            "age": response.data.age,
+            "gender": response.data.gender,
+            "createdAt": response.data.createdAt
          })
       })
       .catch((err) => {
@@ -50,7 +49,7 @@ const MyInfos = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   }, []);
+   });
 
   return (
     <InfoContainer id="infos" className="infos-container">
