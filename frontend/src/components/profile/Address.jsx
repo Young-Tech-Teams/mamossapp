@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_ADDRESS_URL } from '../../utils/APIRoutes';
@@ -39,16 +38,16 @@ const MyAddress = ({ setShowModal }) => {
          console.log(response);
          console.log("It worked!");
          setData({
-            ["name"]: response.data.name,
-            ["street"]: response.data.street,
-            ["street_num"]: response.data.street_num,
-            ["floor"]: response.data.floor,
-            ["door"]: response.data.door,
-            ["building"]: response.data.building,
-            ["code"]: response.data.code,
-            ["zip_code"]: response.data.zip_code,
-            ["city"]: response.data.city,
-            ["country"]: response.data.country
+           "name": response.data.name,
+           "street": response.data.street,
+           "street_num": response.data.street_num,
+           "floor": response.data.floor,
+           "door": response.data.door,
+           "building": response.data.building,
+           "code": response.data.code,
+           "zip_code": response.data.zip_code,
+           "city": response.data.city,
+           "country": response.data.country
          })
       })
       .catch((err) => {
@@ -58,7 +57,7 @@ const MyAddress = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   }, []);
+   });
 
   return (
     <AddressContainer id="address" className="address-container">
