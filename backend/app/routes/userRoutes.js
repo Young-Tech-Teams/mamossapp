@@ -1,4 +1,4 @@
-const { verifyToken, isClient, isAdmin } = require("../middleware");
+const { verifyToken, isClient, isAdmin } = require("../middleware/authJwt");
 const userController = require("../controllers/user/user.controller");
 const router = require("express").Router();
 
