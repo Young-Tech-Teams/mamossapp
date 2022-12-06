@@ -1,4 +1,4 @@
-const { verifySignUp, authJwt } = require("../middleware");
+const { checkDuplicateEmail, checkRolesExisting, verifyToken } = require("../middleware/authJwt");
 const authController = require("../controllers/user/auth.controller")
 const router = require("express").Router();
 
@@ -15,8 +15,8 @@ module.exports = function (app) {
    router.post(
       "/signup", 
       [
-         verifySignUp.checkDuplicateEmail, 
-         verifySignUp.checkRolesExisting
+         checkDuplicateEmail, 
+         checkRolesExisting
       ],
       authController.signup
    );
@@ -25,7 +25,7 @@ module.exports = function (app) {
    router.post("/login", authController.login);
 
    // Logout
-   router.post("/logout", authJwt.verifyToken, authController.logout);
+   router.post("/logout", verifyToken, authController.logout);
 
    // Refresh access token
    router.post("/refresh", authController.refreshToken);
