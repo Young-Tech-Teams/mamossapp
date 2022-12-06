@@ -10,7 +10,7 @@ var path = require("path");
 var bcrypt = require("bcryptjs");
 
 app.use(cors({
-   origin: '*',
+   origin: ["http://localhost:3000", "https://www.app.mamossa.com/connexion"],
    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
    credentials: true,
 }));
