@@ -33,11 +33,11 @@ const MyPayments = ({ setShowModal }) => {
          console.log(response);
          console.log("It worked!");
          setData({
-            ["lastname"]: response.data.lastname,
-            ["firstname"]: response.data.firstname,
-            ["card_number"]: response.data.card_number,
-            ["card_exp_date"]: response.data.card_exp_date,
-            ["card_crypto"]: response.data.card_crypto,
+            "lastname": response.data.lastname,
+            "firstname": response.data.firstname,
+            "card_number": response.data.card_number,
+            "card_exp_date": response.data.card_exp_date,
+            "card_crypto": response.data.card_crypto,
          })
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ const MyPayments = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   }, []);
+   });
 
   return (
     <AddressContainer id="address" className="address-container">
