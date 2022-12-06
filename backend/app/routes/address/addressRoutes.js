@@ -1,4 +1,4 @@
-const { authJwt } = require("../../middleware");
+const { verifyToken, isAdmin } = require("../../middleware");
 const addressController = require("../../controllers/address/address.controller");
 const router = require("express").Router();
 
@@ -12,29 +12,29 @@ module.exports = function (app) {
    });
 
    // Create a new adress
-   router.post("/create", authJwt.verifyToken, addressController.create);
+   router.post("/create", verifyToken, addressController.create);
 
     // Retrieve current user adress with id
-    router.get("/list/:id", authJwt.verifyToken, addressController.findOne);
+    router.get("/list/:id", verifyToken, addressController.findOne);
 
     // Retrieve all adresses of current user
-    router.get("/list-all", authJwt.verifyToken, addressController.findAll);
+    router.get("/list-all", verifyToken, addressController.findAll);
 
     // Retrieve all adresses in database if admin
     router.get(
         "/get-all", 
         [
-            authJwt.verifyToken, 
-            authJwt.isAdmin
+            verifyToken, 
+            isAdmin
         ],
         addressController.getAll
     );
     
     // Update a adress with id
-    router.put("/update/:id", authJwt.verifyToken, addressController.update);
+    router.put("/update/:id", verifyToken, addressController.update);
 
     // Delete a adress with id
-    router.delete("/delete/:id", authJwt.verifyToken, addressController.delete);
+    router.delete("/delete/:id", verifyToken, addressController.delete);
       
     app.use('/api/address', router);
 };
