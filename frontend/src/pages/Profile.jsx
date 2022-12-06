@@ -1,9 +1,4 @@
-import React, { useState, useEffect } from 'react'
-// import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import axios from 'axios';
-import { API_USER_URL } from '../utils/APIRoutes';
-import { format } from 'fecha';
+import React, { useState } from 'react'
 import Modal from '../components/profile/InfoModal';
 import MyInfos from '../components/profile/Infos';
 import MyAddress from '../components/profile/Address';
