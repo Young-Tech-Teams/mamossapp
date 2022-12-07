@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
 
-const AddressModal = ({ setShowModal }) => {
+const AddressModal = ({ setShowAddressModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
   const [data, setData] = useState({
@@ -86,7 +86,7 @@ const AddressModal = ({ setShowModal }) => {
   return (
     <Modal id="addy-modal" className="addy-modal">
       <FormContainer>
-      <button className="btn btn-close" onClick={() => setShowModal(false)}>Fermer</button>
+      <button className="btn btn-close" onClick={() => setShowAddressModal(false)}>Fermer</button>
       <Form onSubmit={onSubmit} id="form">
           <div>
             <label htmlFor="name">Nom d'adresse</label>
