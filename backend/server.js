@@ -1,81 +1,92 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const server = require("http").createServer(app);
-const dotenv = require("dotenv").config();
 const morgan = require("morgan");
+const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv").config();
 
-var path = require("path");
-var bcrypt = require("bcryptjs");
+const StartServer = async() => {
+   const app = express();
 
-app.use(cors({
-   origin: ["http://localhost:3000", "https://app.mamossa.com"],
-   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-   credentials: true,
-}));
+   app.use(cors({
+      origin: ["http://localhost:3000", "https://app.mamossa.com"],
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      credentials: true,
+   }));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+   app.use(bodyParser.json());
+   app.use(bodyParser.urlencoded({ extended: true }));
+   app.use(morgan("dev"));
+   app.use(express.json());
+   app.use(express.urlencoded({ extended: true }));
+   app.use(express.static(__dirname + "/public"));
 
-app.use("/public", express.static(path.join(__dirname, "public")));
+   const database = require("./app/models");
+   const User = database.user;
+   const Role = database.role;
 
-const db = require("./app/models");
-const Role = db.role;
-const User = db.user;
-const Op = db.Sequelize.Op;
+   /** SYNC DB SEQUELIZE **/
+   // await database.sequelize.sync()
+   await database.sequelize.sync({force : true})
+      .then(() => {
+         initialRecords();
+         console.log("The database has been synced successfully");
+      })
+      .catch((err) => {
+         console.error("An error occurred while syncing the database" + err.message);
+      });
 
-/** SYNC DB SEQUELIZE **/
-// db.sequelize.sync({force : true})
-db.sequelize.sync()
-   .then(() => {
-      // initial();
-      console.log("Database synced");
-   })
-   .catch((err) => {
-      console.error("Error syncing database:" + err.message);
+      async function initialRecords() {
+         // creating roles
+         await Role.create({
+            id: 1,
+            name: "admin"
+         });
+         await Role.create({
+            id: 2,
+            name: "client"
+         });
+         await Role.create({
+            id: 3,
+            name: "livreur"
+         });
+
+         // creating user
+         await User.create({
+            email: "lunayu@gmail.com",
+            password: bcrypt.hashSync("Meowmeow", 8),
+            roleId: 1
+         });
+      };
+
+   require("./app/routes/authRoutes")(app);
+   require("./app/routes/userRoutes")(app);
+   require("./app/routes/address/addressRoutes")(app);
+   require("./app/routes/payment/paymentRoutes")(app);
+
+   /** CONNEXION TO LOCALHOST **/
+   const https = require("https");
+   const fs = require("fs");
+   const PORT = process.env.PORT;
+   const hostname = "localhost";
+   const colors = require("./utils/colors");
+
+   https
+   .createServer(
+      {
+         key: fs.readFileSync("key.pem"),
+         cert: fs.readFileSync("cert.pem"),
+      },
+      app
+   )
+   .listen(PORT, () => {
+      console.log(`\u2794 Server up and running on port ${PORT}`.custom,
+      `\nat: https://${hostname}:${PORT}/`.brightMagenta);
    });
 
-async function initial() {
-   // creating roles
-   await Role.create({
-      id: 1,
-      name: "admin"
+   app.get("/", (req, res) => {
+      res.send("Hello from express server.")
    });
-   
-   await Role.create({
-      id: 2,
-      name: "client"
-   });
+}
 
-   await Role.create({
-      id: 3,
-      name: "livreur"
-   });
-
-   // creating user
-   await User.create({
-      email: "lunayu@gmail.com",
-      password: bcrypt.hashSync("Meowmeow", 8),
-      roleId: 1
-   })
-};
-
-require("./app/routes/authRoutes")(app);
-require("./app/routes/userRoutes")(app);
-require("./app/routes/address/addressRoutes")(app);
-require("./app/routes/payment/paymentRoutes")(app);
-
-/** CONNEXION TO LOCALHOST **/
-const colors = require("./utils/colors");
-const join = require("path");
-const port = process.env.PORT;
-const hostname = "localhost";
-
-server.listen(port, () => console.log(
-   `\u2794 Server up and running on port ${port}`.custom,
-   `\nat: https://${hostname}:${port}/`.brightMagenta
-));
+StartServer();

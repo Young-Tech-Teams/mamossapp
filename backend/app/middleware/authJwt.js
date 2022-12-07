@@ -22,7 +22,7 @@ const verifyToken = (req, res, next) => {
 		if (err) {
 			return catchError(err, res);
 		}
-		req.user_id = decoded.id;
+		req.userId = decoded.id;
 		next();
 	});
 };
@@ -53,7 +53,7 @@ const checkRolesExisting = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-	User.findByPk(req.user_id, { include: Role }).then(user => {
+	User.findByPk(req.userId, { include: Role }).then(user => {
 		if (user.role.name === "admin") {
 			next();
 			return;
@@ -67,7 +67,7 @@ const isAdmin = (req, res, next) => {
 };
 
 const isClient = (req, res, next) => {
-	User.findByPk(req.user_id, { include: Role }).then(user => {
+	User.findByPk(req.userId, { include: Role }).then(user => {
 		if (user.role.name === "client") {
 			next();
 			return;
