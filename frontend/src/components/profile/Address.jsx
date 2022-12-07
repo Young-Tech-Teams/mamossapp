@@ -57,7 +57,8 @@ const MyAddress = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   }, []);
+   // eslint-disable-next-line
+   }, []); 
 
   return (
     <AddressContainer id="address" className="address-container">

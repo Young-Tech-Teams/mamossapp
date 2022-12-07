@@ -49,7 +49,8 @@ const MyInfos = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   }, []);
+   // eslint-disable-next-line
+}, []);
 
   return (
     <InfoContainer id="infos" className="infos-container">

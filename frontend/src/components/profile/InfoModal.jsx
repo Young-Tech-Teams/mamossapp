@@ -51,6 +51,7 @@ const InfoModal = ({ setShowModal }) => {
       
     useEffect(() => {
       fetchCurrentUserInfo();
+      // eslint-disable-next-line
     }, []);
 
     const onSubmit = (e) => {

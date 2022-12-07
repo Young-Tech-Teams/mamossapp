@@ -47,6 +47,7 @@ const MyPayments = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
+   // eslint-disable-next-line
    }, []);
 
   return (

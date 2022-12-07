@@ -12,6 +12,7 @@ const Pages = () => {
    const navigate = useNavigate();
 
    const token = JSON.parse(localStorage.getItem("token"));
+   // eslint-disable-next-line
    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
    useEffect(() => {
