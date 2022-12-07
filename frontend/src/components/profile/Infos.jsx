@@ -20,10 +20,10 @@ const MyInfos = ({ setShowModal }) => {
       method: 'get',
       url: `${API_USER_URL}infos`,
       headers: localStorage.getItem("token") ? {
-         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
          "x-access-token": token,
       } : {
-         "Access-Control-Allow-Origin": "https://www.app.mamossa.com/",
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
       }
       }
 
@@ -49,7 +49,7 @@ const MyInfos = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   });
+   }, []);
 
   return (
     <InfoContainer id="infos" className="infos-container">

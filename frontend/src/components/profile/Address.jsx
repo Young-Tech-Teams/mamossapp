@@ -22,12 +22,12 @@ const MyAddress = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_ADDRESS_URL}list-all`,
+      url: `${API_ADDRESS_URL}list/1`,
       headers: localStorage.getItem("token") ? {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
          "x-access-token": token,
       } : {
-         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
       }
       }
 
@@ -57,7 +57,7 @@ const MyAddress = ({ setShowModal }) => {
 
    useEffect(() => {
    fetchCurrentUserInfo();
-   });
+   }, []);
 
   return (
     <AddressContainer id="address" className="address-container">

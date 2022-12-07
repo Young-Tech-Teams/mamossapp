@@ -32,9 +32,9 @@ const Pages = () => {
             <Route path="/" element={<Home />} />
             <Route path="/connexion" element={<Login />} />
             <Route path="/inscription" element={<Register />}/>
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? ( */}
                <Route path="/mon-compte" element={<Profile />} />
-            ) : <></> }
+            {/* ) : <></> } */}
          </Routes>
       </>
    )
