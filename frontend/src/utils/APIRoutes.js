@@ -1,4 +1,4 @@
-const port = "http://localhost:4242";
+const port = "https://localhost:4242";
 
 const API_PUBLIC_URL = `${port}`;
 const API_BASE_URL = `${port}/api`;
