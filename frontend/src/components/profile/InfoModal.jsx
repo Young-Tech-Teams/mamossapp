@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
 
-const InfoModal = ({ setShowModal }) => {
+const InfoModal = ({ setShowInfoModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
   
@@ -79,7 +79,7 @@ const InfoModal = ({ setShowModal }) => {
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
-      <button className="btn btn-close" onClick={() => setShowModal(false)}>Fermer</button>
+      <button className="btn btn-close" onClick={() => setShowInfoModal(false)}>Fermer</button>
       <Form onSubmit={onSubmit} id="form">
           <div>
           <label htmlFor="firstname">Prénom</label>
