@@ -95,7 +95,7 @@ const AddressModal = ({ setShowAddressModal }) => {
                type="text"
                value={data.name ? data.name : ""}
                className="form-control"
-               placeholder="Entrez votre prénom"
+               placeholder="Entrez le nom de votre adresse"
                name="name"
                onChange={handleChange}
                />

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
 
-const MyInfos = ({ setShowModal }) => {
+const MyInfos = ({ setShowInfoModal }) => {
    
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState({

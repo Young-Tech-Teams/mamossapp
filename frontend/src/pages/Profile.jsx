@@ -8,12 +8,12 @@ const Profile = () => {
 
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  // const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   // Info modal
   const toggleInfoModal = () => {
     setShowInfoModal(!showInfoModal);
-    console.log("modal is working");
+    console.log("info modal is working");
   }
   // Close modal with Echap Key
   document.addEventListener("keydown", (e) => {
@@ -25,7 +25,7 @@ const Profile = () => {
   // Address modal
   const toggleAddressModal = () => {
     setShowAddressModal(!showAddressModal);
-    console.log("modal is working");
+    console.log("address modal is working");
   }
   // Close modal with Echap Key
   document.addEventListener("keydown", (e) => {
@@ -34,17 +34,17 @@ const Profile = () => {
     }
   });
   
-  // Address modal
-  const togglePaymentModal = () => {
-    setShowPaymentModal(!showPaymentModal);
-    console.log("modal is working");
-  }
-  // Close modal with Echap Key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setShowPaymentModal(false);
-    }
-  });
+  // // Address modal
+  // const togglePaymentModal = () => {
+  //   setShowPaymentModal(!showPaymentModal);
+  //   console.log("modal is working");
+  // }
+  // // Close modal with Echap Key
+  // document.addEventListener("keydown", (e) => {
+  //   if (e.key === "Escape") {
+  //     setShowPaymentModal(false);
+  //   }
+  // });
     
     
   return (
@@ -56,15 +56,9 @@ const Profile = () => {
           </>
           ) : <></>
         }
-        {showAddressModal ? (
+        {!showInfoModal && showAddressModal ? (
           <>
             <Modal setShowAddressModal={setShowAddressModal} />
-          </>
-          ) : <></>
-        }
-        {showPaymentModal ? (
-          <>
-            <Modal setShowPaymentModal={setShowPaymentModal} />
           </>
           ) : <></>
         }
@@ -87,15 +81,12 @@ const Profile = () => {
               <h2>Mes addresses</h2>
               <MyAddress />
               <button className="btn btn-modal" onClick={toggleAddressModal}>
-                Modifier mes informations
+                Modifier mon addresse
               </button>
             </div>
             <div className="payment">
               <h2>Mes moyens de paiements</h2>
               <MyPayments />
-              <button className="btn btn-modal" onClick={togglePaymentModal}>
-                Modifier mes informations
-              </button>
             </div>
           </div>
         </div>

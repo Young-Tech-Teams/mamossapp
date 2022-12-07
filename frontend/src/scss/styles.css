@@ -462,7 +462,8 @@ li {
   z-index: 222;
 }
 
-#info-modal {
+#info-modal,
+#addy-modal {
   position: fixed;
   top: 0;
   right: 0;
