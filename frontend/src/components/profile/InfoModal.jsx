@@ -24,10 +24,10 @@ const InfoModal = ({ setShowModal }) => {
         method: 'get',
         url: `${API_USER_URL}infos`,
         headers: localStorage.getItem("token") ? {
-         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com"],
           "x-access-token": token,
         } : {
-         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com/"],
+         "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com"],
         }
       }
   
