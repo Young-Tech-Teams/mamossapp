@@ -6,26 +6,65 @@ import MyPayments from '../components/profile/Payment';
 
 const Profile = () => {
 
-  const [showModal, setShowModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  // MODAL
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  // Info modal
+  const toggleInfoModal = () => {
+    setShowInfoModal(!showInfoModal);
     console.log("modal is working");
   }
   // Close modal with Echap Key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      setShowModal(false);
+      setShowInfoModal(false);
     }
   });
+
+  // Address modal
+  const toggleAddressModal = () => {
+    setShowAddressModal(!showAddressModal);
+    console.log("modal is working");
+  }
+  // Close modal with Echap Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setShowAddressModal(false);
+    }
+  });
+  
+  // Address modal
+  const togglePaymentModal = () => {
+    setShowPaymentModal(!showPaymentModal);
+    console.log("modal is working");
+  }
+  // Close modal with Echap Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setShowPaymentModal(false);
+    }
+  });
+    
     
   return (
     <section id="profile">
       <div className="container">
-        {showModal ? (
+        {showInfoModal ? (
           <>
-            <Modal setShowModal={setShowModal} />
+            <Modal setShowInfoModal={setShowInfoModal} />
+          </>
+          ) : <></>
+        }
+        {showAddressModal ? (
+          <>
+            <Modal setShowAddressModal={setShowAddressModal} />
+          </>
+          ) : <></>
+        }
+        {showPaymentModal ? (
+          <>
+            <Modal setShowPaymentModal={setShowPaymentModal} />
           </>
           ) : <></>
         }
@@ -36,7 +75,7 @@ const Profile = () => {
             <span>Allergies</span>
           </div>
 
-          <button className="btn btn-modal" onClick={toggleModal}>
+          <button className="btn btn-modal" onClick={toggleInfoModal}>
             Modifier mes informations
           </button>
 
@@ -47,10 +86,16 @@ const Profile = () => {
             <div className="addresses">
               <h2>Mes addresses</h2>
               <MyAddress />
+              <button className="btn btn-modal" onClick={toggleAddressModal}>
+                Modifier mes informations
+              </button>
             </div>
             <div className="payment">
               <h2>Mes moyens de paiements</h2>
               <MyPayments />
+              <button className="btn btn-modal" onClick={togglePaymentModal}>
+                Modifier mes informations
+              </button>
             </div>
           </div>
         </div>
