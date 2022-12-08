@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_USER_URL } from '../../utils/APIRoutes';
+import { API_ADDRESS_URL } from '../../utils/APIRoutes';
 
 const AddressModal = ({ setShowAddressModal }) => {
 
@@ -26,7 +26,7 @@ const AddressModal = ({ setShowAddressModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
         method: 'get',
-        url: `${API_USER_URL}list/:id`,
+        url: `${API_ADDRESS_URL}list/1`,
         headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": ["https://localhost:3000", "https://www.app.mamossa.com"],
           "x-access-token": token,
