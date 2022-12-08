@@ -8,7 +8,7 @@ const Profile = () => {
 
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
-  // const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   // Info modal
   const toggleInfoModal = () => {
@@ -34,17 +34,17 @@ const Profile = () => {
     }
   });
   
-  // // Address modal
-  // const togglePaymentModal = () => {
-  //   setShowPaymentModal(!showPaymentModal);
-  //   console.log("modal is working");
-  // }
-  // // Close modal with Echap Key
-  // document.addEventListener("keydown", (e) => {
-  //   if (e.key === "Escape") {
-  //     setShowPaymentModal(false);
-  //   }
-  // });
+  // Address modal
+  const togglePaymentModal = () => {
+    setShowPaymentModal(!showPaymentModal);
+    console.log("modal is working");
+  }
+  // Close modal with Echap Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setShowPaymentModal(false);
+    }
+  });
     
     
   return (
@@ -59,6 +59,12 @@ const Profile = () => {
         {!showInfoModal && showAddressModal ? (
           <>
             <Modal setShowAddressModal={setShowAddressModal} />
+          </>
+          ) : <></>
+        }
+        {showPaymentModal ? (
+          <>
+            <Modal setShowPaymentModal={setShowPaymentModal} />
           </>
           ) : <></>
         }
@@ -87,6 +93,7 @@ const Profile = () => {
             <div className="payment">
               <h2>Mes moyens de paiements</h2>
               <MyPayments />
+              <button className="btn btn-modal" onClick={togglePaymentModal}>
             </div>
           </div>
         </div>

@@ -57,7 +57,7 @@ const PaymentModal = ({ setShowPaymentModal }) => {
       e.preventDefault();
       const config = {
         method: 'put',
-        url: `${API_USER_URL}update/:id`,
+        url: `${API_USER_URL}update/6`,
         headers: {
           'x-access-token': token,          
         },
