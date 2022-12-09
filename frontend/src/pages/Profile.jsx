@@ -6,9 +6,11 @@ import MyPayments from '../components/profile/Payment';
 
 const Profile = () => {
 
+  const [isClient, setIsClient] = useState(false);
+  const [isLivreur, setIsLivreur] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
 
   // Info modal
   const toggleInfoModal = () => {
@@ -93,7 +95,25 @@ const Profile = () => {
             <div className="payment">
               <h2>Mes moyens de paiements</h2>
               <MyPayments />
-              <button className="btn btn-modal" onClick={togglePaymentModal}>
+              <button className="btn btn-modal" onClick={togglePaymentModal}></button>
+            </div>
+          </div>
+
+          <div className="body">
+            <div className="plats">
+              <h2>Plats favoris</h2>
+            </div>
+            <div className="addresses">
+              <h2>Mes addresses</h2>
+              <MyAddress />
+              <button className="btn btn-modal" onClick={toggleAddressModal}>
+                Modifier mon addresse
+              </button>
+            </div>
+            <div className="payment">
+              <h2>Mes moyens de paiements</h2>
+              <MyPayments />
+              <button className="btn btn-modal" onClick={togglePaymentModal}></button>
             </div>
           </div>
         </div>
