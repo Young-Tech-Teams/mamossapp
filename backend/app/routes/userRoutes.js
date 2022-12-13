@@ -31,6 +31,16 @@ module.exports = function (app) {
       userController.adminBoard
    );
 
+   // Test livreur private content with JWT auth
+   router.get(
+      "/livreur", 
+      [
+         verifyToken,
+         isLivreur
+      ],
+      userController.livreurBoard
+   );
+
    // Updating user informations
    router.put(
       "/update",

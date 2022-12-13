@@ -80,12 +80,27 @@ const isClient = (req, res, next) => {
 	});
 };
 
+const isLivreur = (req, res, next) => {
+	User.findByPk(req.userId, { include: Role }).then(user => {
+		if (user.role.name === "livreur") {
+			next();
+			return;
+		} else {
+			res.status(403).send({
+				message: "Livreur role is required for this operation!"
+			});
+			return;
+		}
+	});
+};
+
 const authJwt = {
 	verifyToken: verifyToken,
 	verifyEmail: verifyEmail,
+	checkRolesExisting: checkRolesExisting,
 	isAdmin: isAdmin,
 	isClient: isClient,
-	checkRolesExisting: checkRolesExisting
+	isLivreur: isLivreur
 };
 
 module.exports = authJwt;
