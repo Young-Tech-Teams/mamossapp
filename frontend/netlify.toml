@@ -1,25 +1,3 @@
-# Settings in the [build] context are global and are applied to
-# all contexts unless otherwise overridden by more specific contexts.
-[build]
-  # Directory to change to before starting a build.
-  # This is where we will look for package.json/.nvmrc/etc.
-  # If not set, defaults to the root directory.
-  base = "build/"
-
-  # Default build command.
-  command = "npm install && npm run build"
-
-  # You can also define custom headers within your redirects blocks.
-  [redirects.headers]
-    x-access-token
-
-# The following redirect is intended for use with most SPAs that handle
-# routing internally.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
@@ -31,25 +9,3 @@
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = "frame-ancestors https://www.facebook.com"
     Access-Control-Allow-Origin = "*"
-
-    # Multi-value headers are expressed with multi-line strings.
-  cache-control = '''
-  max-age=0,
-  no-cache,
-  no-store,
-  must-revalidate'''
-
-# Use [dev] to set configuration overrides for local 
-# development environments run using Netlify Dev - except 
-# for environment variables. Environment variables for Netlify 
-# Dev should be set under [context.dev.environment] instead.
-[dev]
-
-  command = "npm start"
-  port = 4242
-  targetPort = 3000
-  publish = "dist"
-   [dev.https]
-      certFile = "cert.pem"
-      keyFile = "key.pem"
-
