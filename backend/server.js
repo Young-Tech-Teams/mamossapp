@@ -8,10 +8,23 @@ const dotenv = require("dotenv").config();
 const StartServer = async() => {
    const app = express();
 
+   const whitelist = ["http://localhost:3000", "https://app.mamossa.com"];
+   const corsOptions = {
+      origin: (origin, callback) => {
+          if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+          } else {
+            callback(new Error())
+          }
+        }
+      }
+
    app.use(cors({
+      corsOptions,
       origin: ["http://localhost:3000", "https://app.mamossa.com"],
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      credentials: true,
+       optionsSuccessStatus: 200,
+       methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+       credentials: true
    }));
 
    app.use(bodyParser.json());

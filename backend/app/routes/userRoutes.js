@@ -1,13 +1,14 @@
-const { verifyToken, isClient, isAdmin } = require("../middleware/authJwt");
+const { verifyToken, isClient, isAdmin, isLivreur } = require("../middleware/authJwt");
 const userController = require("../controllers/user/user.controller");
 const router = require("express").Router();
 
 module.exports = function (app) {
    app.use((req, res, next) => {
       res.header(
-         // "Access-Control-Allow-Origin",
-         "Access-Control-Allow-Headers",
-         "x-access-token, Origin, Content-Type, Accept"
+      'Access-Control-Allow-Headers', 
+      'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin',
+      ', x-access-token, Accept',
+         'Access-Control-Allow-Methods', 'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS',
       );
       next();
    });
@@ -29,6 +30,16 @@ module.exports = function (app) {
          isAdmin
       ],
       userController.adminBoard
+   );
+
+   // Test livreur private content with JWT auth
+   router.get(
+      "/livreur", 
+      [
+         verifyToken,
+         isLivreur
+      ],
+      userController.livreurBoard
    );
 
    // Updating user informations

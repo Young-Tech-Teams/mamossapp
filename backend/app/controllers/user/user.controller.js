@@ -34,6 +34,15 @@ exports.adminBoard = (req, res) => {
     res.status(200).send("Admin's private content working!")
 }
 
+/**
+ * @description Test ADMIN private content with JWT auth
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.livreurBoard = (req, res) => {
+    res.status(200).send("Livreur private content working!")
+}
+
 /******* USER UPDATE *******/
 /**
  * @description Updating user informations
