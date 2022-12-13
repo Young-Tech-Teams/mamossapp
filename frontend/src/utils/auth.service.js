@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { API_AUTH_URL } from './APIRoutes';
 
-axios.defaults.withCredentials = true
 
 const register = (email, password, confirmPassword) => {
   return axios.post(API_AUTH_URL + "signup", {
@@ -25,6 +24,7 @@ const logout = async () => {
     method: 'post',
     url: API_AUTH_URL + "logout",
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'x-access-token': user
     }
   };
