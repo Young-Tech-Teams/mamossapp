@@ -1,4 +1,5 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -34,7 +35,7 @@ const StartServer = async() => {
    app.use(express.urlencoded({ extended: true }));
    app.use(express.static(__dirname + "/public"));
 
-   const database = require("./app/models");
+   const database = require("../app/models");
    const User = database.user;
    const Role = database.role;
 
@@ -72,17 +73,17 @@ const StartServer = async() => {
          });
       };
 
-   require("./app/routes/authRoutes")(app);
-   require("./app/routes/userRoutes")(app);
-   require("./app/routes/address/addressRoutes")(app);
-   require("./app/routes/payment/paymentRoutes")(app);
+   require("../app/routes/authRoutes")(app);
+   require("../app/routes/userRoutes")(app);
+   require("../app/routes/address/addressRoutes")(app);
+   require("../app/routes/payment/paymentRoutes")(app);
 
    /** CONNEXION TO LOCALHOST **/
    const https = require("https");
    const fs = require("fs");
    const PORT = process.env.PORT;
    const hostname = "localhost";
-   const colors = require("./utils/colors");
+   const colors = require("../utils/colors");
 
    https
    .createServer(
