@@ -22,7 +22,7 @@ const corsOptions = {
 
 app.use(cors({
    corsOptions,
-   origin: ["http://localhost:3000", "https://app.mamossa.com"],
+   origin: "*",
     optionsSuccessStatus: 200,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true
