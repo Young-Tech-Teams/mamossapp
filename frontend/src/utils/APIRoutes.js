@@ -1,7 +1,7 @@
 const port = "https://www.api.mamossa.com/.netlify/functions";
 
 const API_PUBLIC_URL = `${port}`;
-const API_BASE_URL = `${port}/a`;
+const API_BASE_URL = `${port}/api`;
 const API_AUTH_URL = `${port}/api/auth/`;
 const API_USER_URL = `${port}/api/user/`;
 const API_ADDRESS_URL = `${port}/api/address/`;
