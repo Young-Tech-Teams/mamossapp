@@ -1,4 +1,4 @@
-const port = "https://localhost:4242";
+const port = "http://localhost:9000/.netlify/functions/api";
 
 const API_PUBLIC_URL = `${port}`;
 const API_BASE_URL = `${port}/api`;
