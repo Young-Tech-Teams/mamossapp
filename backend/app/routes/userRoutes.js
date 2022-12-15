@@ -73,5 +73,5 @@ module.exports = function (app) {
       userController.delete
    )
 
-   app.use("/api/user", router);
+   app.use("/.netlify/functions/api/user", router);
 };

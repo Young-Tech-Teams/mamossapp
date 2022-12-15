@@ -37,5 +37,5 @@ module.exports = function (app) {
     // Delete a adress with id
     router.delete("/delete/:id", verifyToken, paymentController.delete);
       
-    app.use('/api/payment', router);
+    app.use('/.netlify/functions/api/payment', router);
 };

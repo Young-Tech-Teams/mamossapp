@@ -19,7 +19,11 @@ module.exports = function (app) {
          verifyEmail, 
          checkRolesExisting
       ],
-      authController.signup
+      authController.signup, (req, res) => {
+         res.json({
+            "hello": "it's signup"
+         });
+      }
    );
 
    // Login
@@ -32,5 +36,5 @@ module.exports = function (app) {
    router.post("/refresh", authController.refreshToken);
 
    // Auth route
-   app.use("/api/auth", router);
+   app.use("/.netlify/functions/api/auth", router);
 };
