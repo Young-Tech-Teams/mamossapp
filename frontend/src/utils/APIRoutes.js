@@ -1,4 +1,4 @@
-const port = "https://www.api.mamossa.com/.netlify/functions";
+const port = "https://api.mamossa.com/.netlify/functions";
 
 const API_PUBLIC_URL = `${port}`;
 const API_BASE_URL = `${port}/api`;
