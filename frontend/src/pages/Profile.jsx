@@ -1,16 +1,42 @@
-import React, { useState } from 'react'
-import Modal from '../components/profile/InfoModal';
-import MyInfos from '../components/profile/Infos';
-import MyAddress from '../components/profile/Address';
-import MyPayments from '../components/profile/Payment';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom"; 
+import axios from 'axios';
+import { API_USER_URL } from '../utils/APIRoutes';
+import Modal from '../components/client/InfoModal';
+import MyInfos from '../components/client/Infos';
+import MyAddress from '../components/client/Address';
+import MyPayments from '../components/client/Payment';
 
 const Profile = () => {
 
+  const token = JSON.parse(localStorage.getItem("token"));
+  const location = useLocation();
   const [isClient, setIsClient] = useState(false);
   const [isLivreur, setIsLivreur] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
+
+  // Check if user is client
+  const checkIfClient = async() => {
+    const response = await axios.get(`${API_USER_URL}client`, {
+      headers: {
+        "x-access-token": token
+      },
+    });
+    setIsClient(response.data)
+  }
+
+  // Check if user is livreur
+  const checkIfLivreur = async() => {
+    const response = await axios.get(`${API_USER_URL}livreur`, {
+      headers: {
+        "x-access-token": token
+      },
+    });
+    setIsLivreur(response.data);
+  }
 
   // Info modal
   const toggleInfoModal = () => {
@@ -47,28 +73,47 @@ const Profile = () => {
       setShowPaymentModal(false);
     }
   });
-    
+
+  useEffect(() => {
+    if (token) {
+      checkIfClient();
+      setIsLoggedIn(true);
+    } else {
+      setIsClient(false);
+      setIsLoggedIn(false);
+    }
+  }, [location, token]);
+
+  useEffect(() => {
+    if (token) {
+      checkIfLivreur();
+      setIsLoggedIn(true);
+    } else {
+      setIsLivreur(false);
+      setIsLoggedIn(false);
+    }
+  }, [location, token]);
     
   return (
     <section id="profile">
       <div className="container">
-        {showInfoModal ? (
+        {showInfoModal && (
           <>
             <Modal setShowInfoModal={setShowInfoModal} />
           </>
-          ) : <></>
+          ) 
         }
-        {!showInfoModal && showAddressModal ? (
+        {!showInfoModal && showAddressModal && (
           <>
             <Modal setShowAddressModal={setShowAddressModal} />
           </>
-          ) : <></>
+          ) 
         }
-        {showPaymentModal ? (
+        {showPaymentModal && (
           <>
             <Modal setShowPaymentModal={setShowPaymentModal} />
           </>
-          ) : <></>
+          )
         }
         <h2>Mon compte</h2>
         <MyInfos />
@@ -81,43 +126,58 @@ const Profile = () => {
             Modifier mes informations
           </button>
 
+          {isClient && !isLivreur && (
+            <div className="body">
+              <div className="plats">
+                <h2>Plats favoris</h2>
+              </div>
+              <div className="addresses">
+                <h2>Mes addresses</h2>
+                <MyAddress />
+                <button className="btn btn-modal" onClick={toggleAddressModal}>
+                  Modifier mon addresse
+                </button>
+              </div>
+              <div className="payment">
+                <h2>Mes moyens de paiements</h2>
+                <MyPayments />
+                <button className="btn btn-modal" onClick={togglePaymentModal}></button>
+              </div>
+            </div>
+            
+          )}
+          
+          {isLivreur && !isClient && (
           <div className="body">
             <div className="plats">
-              <h2>Plats favoris</h2>
+              <h2>Commandes en cours</h2>
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
             </div>
             <div className="addresses">
-              <h2>Mes addresses</h2>
-              <MyAddress />
+              <h2>Commandes</h2>
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
+              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
+              <hr />
               <button className="btn btn-modal" onClick={toggleAddressModal}>
-                Modifier mon addresse
+                Voir plus de commandes
               </button>
-            </div>
-            <div className="payment">
-              <h2>Mes moyens de paiements</h2>
-              <MyPayments />
-              <button className="btn btn-modal" onClick={togglePaymentModal}></button>
             </div>
           </div>
 
-          <div className="body">
-            <div className="plats">
-              <h2>Plats favoris</h2>
-            </div>
-            <div className="addresses">
-              <h2>Mes addresses</h2>
-              <MyAddress />
-              <button className="btn btn-modal" onClick={toggleAddressModal}>
-                Modifier mon addresse
-              </button>
-            </div>
-            <div className="payment">
-              <h2>Mes moyens de paiements</h2>
-              <MyPayments />
-              <button className="btn btn-modal" onClick={togglePaymentModal}></button>
-            </div>
-          </div>
+          )}
+
         </div>
-
     </section>
   )
 }

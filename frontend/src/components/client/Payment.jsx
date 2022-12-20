@@ -17,7 +17,7 @@ const MyPayments = ({ setShowModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_PAYMENT_URL}list/6`,
+      url: `${API_PAYMENT_URL}list/1`,
       headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": "*",
          "x-access-token": token,
