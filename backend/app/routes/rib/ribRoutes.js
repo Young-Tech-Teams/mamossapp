@@ -1,5 +1,5 @@
 const { verifyToken, isAdmin } = require("../../middleware/authJwt");
-const ribController = require("../../controllers/impt/rib.controller.js");
+const ribController = require("../../controllers/impt/rib.controller");
 const router = require("express").Router();
 
 module.exports = function (app) {
