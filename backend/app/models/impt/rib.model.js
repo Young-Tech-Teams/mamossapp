@@ -7,13 +7,13 @@ module.exports = (sequelize, Sequelize) => {
            type: Sequelize.STRING
        },
        rib_num: {
-           type: Sequelize.BIGINT
+           type: Sequelize.STRING
        },
        iban_num: {
-           type: Sequelize.BIGINT
+           type: Sequelize.STRING
        },
        bic_code: {
-           type: Sequelize.BIGINT
+           type: Sequelize.STRING
        }
    });
    return Rib;

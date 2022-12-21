@@ -28,10 +28,11 @@ exports.create = (req, res) => {
     });
 
     const dataList = {
-        titulaire: req.body.titulaire,
-        bank: req.body.bank,
-        iban: req.body.iban,
-        bic: req.body.bic,
+        account_holder: req.body.account_holder,
+        bank_name: req.body.bank_name,
+        rib_num: req.body.rib_num,
+        iban_num: req.body.iban_num,
+        bic_code: req.body.bic_code,
         userId: userId
     };
     Rib.create(dataList)
@@ -40,7 +41,7 @@ exports.create = (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-           message: err.message || "Some error occurred while creating the payment"
+           message: err.message || "Some error occurred while creating the rib"
        });
    });
 };

@@ -5,6 +5,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   dialectModule: require('mysql2'),
+  dialectOptions: {
+    supportBigNumbers: true,
+    bigNumberStrings: true
+  },
   port: dbConfig.port,
   operatorsAliases: 0,
   pool: {
