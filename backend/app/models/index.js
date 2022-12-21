@@ -24,6 +24,7 @@ db.refreshToken = require("./user/refreshToken.model.js")(sequelize, Sequelize);
 db.role = require("./user/role.model.js")(sequelize, Sequelize);
 db.address = require("./address/address.model.js")(sequelize, Sequelize);
 db.payment = require("./payment/payment.model.js")(sequelize, Sequelize);
+db.rib = require("./rib/rib.model.js")(sequelize, Sequelize);
 
 /** TOKEN */
 db.refreshToken.belongsTo(db.user, {
@@ -48,5 +49,9 @@ db.address.belongsTo(db.user, { as: "user" });
 /** PAYMENT */
 db.user.hasMany(db.payment, { as: "payments" });
 db.payment.belongsTo(db.user, { as: "user" });
+
+/** RIB */
+db.user.hasMany(db.rib, { as: "ribs" });
+db.rib.belongsTo(db.user, { as: "user" });
 
 module.exports = db;
