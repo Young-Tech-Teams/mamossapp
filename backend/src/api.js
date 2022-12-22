@@ -40,10 +40,10 @@ const User = database.user;
 const Role = database.role;
 
 /** SYNC DB SEQUELIZE **/
-// database.sequelize.sync({force : true})
-database.sequelize.sync()
+// database.sequelize.sync()
+database.sequelize.sync({force : true})
    .then(() => {
-      // initialRecords();
+      initialRecords();
       console.log("The database has been synced successfully");
    })
    .catch((err) => {
@@ -77,7 +77,8 @@ require("../app/routes/authRoutes")(app);
 require("../app/routes/userRoutes")(app);
 require("../app/routes/address/addressRoutes")(app);
 require("../app/routes/payment/paymentRoutes")(app);
-require("../app/routes/rib/ribRoutes")(app);
+require("../app/routes/impt/ribRoutes")(app);
+require("../app/routes/impt/idCardRoutes")(app);
 
 const router = express.Router();
 

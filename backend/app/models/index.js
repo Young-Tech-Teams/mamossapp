@@ -58,4 +58,8 @@ db.payment.belongsTo(db.user, { as: "user" });
 db.user.hasMany(db.rib, { as: "ribs" });
 db.rib.belongsTo(db.user, { as: "user" });
 
+/** ID CARD */
+db.user.hasOne(db.id_card, { as: "id_cards" });
+db.id_card.belongsTo(db.user, { as: "user" });
+
 module.exports = db;
