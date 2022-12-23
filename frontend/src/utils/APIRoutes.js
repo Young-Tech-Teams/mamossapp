@@ -1,5 +1,5 @@
-// const port = "http://localhost:9000/.netlify/functions/api";
-const port = "https://api.mamossa.com/.netlify/functions/api";
+const port = "http://localhost:9000/.netlify/functions/api";
+// const port = "https://api.mamossa.com/.netlify/functions/api";
 
 const API_PUBLIC_URL = `${port}`;
 const API_AUTH_URL = `${port}/auth/`;
