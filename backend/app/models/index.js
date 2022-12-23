@@ -29,6 +29,7 @@ db.role = require("./user/role.model.js")(sequelize, Sequelize);
 db.address = require("./address/address.model.js")(sequelize, Sequelize);
 db.payment = require("./payment/payment.model.js")(sequelize, Sequelize);
 db.rib = require("./impt/rib.model.js")(sequelize, Sequelize);
+db.id_card = require("./impt/id_card.model.js")(sequelize, Sequelize);
 
 /** TOKEN */
 db.refreshToken.belongsTo(db.user, {
