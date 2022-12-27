@@ -6,6 +6,7 @@ import Modal from '../components/client/InfoModal';
 import MyInfos from '../components/client/Infos';
 import MyAddress from '../components/client/Address';
 import MyPayments from '../components/client/Payment';
+import AdminPanel from '../components/admin/adminPanel';
 
 const Profile = () => {
 
@@ -13,6 +14,7 @@ const Profile = () => {
   const location = useLocation();
   const [isClient, setIsClient] = useState(false);
   const [isLivreur, setIsLivreur] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
@@ -38,6 +40,16 @@ const Profile = () => {
     setIsLivreur(response.data);
   }
 
+    // Check if user is admin
+    const checkIfAdmin = async() => {
+      const response = await axios.get(`${API_USER_URL}admin`, {
+        headers: {
+          "x-access-token": token
+        },
+      });
+      setIsAdmin(response.data);
+    }
+  
   // Info modal
   const toggleInfoModal = () => {
     setShowInfoModal(!showInfoModal);
@@ -93,7 +105,18 @@ const Profile = () => {
       setIsLoggedIn(false);
     }
   }, [location, token]);
-    
+
+  useEffect(() => {
+    if (token) {
+      checkIfAdmin();
+      setIsLoggedIn(true);
+    } else {
+      setIsAdmin(false);
+      setIsLoggedIn(false);
+    }
+  }, [location, token]);
+
+
   return (
     <section id="profile">
       <div className="container">
@@ -126,7 +149,7 @@ const Profile = () => {
             Modifier mes informations
           </button>
 
-          {isClient && !isLivreur && (
+          {isClient && (
             <div className="body">
               <div className="plats">
                 <h2>Plats favoris</h2>
@@ -147,7 +170,7 @@ const Profile = () => {
             
           )}
           
-          {isLivreur && !isClient && (
+          {isLivreur && (
           <div className="body">
             <div className="plats">
               <h2>Commandes en cours</h2>
@@ -175,6 +198,14 @@ const Profile = () => {
             </div>
           </div>
 
+          )}
+
+          {isAdmin && (
+            <div className="body">
+              <div className="plats">
+                <AdminPanel />
+              </div>
+            </div>
           )}
 
         </div>
