@@ -40,10 +40,10 @@ const User = database.user;
 const Role = database.role;
 
 /** SYNC DB SEQUELIZE **/
-// database.sequelize.sync()
-database.sequelize.sync({force : true})
+// database.sequelize.sync({force : true})
+database.sequelize.sync()
    .then(() => {
-      initialRecords();
+      // initialRecords();
       console.log("The database has been synced successfully");
    })
    .catch((err) => {
