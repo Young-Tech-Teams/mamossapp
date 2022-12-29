@@ -79,6 +79,7 @@ require("../app/routes/address/addressRoutes")(app);
 require("../app/routes/payment/paymentRoutes")(app);
 require("../app/routes/impt/ribRoutes")(app);
 require("../app/routes/impt/idCardRoutes")(app);
+require("../app/routes/orders/ordersRoutes")(app);
 
 const router = express.Router();
 

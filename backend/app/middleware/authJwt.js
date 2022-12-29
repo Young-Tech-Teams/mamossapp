@@ -94,13 +94,45 @@ const isLivreur = (req, res, next) => {
 	});
 };
 
+const isAdminOrClient = (req, res, next) => {
+	User.findByPk(req.userId, { include: Role })
+	.then(user => {
+		if (user.role.name === "admin" || user.role.name === "client") {
+			next();
+			return;
+		} else {
+			res.status(403).send({
+				message: "You do not have permission to access this page."
+			});
+			return
+		}
+	});
+};
+
+const isAdminOrLivreur = (req, res, next) => {
+	User.findByPk(req.userId, { include: Role })
+	.then(user => {
+		if (user.role.name === "admin" || user.role.name === "livreur") {
+			next();
+			return;
+		} else {
+			res.status(403).send({
+				message: "You do not have permission to access this page."
+			});
+			return
+		}
+	});
+};
+
 const authJwt = {
 	verifyToken: verifyToken,
 	verifyEmail: verifyEmail,
 	checkRolesExisting: checkRolesExisting,
 	isAdmin: isAdmin,
 	isClient: isClient,
-	isLivreur: isLivreur
+	isLivreur: isLivreur,
+	isAdminOrLivreur: isAdminOrLivreur,
+	isAdminOrClient: isAdminOrClient
 };
 
 module.exports = authJwt;

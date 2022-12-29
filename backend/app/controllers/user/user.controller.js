@@ -50,6 +50,21 @@ exports.livreurBoard = (req, res) => {
  * @param {*} res 
  */
 exports.update = (req, res) => {
+   let token = req.headers["x-access-token"];
+   console.log("body\n\n" + req.body);
+   var userId;
+    if (!token) {
+        return res.status(403).send({
+            message: "Access token is required for this operation to work."
+        });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return catchError(err, res);
+        }
+        req.userId = decoded.id;
+        userId = decoded.id;
+    });
     User.findByPk(userId, { include: Role }) // { include: [ { model : Role },{ model: Order, include : [{model: Product}] }]}
     .then(userRecord => {
         if (!userRecord) {
@@ -129,7 +144,7 @@ exports.getUserInfos = (req, res) => {
             return catchError(err, res);
         }
     });
-    User.findAll({})
+    User.findAll({ include: Role })
     .then(data => {
        res.send(data);
     })

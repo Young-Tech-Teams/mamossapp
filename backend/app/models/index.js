@@ -30,6 +30,7 @@ db.address = require("./address/address.model.js")(sequelize, Sequelize);
 db.payment = require("./payment/payment.model.js")(sequelize, Sequelize);
 db.rib = require("./impt/rib.model.js")(sequelize, Sequelize);
 db.id_card = require("./impt/id_card.model.js")(sequelize, Sequelize);
+db.order = require("./orders/orders.model.js")(sequelize, Sequelize);
 
 /** TOKEN */
 db.refreshToken.belongsTo(db.user, {
@@ -62,5 +63,9 @@ db.rib.belongsTo(db.user, { as: "user" });
 /** ID CARD */
 db.user.hasOne(db.id_card, { as: "id_cards" });
 db.id_card.belongsTo(db.user, { as: "user" });
+
+/** ORDERS */
+db.user.hasMany(db.order, { as: "orders" });
+db.order.belongsTo(db.user, { as: "user" });
 
 module.exports = db;
