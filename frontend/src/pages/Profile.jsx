@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom"; 
 import axios from 'axios';
 import { API_USER_URL } from '../utils/APIRoutes';
-import Modal from '../components/client/InfoModal';
-import MyInfos from '../components/client/Infos';
-import MyAddress from '../components/client/Address';
-import MyPayments from '../components/client/Payment';
+import MyAddress from '../components/profile/Address';
+import MyPayments from '../components/profile/Payment';
 import AdminPanel from '../components/admin/adminPanel';
+import LivreurPanel from '../components/livreur/livreurPanel';
+import ClientPanel from '../components/client/clientPanel';
+import MyInfos from '../components/profile/Infos';
+import Modal from '../components/profile/InfoModal';
 
 const Profile = () => {
 
@@ -17,8 +19,6 @@ const Profile = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const [showAddressModal, setShowAddressModal] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
 
   // Check if user is client
   const checkIfClient = async() => {
@@ -49,42 +49,6 @@ const Profile = () => {
       });
       setIsAdmin(response.data);
     }
-  
-  // Info modal
-  const toggleInfoModal = () => {
-    setShowInfoModal(!showInfoModal);
-    console.log("info modal is working");
-  }
-  // Close modal with Echap Key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setShowInfoModal(false);
-    }
-  });
-
-  // Address modal
-  const toggleAddressModal = () => {
-    setShowAddressModal(!showAddressModal);
-    console.log("address modal is working");
-  }
-  // Close modal with Echap Key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setShowAddressModal(false);
-    }
-  });
-  
-  // Address modal
-  const togglePaymentModal = () => {
-    setShowPaymentModal(!showPaymentModal);
-    console.log("modal is working");
-  }
-  // Close modal with Echap Key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setShowPaymentModal(false);
-    }
-  });
 
   useEffect(() => {
     if (token) {
@@ -117,54 +81,41 @@ const Profile = () => {
   }, [location, token]);
 
 
+  // Info modal
+  const toggleInfoModal = () => {
+    setShowInfoModal(!showInfoModal);
+    console.log("info modal is working");
+  }
+  // Close modal with Echap Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setShowInfoModal(false);
+    }
+  });
+
   return (
     <section id="profile">
       <div className="container">
-        {showInfoModal && (
+        {isLoggedIn && (
           <>
-            <Modal setShowInfoModal={setShowInfoModal} />
+            {showInfoModal && (
+                  <>
+                    <Modal setShowInfoModal={setShowInfoModal} />
+                  </>
+                  ) 
+            }
+            <h2 className="text-center mb-sm">Mon compte</h2>
+            <MyInfos />
+            <button className="btn btn-modal mb-md  " onClick={toggleInfoModal}>
+              Modifier mes informations
+            </button>
           </>
-          ) 
-        }
-        {!showInfoModal && showAddressModal && (
-          <>
-            <Modal setShowAddressModal={setShowAddressModal} />
-          </>
-          ) 
-        }
-        {showPaymentModal && (
-          <>
-            <Modal setShowPaymentModal={setShowPaymentModal} />
-          </>
-          )
-        }
-        <h2>Mon compte</h2>
-        <MyInfos />
-
-          <div className="allergies">
-            <span>Allergies</span>
-          </div>
-
-          <button className="btn btn-modal" onClick={toggleInfoModal}>
-            Modifier mes informations
-          </button>
+        )}
 
           {isClient && (
             <div className="body">
-              <div className="plats">
-                <h2>Plats favoris</h2>
-              </div>
-              <div className="addresses">
-                <h2>Mes addresses</h2>
-                <MyAddress />
-                <button className="btn btn-modal" onClick={toggleAddressModal}>
-                  Modifier mon addresse
-                </button>
-              </div>
-              <div className="payment">
-                <h2>Mes moyens de paiements</h2>
-                <MyPayments />
-                <button className="btn btn-modal" onClick={togglePaymentModal}></button>
+              <div className="client">
+                <ClientPanel />
               </div>
             </div>
             
@@ -172,29 +123,8 @@ const Profile = () => {
           
           {isLivreur && (
           <div className="body">
-            <div className="plats">
-              <h2>Commandes en cours</h2>
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-            </div>
-            <div className="addresses">
-              <h2>Commandes</h2>
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <span>#642</span> <span>Prénom NOM</span> <span>15:43</span> <span>CODE</span>
-              <hr />
-              <button className="btn btn-modal" onClick={toggleAddressModal}>
-                Voir plus de commandes
-              </button>
+            <div className="livreur">
+              <LivreurPanel />
             </div>
           </div>
 
@@ -202,7 +132,7 @@ const Profile = () => {
 
           {isAdmin && (
             <div className="body">
-              <div className="plats">
+              <div className="admin">
                 <AdminPanel />
               </div>
             </div>

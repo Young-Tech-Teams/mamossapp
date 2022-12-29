@@ -6,14 +6,7 @@ import { API_USER_URL } from '../../utils/APIRoutes';
 const InfoModal = ({ setShowInfoModal }) => {
 
   const token = JSON.parse(localStorage.getItem("token"));
-  
-  const [data, setData] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    age: "",
-    gender: ""
- });
+  const [data, setData] = useState([]);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -36,13 +29,7 @@ const InfoModal = ({ setShowInfoModal }) => {
       axios(config)
       .then((response) => {
          console.log(response);
-         setData({ 
-            "firstname": response.data.firstname,
-            "lastname": response.data.lastname,
-            "email": response.data.email,
-            "gender": response.data.gender,
-            "age": response.data.age
-          });
+         setData(response.data);
       })
       .catch((err) => {
          console.log(err);
@@ -69,7 +56,7 @@ const InfoModal = ({ setShowInfoModal }) => {
         console.log(JSON.stringify(response.data));
          console.log(response.data.message);
          console.log("did it work?");
-        // window.location.href = "/mon-compte"
+        window.location.href = "/mon-compte"
       })
       .catch(err => {
         console.log(err);

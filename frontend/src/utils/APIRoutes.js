@@ -6,11 +6,15 @@ const API_AUTH_URL = `${port}/auth/`;
 const API_USER_URL = `${port}/user/`;
 const API_ADDRESS_URL = `${port}/address/`;
 const API_PAYMENT_URL = `${port}/payment/`;
+const API_RIB_URL = `${port}/rib/`;
+const API_ORDERS_URL = `${port}/orders/`;
 
 export {
     API_PUBLIC_URL,
     API_AUTH_URL,
     API_USER_URL,
     API_ADDRESS_URL,
-    API_PAYMENT_URL
+    API_PAYMENT_URL,
+    API_RIB_URL,
+    API_ORDERS_URL
 }

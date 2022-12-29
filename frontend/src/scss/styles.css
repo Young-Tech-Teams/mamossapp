@@ -80,7 +80,7 @@ body {
   align-items: center;
 }
 
-.d_flex {
+.d-flex {
   display: flex;
   justify-content: space-between;
 }
@@ -114,6 +114,22 @@ body {
   grid-template-rows: repeat(2, 1fr);
 }
 
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
 .mg-auto {
   margin: 0 auto;
 }
@@ -145,6 +161,22 @@ li {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-sm {
+  margin-bottom: 1rem;
+}
+
+.mb-md {
+  margin-bottom: 2rem;
+}
+
+.width-sm {
+  width: 50%;
 }
 
 #register-section .form.container,
