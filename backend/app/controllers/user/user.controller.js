@@ -153,6 +153,34 @@ exports.getUserInfos = (req, res) => {
     });
  }
 
+/**
+ * @description Returns all users informations FOR ADMIN ONLY
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+ exports.findRoles  = async (req, res) => {
+    let token = req.headers["x-access-token"];
+    if (!token) {
+        return res.status(403).send({
+            message: "No token provided!"
+        });
+    }
+    jwt.verify(token, config.secret, (err) => {
+        if (err) {
+            return catchError(err, res);
+        }
+    });
+    Role.findAll()
+    .then(data => {
+       res.send(data);
+    })
+    .catch(err => {
+       res.status(500).send({ message: err.message || "Some error occurred while retrieving all users." });
+    });
+ }
+
+
 /** DELETE USER */
 exports.delete = async (req, res) => {
     let token = req.headers["x-access-token"];
