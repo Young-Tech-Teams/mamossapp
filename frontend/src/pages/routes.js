@@ -7,6 +7,7 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Profile from './Profile';
+import EditUser from '../components/admin/edit-user';
 
 const Pages = () => {
    const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Pages = () => {
             <Route path="/" element={<Home />} />
             <Route path="/connexion" element={<Login />} />
             <Route path="/inscription" element={<Register />}/>
+            <Route path="/edit-user/:id" element={<EditUser />}/>
             {/* {isLoggedIn ? ( */}
                <Route path="/mon-compte" element={<Profile />} />
             {/* ) : <></> } */}
