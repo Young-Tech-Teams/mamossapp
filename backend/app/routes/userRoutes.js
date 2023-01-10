@@ -28,25 +28,17 @@ module.exports = function (app) {
 
    // Updating user informations
    router.put("/update", verifyToken, userController.update);
+   router.put("/update/:id", [ verifyToken, isAdmin ], userController.updateById); // for admin
 
    // Get user information
    router.get("/infos", verifyToken, userController.getUserInfos);
-
+   router.get("/infos/:id", [ verifyToken, isAdmin ], userController.findOne); // for admin
+   
    // Get all users informations
    router.get("/get-all", [ verifyToken, isAdmin ], userController.findAllUsers);
 
-   // router.get("/edit-user", verifyToken, async(req, res) => {
-   //    try {
-   //       const id = req.userId;
-   //       const userData = await User.findById({ _id: id });
-   //       res.render("edit-user", { user: userData });
-   //    } catch (err) {
-   //       console.log(err.message);
-   //    }
-   // })
-
    // Deleting user from database
-   router.delete("/delete", verifyToken, userController.delete)
+   router.delete("/delete/:id", [ verifyToken, isAdmin ], userController.delete)
 
    app.use("/.netlify/functions/api/user", router);
 };
