@@ -66,67 +66,67 @@ const InfoModal = ({ setShowInfoModal }) => {
   return (
     <Modal id="info-modal" className="info-modal">
       <FormContainer>
-      <button className="btn btn-close" onClick={() => setShowInfoModal(false)}>Fermer</button>
-      <Form onSubmit={onSubmit} id="form">
+        <button className="btn btn-close" onClick={() => setShowInfoModal(false)}>Fermer</button>
+        <Form onSubmit={onSubmit} id="form">
           <div>
-          <label htmlFor="firstname">Prénom</label>
-          <hr />
-          <Input 
-            type="text"
-            value={data.firstname ? data.firstname : ""}
-            className="form-control"
-            placeholder="Entrez votre prénom"
-            name="firstname"
-            onChange={handleChange}
-            />
+            <label htmlFor="firstname">Prénom</label>
+            <hr />
+            <Input 
+              type="text"
+              value={data.firstname ? data.firstname : ""}
+              className="form-control"
+              placeholder="Entrez votre prénom"
+              name="firstname"
+              onChange={handleChange}
+              />
           </div>
           <div>
-          <label htmlFor="lastname">Nom</label>
-          <hr />
-          <Input 
-            type="text"
-            value={data.lastname ? data.lastname : ""}
-            className="form-control"
-            placeholder="Entrez votre nom"
-            name="lastname"
-            onChange={handleChange}
-            />
+            <label htmlFor="lastname">Nom</label>
+            <hr />
+            <Input 
+              type="text"
+              value={data.lastname ? data.lastname : ""}
+              className="form-control"
+              placeholder="Entrez votre nom"
+              name="lastname"
+              onChange={handleChange}
+              />
           </div>
           <div>
           <label htmlFor="email">Email</label>
           <hr />
-          <Input 
-            type="email"
-            value={data.email ? data.email : ""}
-            className="form-control"
-            placeholder="Entrez votre adresse mail"
-            name="email"
-            onChange={handleChange}
-          />
-          </div>
-          <div>
-          <label htmlFor="age">Age</label>
-          <hr />
-          <Input  
-            type="number"
-            value={data.age ? data.age : ""}
-            className="form-control"
-            placeholder="Entrez votre age"
-            name="age"
-            onChange={handleChange}
+            <Input 
+              type="email"
+              value={data.email ? data.email : ""}
+              className="form-control"
+              placeholder="Entrez votre adresse mail"
+              name="email"
+              onChange={handleChange}
             />
           </div>
           <div>
-          <label htmlFor="gender">Genre</label>
-          <hr />
-          <Input 
-            type="text"
-            value={data.gender ? data.gender : ""}
-            className="form-control"
-            placeholder="Entrez votre genre"
-            name="gender"
-            onChange={handleChange}
-          />
+            <label htmlFor="age">Age</label>
+            <hr />
+            <Input  
+              type="number"
+              value={data.age ? data.age : ""}
+              className="form-control"
+              placeholder="Entrez votre age"
+              name="age"
+              onChange={handleChange}
+              />
+          </div>
+          <div>
+            <label htmlFor="gender">Genre</label>
+            <hr />
+            <Input 
+              type="text"
+              value={data.gender ? data.gender : ""}
+              className="form-control"
+              placeholder="Entrez votre genre"
+              name="gender"
+              onChange={handleChange}
+            />
           </div>
           <button>Sauvegarder</button>
         </Form>

@@ -113,28 +113,22 @@ const Profile = () => {
         )}
 
           {isClient && (
-            <div className="body">
-              <div className="client">
+            <div className="body client">
                 <ClientPanel />
-              </div>
             </div>
             
           )}
           
           {isLivreur && (
-          <div className="body">
-            <div className="livreur">
+          <div className="body livreur">
               <LivreurPanel />
-            </div>
           </div>
 
           )}
 
           {isAdmin && (
-            <div className="body">
-              <div className="admin">
+            <div className="body admin">
                 <AdminPanel />
-              </div>
             </div>
           )}
 

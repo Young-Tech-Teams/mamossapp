@@ -73,82 +73,57 @@ const AdminPanel = () => {
       // eslint-disable-next-line
    }, []);
 
-   const deleteUser = () => {
-      const config = {
-         method: 'delete',
-         url: `${API_USER_URL}delete`,
-         headers: localStorage.getItem("token") ? {
-            "Access-Control-Allow-Origin": "*",
-            "x-access-token": token,
-         } : {
-            "Access-Control-Allow-Origin": "*",
-         }
-      }
-      axios.defaults.withCredentials = true;
-
-      axios(config)
-      .then((response) => {
-         console.log(response);
-         console.log("Did i get the roles?");
-         setData(response.data);
-      })
-      .catch((err) => {
-         console.log(err);
-      })
-   }
-
    const listUsers = data?.map((user) => ( 
-      <div key={user.id} className="d-flex gap-1">
+      <tr key={user.id} className="d-flex">
          {user.roleId !== "" ? ( 
             <>
-            <table className="gap-2 text-center" >
-               <tr>
-                  <th width="104rem">Prénom</th>
-                  <th width="104rem">Nom</th>
-                  <th width="104rem">Email</th>
-                  <th width="104rem">Âge</th>
-                  <th width="104rem">Genre</th>
-                  <th width="104rem">Rôle</th>
-                  <th width="104rem">Action</th>
-               </tr>
-               <tr>
-                  <td className="name">
-                     {user.firstname ? user.firstname : "Prénom"} 
-                  </td>
-                  <td className="lastname">
-                     {user.lastname ? user.lastname : "Nom"}
-                  </td>
-                  <td className="mail">
-                     {user.email ? user.email : "Email"}
-                  </td>
-                  <td className="age">
-                     {user.age ? user.age : "Age"}
-                  </td>
-                  <td className="gender">
-                     {user.gender ? user.gender : "Genre"}
-                  </td>
-                  <td className="role">
-                     <select>
-                        <option hidden disabled selected value>{user.roleId ? user.roleId : "0"} - {user.role.name ? user.role.name : " ?? "}</option>
-                        {role?.map((roles) => (
-                           <option key={roles.id} value={roles.id}>{roles.name}</option>
-                        ))}
-                     </select>
-                  </td>
-                  <td>
-                     <Link to={`/edit-user/${user.id}`}>Edit</Link>
-                  </td>
-               </tr>
-         </table>
+               <td className="name">
+                  {user.firstname ? user.firstname : "Prénom"} 
+               </td>
+               <td className="lastname">
+                  {user.lastname ? user.lastname : "Nom"}
+               </td>
+               <td className="mail">
+                  {user.email ? user.email : "Email"}
+               </td>
+               <td className="age">
+                  {user.age ? user.age : "Age"}
+               </td>
+               <td className="gender">
+                  {user.gender ? user.gender : "Genre"}
+               </td>
+               <td className="role">
+                  {user.roleId ? user.roleId : "0"} - {user.role.name ? user.role.name : " ?? "}                  
+               </td>
+               <td>
+                  <Link to={`/edit-user/${user.id}`}>Gérer</Link>
+               </td>
             </>            
             ) : <></>
          }
-      </div>
+      </tr>
    ))
 
    return (
       <>
-         {listUsers}
+         <h2>Liste des utilisateurs</h2>
+         <tbody>
+         <table className="d-grid width-sm gap-2 text-center" >
+            <tr className="d-flex">
+               <th>Prénom</th>
+               <th>Nom</th>
+               <th>Email</th>
+               <th>Âge</th>
+               <th>Genre</th>
+               <th>Rôle</th>
+               <th>Action</th>
+            </tr>
+            <tr>
+               {listUsers}
+            </tr>
+            </table>
+
+         </tbody>
       </>
    )
 }

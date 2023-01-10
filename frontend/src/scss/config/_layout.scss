@@ -27,6 +27,9 @@
  .col-6 {
   grid-template-columns: repeat(6, 1fr);
  }
+ .col-7 {
+   grid-template-columns: repeat(7, 1fr);
+  }
  .row-2 {
    grid-template-rows: repeat(2, 1fr);
  }
@@ -44,6 +47,9 @@
  }
  .mg-auto {
     margin: 0 auto;
+ }
+ .mg-2 {
+   margin: 2rem;
  }
  .text-dark {
     color: $dark;

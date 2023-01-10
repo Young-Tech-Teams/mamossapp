@@ -158,7 +158,7 @@ const MyInfos = ({ setShowInfoModal }) => {
  ))
 
   return (
-     <InfoContainer id="infos" className="infos-container width-sm">
+     <InfoContainer id="infos" className="infos-container mg-2">
          <p className="text-center mb-md">Bonjour {data.firstname}</p>
          <div className="user-info d-grid col-2 gap-2 ">
             <div className="left d-flex gap-2">
