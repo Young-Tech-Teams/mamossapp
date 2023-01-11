@@ -71,6 +71,16 @@ database.sequelize.sync()
          password: bcrypt.hashSync("Meowmeow", 8),
          roleId: 1
       });
+      await User.create({
+         email: "miyuna@gmail.com",
+         password: bcrypt.hashSync("Meowmeow", 8),
+         roleId: 2
+      });
+      await User.create({
+         email: "meowy@gmail.com",
+         password: bcrypt.hashSync("Meowmeow", 8),
+         roleId: 3
+      });
    };
 
 require("../app/routes/authRoutes")(app);

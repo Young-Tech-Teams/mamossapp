@@ -29,6 +29,7 @@ exports.create = (req, res) => {
 
     const dataList = {
        order_num: req.body.order_num,
+       price: req.body.price,
         lastname: req.body.lastname,
         firstname: req.body.firstname,
         date: req.body.date,
@@ -182,15 +183,35 @@ exports.update = (req, res) => {
         userId = decoded.id;
     });
     const id = req.params.id;
-    Order.update(req.body, { where: { id: id } })
-    .then(data => {
-        res.status(200).send({ message: "The order has been updated successfully" });
-    })
-    .catch(err => {
-        res.status(500).send({
-            message: "There was an error updating the Order."
-        });
+
+    Order.findByPk(id)
+    .then(orderRecord => {
+        if (!orderRecord) {
+            throw new Error("User records not found")
+        } else {
+            console.log(`Retrieved record ${JSON.stringify(orderRecord, null, 2)}`) 
+            
+            orderRecord.update(req.body, { where: { id: userId } })
+            .then(updatedRecord => {
+                console.log(`Updated record ${JSON.stringify(updatedRecord, null, 2)}`)
+                res.status(200).send({ message: updatedRecord || "The order has been updated successfully" })
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "There was an error getting the updated record."
+                });
+            });
+        }
+
     });
+    // Order.update(req.body, { where: { id: id } })
+    // .then(data => {
+    //     res.status(200).send({ message: "The order has been updated successfully" });
+    // })
+    // .catch(err => {
+    //     res.status(500).send({
+    //         message: "There was an error updating the Order."
+    //     });
 };
 
 /**
