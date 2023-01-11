@@ -50,6 +50,7 @@
             transition: 0.5s ease-in-out;
             cursor: pointer;
             &:hover {
+               color: $accent;
                transform: translateY(-3px);
             }
          }

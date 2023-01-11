@@ -99,13 +99,12 @@ const EditUser = () => {
    return (
       <>
          <section id="profile">
-            <div className="container d-grid gap-1">
-               <h1>Modifier les informations</h1>
-               <button onClick={onDelete}>Supprimer définitivement</button>
-               <FormContainer>
+            <div  id="edit-user" className="container form-group d-grid gap-1">
+               <h1 className="title">Modifier les informations</h1>
+               <button className="btn btn-primary btn-delete" onClick={onDelete}>Supprimer définitivement</button>
                   <Form onSubmit={onSubmit} id="form">
                      <div>
-                        <label htmlFor="firstname">Prénom</label>
+                        <label htmlFor="firstname" className="form-group-label">Prénom</label>
                         <hr />
                         <Input 
                         type="text"
@@ -144,7 +143,7 @@ const EditUser = () => {
                         <label htmlFor="age">Âge</label>
                         <hr />
                         <Input 
-                        type="text"
+                        type="number"
                         value={data.age ? data.age : ""}
                         className="form-control"
                         placeholder="Entrez l'âge"
@@ -177,9 +176,8 @@ const EditUser = () => {
                         onChange={handleChange}
                         />
                      </div>
-                      <button onClick={() => {alert("Êtes-vous sûr de vouloir sauvegarder?")}}>Sauvegarder</button>
+                      <button className="btn btn-primary mt-1 text-center" onClick={() => alert("Êtes-vous sûr de vouloir sauvegarder?")}>Sauvegarder</button>
                   </Form>
-               </FormContainer>
             </div>
          </section>
       </>

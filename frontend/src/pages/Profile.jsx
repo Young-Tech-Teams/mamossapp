@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom"; 
 import axios from 'axios';
 import { API_USER_URL } from '../utils/APIRoutes';
-import MyAddress from '../components/profile/Address';
-import MyPayments from '../components/profile/Payment';
-import AdminPanel from '../components/admin/adminPanel';
+import ListAllUsers from '../components/admin/ListUser';
 import LivreurPanel from '../components/livreur/livreurPanel';
 import ClientPanel from '../components/client/clientPanel';
 import MyInfos from '../components/profile/Infos';
@@ -104,9 +102,8 @@ const Profile = () => {
                   </>
                   ) 
             }
-            <h2 className="text-center mb-sm">Mon compte</h2>
             <MyInfos />
-            <button className="btn btn-modal mb-md  " onClick={toggleInfoModal}>
+            <button className="btn btn-modal mt-2 mb-2 " onClick={toggleInfoModal}>
               Modifier mes informations
             </button>
           </>
@@ -127,9 +124,7 @@ const Profile = () => {
           )}
 
           {isAdmin && (
-            <div className="body admin">
-                <AdminPanel />
-            </div>
+                <ListAllUsers />
           )}
 
         </div>

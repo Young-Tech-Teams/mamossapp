@@ -1,13 +1,205 @@
 #profile {
+   height: 100vh;
+   #edit-user {
+      margin-top: 12rem;
+
+      @media screen and (max-width: 768px) {
+         margin-top: 10rem;
+         
+         h1 {
+            font-size: 20px;
+         }
+      }
+   }
    .container {
-      margin-top: 2rem;
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: column;
+      place-content: center;
       justify-content: center;
+      width: 100vw;
       gap: 1rem;
       align-items: center;
       z-index: 222;
+      margin-top: 2rem;
+
+      #infos {
+         width: 80%;
+         margin: 0 auto;
+         margin-top: 6rem;
+
+         @media screen and (max-width: 768px) {
+            // margin-top: 6rem;
+         }
+
+         .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+
+            @media screen and (max-width: 768px) {
+               grid-template-columns: 1fr;
+               grid-template-rows: 1fr 1fr;
+               gap: 1rem;
+            }
+
+            .left {
+               padding: 22px;
+               border: 2px solid darkgreen;
+               border-radius: 0.237rem;
+            }
+            .right {
+               padding: 22px;
+               border: 2px solid darkgreen;
+               border-radius: 0.237rem;
+            }
+         }
+
+      }
+
+      .body {
+         width: 80%;
+         margin: 0 auto;
+         margin-top: 2rem;
+         padding: 0 1rem 4rem 1rem;
+
+         .client-panel {
+            @media screen and (min-width: 768px) {
+               grid-template-columns: 1fr 1fr;
+            }
+         }
+      }
+
+      .btn-delete {
+         margin: 1rem 0;
+         color: $mamossa;
+         border-color: $mamossa;
+         border-width: 2px;
+         background-color: rgb(255, 91, 91);
+         padding: 0.6rem;
+      }
+
+      table {
+         
+         @media screen and (min-width: 768px) {
+            width: 80%;
+            margin: 0 auto;
+            gap: 1rem;
+            display: grid;
+            grid-template: 
+               "left" 50px;
+         }
+
+         .list {
+            display: grid;
+            grid-template-columns: (repeat(7, 1fr));
+
+            @media screen and (max-width: 768px){
+               grid-template:
+                  "a b" 3ch
+                  "c d" 3ch
+                  "e f" 3ch
+                  "edit edit" auto / 0.3fr 0.5fr;
+               place-content: space-evenly;
+               text-align: start;
+               column-gap: 1rem;
+   
+               .name {
+                  grid-area: a;
+               }
+               .lastname {
+                  grid-area: c;
+               }
+               .mail {
+                  grid-area: b;
+               }
+               .age {
+                  grid-area: e;
+               }
+               .gender {
+                  grid-area: f;
+               }
+               .role {
+                  grid-area: d;
+               }
+               .edit {
+                  grid-area: edit;
+                  width: 70%;
+                  margin: 0 auto;
+                  text-align: center;
+               }
+               
+            }
+            .btn-edit {
+               color: $accent;
+            }
+         }
+
+         thead {
+            height: calc(2.75rem + 2px);
+            padding: .625rem .75rem;
+            transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
+            color: $mamossa;
+            border: 1px solid #cad1d7;
+            border-radius: .375rem;
+            background-color: #fff;
+            background-clip: padding-box;
+            margin-bottom: 1rem;
+
+            @media screen and (max-width: 768px) {
+               display: none;
+            }
+         }
+      }
+
+      form {
+         background-color: #ffffff !important;
+         box-shadow: 0 0 2rem 0 rgba(98, 138, 89, 0.15) !important;
+         border-radius: calc(0.375rem - 1px);
+         padding: 50px;
+
+         @media screen and (min-width: 768px) {
+            display: grid;
+            grid-template:
+               "left right" 
+               "left right"
+               "left right"
+               "save save" auto;
+            gap: 2rem;
+            place-content: center;
+            align-items: center;
+            text-align: center;
+
+            bottom {
+               width: 80%;
+            }
+         }
+         
+         input {
+            margin-bottom: 0.8rem;
+
+            
+            @media screen and (max-width: 768px) {
+               font-size: 15px;
+            }
+            &:hover {
+               border-color: $mamossa;
+            }
+         }
+
+         label {
+            font-weight: 500;
+            margin-bottom: 1rem;
+
+            @media screen and (max-width: 768px) {
+               font-size: 15px;
+            }
+         }
+
+         button {
+            grid-area: save;
+            margin: 0 auto;
+            width: 100%;
+         }
+      }
    }
 }

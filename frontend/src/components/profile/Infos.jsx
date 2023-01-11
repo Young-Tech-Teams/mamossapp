@@ -158,29 +158,39 @@ const MyInfos = ({ setShowInfoModal }) => {
  ))
 
   return (
-     <InfoContainer id="infos" className="infos-container mg-2">
-         <p className="text-center mb-md">Bonjour {data.firstname}</p>
-         <div className="user-info d-grid col-2 gap-2 ">
-            <div className="left d-flex gap-2">
+     <InfoContainer id="infos">
+         {/*-- Header --*/}
+         <div className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+               <div className="col-lg-7 col-md-10">
+                  <h1 className="display-2 text-white">Bonjour {data.firstname},</h1>
+                  <p className="text-white mt-0 mb-4">Bienvenue sur ton profil Mamossapp !<br></br> Ici tu pourras voir, ajouter et modifier tes informations personnelles à tout moment.</p>
+               </div>
+            </div>
+
+         {/*-- Page content --*/}
+         <div className="main-content">
+            <div className="left n-flex gap-1">
+               <div className="bio d-flex gap-4">
                <div className="avatar">
                   <img src="" alt="Avatar" />
                </div>
-               <div className="bio">
-                  <div className="fullname">
-                     <span>{data.firstname ? data.firstname : "Prénom"}</span>
-                     <hr />
-                     <span>{data.lastname ? data.lastname : "Nom"}</span>
-                  </div>
-                  <div className="mail">
-                     <span>{data.email ? data.email : "Votre email"}</span>
-                  </div>
-                  <div className="more">
-                     <span>{data.age ? data.age : "Age"}</span>
-                     <hr />
-                     <span>{data.gender ? data.gender : "Sexe"}</span>
-                  </div>
-                  <div className="created">
-                     <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
+               <div>
+                     <div className="fullname">
+                        <span>{data.firstname ? data.firstname : "Prénom"}</span>
+                        <hr />
+                        <span>{data.lastname ? data.lastname : "Nom"}</span>
+                     </div>
+                     <div className="mail">
+                        <span>{data.email ? data.email : "Votre email"}</span>
+                     </div>
+                     <div className="more">
+                        <span>{data.age ? data.age : "Age"}</span>
+                        <hr />
+                        <span>{data.gender ? data.gender : "Sexe"}</span>
+                     </div>
+                     <div className="created">
+                        <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
+                     </div>
                   </div>
             </div>
          </div>
@@ -188,7 +198,7 @@ const MyInfos = ({ setShowInfoModal }) => {
             <div className="allergies">
                {isClient && (
                   <>
-                     <p>Allergies</p>
+                     <p>Mes allergies</p>
                   </>
                )}
             </div>
@@ -198,15 +208,16 @@ const MyInfos = ({ setShowInfoModal }) => {
                      {listRibs}
                   </>
                )}
-            </div>
-            <div className="rib d-grid gap-1">
+               </div>
+
+               <div className="admin d-grid gap-1">
                {isAdmin && (
                   <>
-                     Courses
+                     <p>Courses</p>
                   </>
                )}
+               </div>
             </div>
-         </div>
       </div>
     </InfoContainer>
   )

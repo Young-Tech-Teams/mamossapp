@@ -46,7 +46,7 @@ const ClientPanel = () => {
 
    return (
       <>
-         <div className="client-panel d-grid col-2 gap-2">
+         <div className="client-panel d-grid gap-2">
             <div className="addresses">
                <h2 className="mb-sm">Mes addresses</h2>  
                <MyAddress />

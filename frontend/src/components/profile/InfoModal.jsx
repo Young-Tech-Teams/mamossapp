@@ -128,7 +128,7 @@ const InfoModal = ({ setShowInfoModal }) => {
               onChange={handleChange}
             />
           </div>
-          <button>Sauvegarder</button>
+          <button className="btn btn-primary mt-2">Sauvegarder</button>
         </Form>
       </FormContainer>
     </Modal>

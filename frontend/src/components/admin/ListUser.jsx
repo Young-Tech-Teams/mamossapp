@@ -5,10 +5,9 @@ import { API_USER_URL } from '../../utils/APIRoutes';
 import EditUser from './edit-user';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const AdminPanel = () => {
+const ListAllUsers = () => {
    const location = useLocation();
    const url = location.pathname.split("/")
-   const id_user = url[2]
    const navigate = useNavigate();
 
    const token = JSON.parse(localStorage.getItem("token"));
@@ -74,7 +73,7 @@ const AdminPanel = () => {
    }, []);
 
    const listUsers = data?.map((user) => ( 
-      <tr key={user.id} className="d-flex">
+      <tr key={user.id} className="list d-grid">
          {user.roleId !== "" ? ( 
             <>
                <td className="name">
@@ -95,8 +94,8 @@ const AdminPanel = () => {
                <td className="role">
                   {user.roleId ? user.roleId : "0"} - {user.role.name ? user.role.name : " ?? "}                  
                </td>
-               <td>
-                  <Link to={`/edit-user/${user.id}`}>Gérer</Link>
+               <td className="edit">
+                  <Link to={`/edit-user/${user.id}`} className="btn-edit">Gérer</Link>
                </td>
             </>            
             ) : <></>
@@ -106,10 +105,10 @@ const AdminPanel = () => {
 
    return (
       <>
-         <h2>Liste des utilisateurs</h2>
          <tbody>
-         <table className="d-grid width-sm gap-2 text-center" >
-            <tr className="d-flex">
+         <h2 className="mb-2" style={{textAlign: 'center'}}>Liste des utilisateurs</h2>
+         <table className="text-center" >
+            <thead className="headers d-flex">
                <th>Prénom</th>
                <th>Nom</th>
                <th>Email</th>
@@ -117,10 +116,8 @@ const AdminPanel = () => {
                <th>Genre</th>
                <th>Rôle</th>
                <th>Action</th>
-            </tr>
-            <tr>
-               {listUsers}
-            </tr>
+            </thead>
+               {EditUser}
             </table>
 
          </tbody>
@@ -130,4 +127,4 @@ const AdminPanel = () => {
 
 const InfoContainer = styled.div``
 
-export default AdminPanel
+export default ListAllUsers
