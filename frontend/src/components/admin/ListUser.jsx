@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
 import EditUser from './edit-user';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ListAllUsers = () => {
-   const location = useLocation();
-   const url = location.pathname.split("/")
-   const navigate = useNavigate();
 
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState([]);
@@ -73,7 +70,7 @@ const ListAllUsers = () => {
    }, []);
 
    const listUsers = data?.map((user) => ( 
-      <tr key={user.id} className="list d-grid">
+      <tr key={user.id} className="list d-grid mb-2">
          {user.roleId !== "" ? ( 
             <>
                <td className="name">
@@ -117,7 +114,7 @@ const ListAllUsers = () => {
                <th>Rôle</th>
                <th>Action</th>
             </thead>
-               {EditUser}
+               {listUsers}
             </table>
 
          </tbody>
