@@ -35,6 +35,10 @@ const MyInfos = ({ setShowInfoModal }) => {
          console.log(response);
          console.log("It worked!");
          setData(response.data);
+         console.log(response.data.createdAt);
+         const time = parseInt(response.data.createdAt);
+         console.log(time);
+         // setData(parseInt(response.data.createdAt));
       })
       .catch((err) => {
          console.log(err);
@@ -42,9 +46,9 @@ const MyInfos = ({ setShowInfoModal }) => {
    }
 
    useEffect(() => {
-   fetchCurrentUserInfo();
-   // eslint-disable-next-line
-}, []);
+      fetchCurrentUserInfo();
+      // eslint-disable-next-line
+   }, []);
 
    const fetchCurrentUserRIB = () => {
       const config = {
@@ -189,7 +193,7 @@ const MyInfos = ({ setShowInfoModal }) => {
                         <span>{data.gender ? data.gender : "Sexe"}</span>
                      </div>
                      <div className="created">
-                        <span>Mamossien depuis {data.createdAt ? data.createdAt : "??/??/??"}</span>
+                        <span>Mamossien depuis {parseInt(data.createdAt, "dd, mm, yy") ? parseInt(data.createdAt) : "??/??/??"}</span>
                      </div>
                   </div>
             </div>

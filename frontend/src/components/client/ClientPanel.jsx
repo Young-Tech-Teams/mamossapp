@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom"; 
+import { Link, useLocation } from "react-router-dom"; 
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_ORDERS_URL } from '../../utils/APIRoutes';
 import MyInfos from '../profile/Infos';
 import Modal from '../profile/InfoModal';
-import MyAddress from '../profile/Address';
-import MyPayments from '../profile/Payment';
+import MyAddress from './Address';
+import MyPayments from './Payment';
 
 const ClientPanel = () => {
    
@@ -48,11 +48,13 @@ const ClientPanel = () => {
       <>
          <div className="client-panel d-grid gap-2">
             <div className="addresses">
-               <h2 className="mb-sm">Mes addresses</h2>  
+               <h2 className="mb-sm">Mes addresses</h2>
+               <Link to="/créer-adresse/" className="btn-edit">Créer</Link>
                <MyAddress />
             </div>
             <div className="payments">
                <h2 className="mb-sm">Mes moyens de paiements</h2>
+               <Link to="/enregistrer-carte/" className="btn-edit">Créer</Link>
                <MyPayments />
             </div>
          </div>

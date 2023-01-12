@@ -7,7 +7,11 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Profile from './Profile';
-import EditUser from '../components/admin/edit-user';
+import EditUser from '../components/admin/EditUser';
+import CreateAddy from '../components/client/CreateAddress';
+import CreatePayment from '../components/client/CreatePayment';
+import EditAddy from '../components/client/EditAddress';
+import DeletePayment from '../components/client/EditPayment';
 
 const Pages = () => {
    const navigate = useNavigate();
@@ -35,6 +39,11 @@ const Pages = () => {
             <Route path="/connexion" element={<Login />} />
             <Route path="/inscription" element={<Register />}/>
             <Route path="/edit-user/:id" element={<EditUser />}/>
+            <Route path="/créer-adresse" element={<CreateAddy />}/>
+            <Route path="/enregistrer-carte" element={<CreatePayment />}/>
+            <Route path="/modifier-adresse/:id" element={<EditAddy />}/>
+            <Route path="/supprimer-payment/:id" element={<DeletePayment />}/>
+
             {/* {isLoggedIn ? ( */}
                <Route path="/mon-compte" element={<Profile />} />
             {/* ) : <></> } */}

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import { API_USER_URL } from '../../utils/APIRoutes';
-import EditUser from './edit-user';
 import { Link } from 'react-router-dom';
 
 const ListAllUsers = () => {
 
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState([]);
+      // eslint-disable-next-line
    const [role, setRole] = useState([]);
 
    const fetchAllUsers = () => {
@@ -121,7 +120,5 @@ const ListAllUsers = () => {
       </>
    )
 }
-
-const InfoContainer = styled.div``
 
 export default ListAllUsers

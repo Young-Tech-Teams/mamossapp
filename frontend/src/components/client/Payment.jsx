@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_ADDRESS_URL } from '../../utils/APIRoutes';
+import { API_PAYMENT_URL } from '../../utils/APIRoutes';
+import { Link } from 'react-router-dom';
 
-const MyAddress = ({ setShowAddressModal }) => {
+const MyPayments = ({ setShowModal }) => {
    
    const token = JSON.parse(localStorage.getItem("token"));
    const [data, setData] = useState([])
@@ -11,7 +12,7 @@ const MyAddress = ({ setShowAddressModal }) => {
    const fetchCurrentUserInfo = () => {
       const config = {
       method: 'get',
-      url: `${API_ADDRESS_URL}list-all`,
+      url: `${API_PAYMENT_URL}list-all`,
       headers: localStorage.getItem("token") ? {
          "Access-Control-Allow-Origin": "*",
          "x-access-token": token,
@@ -36,24 +37,25 @@ const MyAddress = ({ setShowAddressModal }) => {
    useEffect(() => {
    fetchCurrentUserInfo();
    // eslint-disable-next-line
-   }, []); 
+   }, []);
 
-   const listAllAdresses = data?.map((addy) => (
-      <div key={addy.id} className="d-grid">
-         {addy.name !== "" ? (
+   const listAllPayments = data?.map((payment) => (
+      <div key={payment.id} className="gap-1">
+         {payment.name !== "" ? (
             <>
                <div className="name">
-                  {addy.name ? addy.name : "Nom d'adresse"}
+                  {payment.lastname ? payment.lastname : "Nom"} {payment.firstname ? payment.firstname : "Prénom"}
                </div>
-               <div className="street">
-                  {addy.street_num ? addy.street_num : "Numéro de rue"}, {addy.street ? addy.street : "Rue"},
+               <div className="card_num">
+                  N° de carte : {payment.card_number ? payment.card_number : "Numéro de carte"}
                </div>
-               <div className="more">
-                  {addy.building ? addy.building : "Bâtiment"}, {addy.door ? addy.door : "Porte"}, {addy.floor ? addy.floor : "Étage"}
+               <div className="exp_date">
+                  Date d'expiration : {parseInt(payment.card_exp_date) ? parseInt(payment.card_exp_date) : "Date d'expiration"}
                </div>
-               <div className="code">
-                  {addy.zip_code ? addy.zip_code : "Code postal"}, {addy.city ? addy.city : "Ville"}, {addy.country ? addy.country : "Pays"}
+               <div className="card_crypto">
+                  Cryptogramme : {payment.card_crypto ? payment.card_crypto : "Cryptogramme"}
                </div>
+               <Link to={`/supprimer-payment/${payment.id}`} className="btn-edit">Gérer</Link>
             </>
          ) : <></>
          }
@@ -62,11 +64,11 @@ const MyAddress = ({ setShowAddressModal }) => {
 
   return (
     <AddressContainer className="d-grid gap-1">
-      {listAllAdresses}
+      {listAllPayments}
     </AddressContainer>
   )
 }
 
 const AddressContainer = styled.div``
 
-export default MyAddress
+export default MyPayments

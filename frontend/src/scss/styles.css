@@ -632,14 +632,20 @@ li {
 #profile {
   height: 100vh;
 }
-#profile #edit-user {
+#profile #edit-user,
+#profile #create-addy,
+#profile #create-payment {
   margin-top: 12rem;
 }
 @media screen and (max-width: 768px) {
-  #profile #edit-user {
+  #profile #edit-user,
+#profile #create-addy,
+#profile #create-payment {
     margin-top: 10rem;
   }
-  #profile #edit-user h1 {
+  #profile #edit-user h1,
+#profile #create-addy h1,
+#profile #create-payment h1 {
     font-size: 20px;
   }
 }
@@ -778,6 +784,9 @@ li {
     place-content: center;
     align-items: center;
     text-align: center;
+  }
+  #profile .container form#addy-form, #profile .container form#payment-form {
+    grid-template: "left right" "left right" "left right" "left right" "left right" "save save" auto;
   }
   #profile .container form bottom {
     width: 80%;

@@ -1,6 +1,8 @@
 #profile {
    height: 100vh;
-   #edit-user {
+   #edit-user, 
+   #create-addy,
+   #create-payment {
       margin-top: 12rem;
 
       @media screen and (max-width: 768px) {
@@ -167,7 +169,18 @@
             gap: 2rem;
             place-content: center;
             align-items: center;
-            text-align: center;
+            text-align: center;            
+
+            &#addy-form,
+            &#payment-form {
+                  grid-template:
+                  "left right" 
+                  "left right"
+                  "left right"
+                  "left right"
+                  "left right"
+                  "save save" auto;
+            }
 
             bottom {
                width: 80%;

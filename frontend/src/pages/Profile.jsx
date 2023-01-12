@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_USER_URL } from '../utils/APIRoutes';
 import ListAllUsers from '../components/admin/ListUser';
 import LivreurPanel from '../components/livreur/livreurPanel';
-import ClientPanel from '../components/client/clientPanel';
+import ClientPanel from '../components/client/ClientPanel';
 import MyInfos from '../components/profile/Infos';
 import Modal from '../components/profile/InfoModal';
 
@@ -56,6 +56,7 @@ const Profile = () => {
       setIsClient(false);
       setIsLoggedIn(false);
     }
+      // eslint-disable-next-line
   }, [location, token]);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const Profile = () => {
       setIsLivreur(false);
       setIsLoggedIn(false);
     }
+      // eslint-disable-next-line
   }, [location, token]);
 
   useEffect(() => {
@@ -76,6 +78,7 @@ const Profile = () => {
       setIsAdmin(false);
       setIsLoggedIn(false);
     }
+      // eslint-disable-next-line
   }, [location, token]);
 
 
